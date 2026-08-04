@@ -62,8 +62,19 @@ nav:
       - "08 · Async Basics": level-1/08-async-basics.md
       - "09 · Packages (pub, pubspec.yaml)": level-1/09-packages.md
       - "10 · Project — CLI To-Do App": level-1/10-project-todo-cli.md
+  - "Level 2 · Intermediate":
+      - Overview: level-2/index.md
+      - "01 · OOP Deep Dive": level-2/01-oop-deep-dive.md
+      - "02 · Null Safety Advanced": level-2/02-null-safety-advanced.md
+      - "03 · Streams": level-2/03-streams.md
+      - "04 · Testing with the test package": level-2/04-testing.md
+      - "05 · Working with JSON": level-2/05-json.md
+      - "06 · Generics": level-2/06-generics.md
+      - "07 · Extension Methods": level-2/07-extension-methods.md
+      - "08 · Error Handling": level-2/08-error-handling.md
+      - "09 · Collections Deep Dive": level-2/09-collections-deep-dive.md
+      - "10 · Project — Weather CLI": level-2/10-project-weather-cli.md
 # --- auto-pruned stub levels (see AdSense low-value-content fix) ---
 exclude_docs: |
-  level-2/*.md
   level-3/*.md
   level-4/*.md

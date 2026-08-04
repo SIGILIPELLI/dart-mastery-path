@@ -14,7 +14,7 @@ code snippets in every module and a hands-on project at the end of each level.
 | Level | Focus | Modules |
 |-------|-------|---------|
 | [Level 1 · Entry](level-1/index.md) | Language foundations | 9 topics + 1 project |
-| Level 2 · Intermediate (coming soon) | Idiomatic, testable Dart | 9 topics + 1 project |
+| [Level 2 · Intermediate](level-2/index.md) | Idiomatic, testable Dart | 9 topics + 1 project |
 | Level 3 · Advanced (coming soon) | APIs, databases, concurrency | 9 topics + 1 project |
 | Level 4 · Master (coming soon) | Production systems & architecture | 9 topics + 1 capstone |
 
