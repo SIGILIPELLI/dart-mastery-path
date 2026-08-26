@@ -12,3 +12,6 @@
 8. Performance & Profiling
 9. Code Generation (build_runner intro)
 10. Project — REST API + Database Service
+
+Every module above is written and ready — dive in starting with
+[Flutter Fundamentals](01-flutter-fundamentals.md).
