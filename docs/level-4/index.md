@@ -12,3 +12,6 @@
 8. Package Publishing (pub.dev)
 9. Code Quality (dart analyze/lints)
 10. Capstone Project
+
+Every module above is written and ready — dive in starting with
+[Advanced Async Patterns](01-advanced-async-patterns.md).
