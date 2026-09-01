@@ -1,8 +1,8 @@
 site_name: Dart Mastery Path
 site_description: A structured, module-wise Dart training program from entry level to master level.
-site_url: https://sigilipelli.github.io/dart-skillmastery/
-repo_url: https://github.com/SIGILIPELLI/dart-skillmastery
-repo_name: dart-skillmastery
+site_url: https://sigilipelli.github.io/dart-mastery-path/
+repo_url: https://github.com/SIGILIPELLI/dart-mastery-path
+repo_name: dart-mastery-path
 
 theme:
   name: material
