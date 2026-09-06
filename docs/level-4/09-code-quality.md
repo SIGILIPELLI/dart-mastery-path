@@ -118,6 +118,37 @@ future code that would have genuinely benefited from the check.
 | `dart fix --apply` | Auto-applies mechanical fixes for lints that have one |
 | `// ignore: rule_name` | Silence a lint for one line, with a reason in a comment |
 
+## How It Actually Works
+
+The Dart linter operates on the same **analyzer** AST-based infrastructure
+that powers `dart analyze` and your IDE's error squiggles — each lint rule
+is a small visitor that walks the parsed syntax tree (not the compiled
+output) looking for a specific pattern, which is why lints run instantly
+without executing your code at all and can catch issues even in code paths
+that never run during testing.
+
+`unawaited_futures` only firing inside `async` functions is a direct
+consequence of how the rule is scoped: it specifically flags a
+`Future`-returning expression statement (a call whose result is discarded)
+written inside a function itself marked `async`, on the theory that if
+you're already in async-aware code, forgetting an `await` is very likely a
+mistake rather than intentional fire-and-forget. A plain synchronous
+function calling an async function and discarding its `Future` doesn't
+trigger the same lint, because the rule's heuristic is "you were clearly
+thinking about async control flow here (you marked the function `async`)
+and still dropped this one" — outside that context, discarding a `Future`
+looks intentional often enough that the lint would generate too many false
+positives to be useful, so the analyzer team scoped it narrowly.
+
+`dart fix` works by having each lint rule optionally ship a matching
+**code-transform** (a mechanical AST rewrite, similar in spirit to a
+generator's output but modifying your existing source in place instead of
+producing new files) — it's why `dart fix --apply` can only auto-correct
+lints that have an unambiguous mechanical fix (adding `await`, removing
+dead code) and cannot auto-fix lints whose correction requires
+understanding intent (like `prefer_final_fields` when reassignment is
+actually load-bearing elsewhere).
+
 ## Exercise
 
 Add `avoid_dynamic_calls` and `always_declare_return_types` to your

@@ -178,6 +178,38 @@ This is exactly the same shape of mistake as `FakeRepository`'s working
 | `throwsA(matcher)` | Assert an exception is thrown — needs `() => ...`, not a called value |
 | `isA<T>()` | Matcher: value is an instance of `T` |
 
+## How It Actually Works
+
+`throwsA` and other asynchronous/exception matchers work because
+`package:matcher` doesn't inspect a *value* — it wraps a **closure** and
+invokes it itself inside a controlled `try`/`catch`, capturing whatever
+exception (or lack of one) results. This is exactly why `throwsA` needs an
+uncalled closure (`() => doTheThing()`) rather than the already-evaluated
+result of calling the function (`doTheThing()`): if you call the function
+yourself when passing it to `expect`, the exception is thrown immediately,
+during argument evaluation, before `expect`/`throwsA` ever gets a chance to
+install its `try`/`catch` around the call — the exception propagates out of
+your test function directly instead of being captured as an expected
+outcome.
+
+`completion()` similarly wraps a `Future` rather than a resolved value —
+internally it registers a `.then()`/`.catchError()` pair on the future and
+tells the test runner's zone-based scheduler (the same `Zone` mechanism
+that lets the runner attribute async errors to specific tests) to keep the
+test alive until that future settles, then asserts against the eventual
+result or error.
+
+Fakes over mocking frameworks is a design choice that interacts with
+Dart's static, sound type system: a hand-written fake is a real class
+implementing the same interface, so the compiler checks it structurally
+just like any other implementation — a fake naturally stays in sync with
+interface changes (a signature change is a compile error in the fake too),
+whereas a fully dynamic mock built via reflection-like intercepting proxies
+can silently drift out of sync with an interface it doesn't statically
+implement, an outcome Dart's AOT-compiled, tree-shaken runtime model
+(which discourages heavy runtime reflection) makes actively awkward to rely
+on anyway.
+
 ## Exercise
 
 Write a `RetryingClient` class that takes a `Future<String> Function()`

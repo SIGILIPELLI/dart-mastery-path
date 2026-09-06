@@ -189,6 +189,33 @@ void main() {
 | `?:` | Inline conditional expression |
 | `??` / `??=` | Fallback for `null`, or assign-if-null |
 
+## How It Actually Works
+
+Dart's newer `switch` **expressions** (as opposed to `switch` statements) are
+compiled using exhaustiveness analysis against the matched type: if you switch
+over an enum or a sealed class hierarchy, the compiler proves at compile time
+whether every case is covered, and refuses to compile if it isn't (unless you
+add a `default`/wildcard `_`). This isn't just a lint — it's the analyzer
+walking the declared subtype set of the matched value's static type, which is
+why exhaustiveness checking only works reliably on closed type hierarchies
+(enums, `sealed` classes), not on arbitrary open classes.
+
+`break`, `continue`, and labeled loops compile to jump instructions in the
+underlying IR, but the "label" itself is purely a compile-time construct —
+by the time code reaches the VM's intermediate representation or the AOT
+backend, labels have already been resolved into direct control-flow edges
+between basic blocks. There's no runtime cost to a label versus an
+unlabeled loop; the label only exists to disambiguate *which* enclosing loop
+a `break`/`continue` targets during compilation.
+
+The null-aware operators (`??`, `?.`) are not simply syntactic sugar evaluated
+left-to-right at runtime with a null check — the compiler's type-flow analysis
+uses them as promotion evidence. After `if (x != null)` or `x?.something`,
+Dart's flow analysis can *promote* `x`'s static type from `T?` to `T` for the
+rest of that scope, meaning subsequent member accesses on `x` skip the
+null check entirely and compile to a direct (non-nullable) call — a real
+compile-time optimization, not just a readability nicety.
+
 ## Exercise
 
 Write a program that loops from 1 to 30 and, for each number, prints "Fizz"

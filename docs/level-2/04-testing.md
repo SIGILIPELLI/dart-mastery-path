@@ -218,6 +218,34 @@ void main() {
 }
 ```
 
+## How It Actually Works
+
+`package:test` runs each test inside its own **error zone** (a Dart `Zone`) —
+a mechanism the Dart runtime provides for intercepting uncaught errors,
+print calls, and scheduling within a delimited region of code. This is how
+the test runner can catch an exception thrown from deep inside an
+asynchronous callback that has nothing structurally to do with the `test()`
+function's own call stack (say, an error thrown inside a `Timer` callback
+started by the code under test) and correctly attribute it as *that specific
+test's* failure rather than crashing the whole process.
+
+`setUp`/`tearDown` execute around **every** test in their enclosing `group`,
+run via the same zone-based scheduling — the test runner literally
+constructs a fresh execution context per test, which is why state declared
+at the top of a `group` and reassigned in `setUp` doesn't leak between
+tests even though it's "the same variable" textually: each test's `setUp`
+call reassigns it before that test's body runs, and Dart doesn't share
+mutable closures across tests unless you deliberately hoist them outside
+`setUp`.
+
+Testing async code with `expectLater`/awaited `expect` calls works because
+the test framework registers the test function itself as a `Future`-returning
+callback with the runner — the runner `await`s your test body's returned
+`Future` before considering the test finished, which is exactly why a test
+that fires off an unawaited async operation and returns can pass "green"
+while that operation's assertion failure surfaces later, sometimes
+attributed to the *next* test, unless you explicitly await it.
+
 ## Exercise
 
 Create a small `lib/string_utils.dart` with a function `String

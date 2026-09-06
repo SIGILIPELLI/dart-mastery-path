@@ -136,6 +136,42 @@ automatically, because it's easy to miss in review.
 | Missing `await` on an `async` call | Its exceptions become unhandled — the surrounding `try/catch` never sees them |
 | `unawaited_futures` lint | Flags exactly this missing-`await` mistake at analysis time |
 
+## How It Actually Works
+
+`Completer` is the primitive that bridges callback-based APIs into
+`Future`-based ones because a `Future` on its own has no public
+"complete me" method — `Future`'s constructors only let you wrap already-
+determined values or existing futures. `Completer` exposes the
+`.complete()`/`.completeError()` methods that a `Future` deliberately
+hides, and internally a `Completer`'s `.future` getter returns a `Future`
+object wired to that same completer's internal state — when a legacy
+callback fires, calling `completer.complete(value)` transitions that
+`Future` from pending to completed, which schedules every registered
+`.then()`/`await`er as a microtask. This is the exact mechanism `async`/
+`await` itself is built on beneath the compiler-generated state machine.
+
+`eagerError` changes `Future.wait`'s internal bookkeeping about when to
+settle its own returned Future: by default, `Future.wait` waits for *every*
+input future to complete (success or failure) before resolving, collecting
+all errors' worth of information as far as tracking goes; with
+`eagerError: true`, it resolves (with an error) as soon as the *first*
+input future fails, without waiting for the rest — but critically, the
+other futures are still running to completion in the background (Dart has
+no way to "cancel" a `Future` mid-flight), they're just no longer being
+awaited by that particular `Future.wait` call, so any errors they later
+throw become unhandled unless something else is still listening.
+
+The missing-`await` trap is a direct consequence of `async` functions
+returning a `Future` immediately upon hitting their first `await` (or
+immediately, if there's no `await` before an early return) — if you call an
+`async` function without `await`ing or otherwise handling its returned
+`Future`, any exception inside it completes that `Future` as an error, and
+since nothing is listening for it, it becomes an **unhandled async error**,
+reported to the current `Zone`'s uncaught-error handler (which, unless
+customized, terminates an isolate's `main()` or crashes a Flutter app) —
+this looks like "throwing past a try/catch" but is really "the try/catch
+never got attached to the future that actually failed."
+
 ## Exercise
 
 Write a function `Future<List<String>> fetchAll(List<Future<String> Function()> tasks)`

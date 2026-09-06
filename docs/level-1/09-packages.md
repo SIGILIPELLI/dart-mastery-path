@@ -141,6 +141,34 @@ after `pubspec.yaml`'s `name` field.
 | `dart pub outdated` | Show which dependencies have newer versions available |
 | `dart pub deps` | Print the resolved dependency tree |
 
+## How It Actually Works
+
+Running `dart pub get` doesn't just download files — it runs a real
+**version-solving** algorithm (PubGrub, the same family of SAT-based solver
+used by other modern package managers) that must simultaneously satisfy
+every version constraint declared across your `pubspec.yaml` *and* every
+transitive dependency's own `pubspec.yaml`. The output is written to
+`pubspec.lock`, which pins the exact resolved version of every package —
+that's why committing `pubspec.lock` (for applications, not for published
+packages) matters: without it, two machines running `pub get` against the
+same loose constraints (`^1.2.0`) could resolve to different concrete
+versions if a new compatible release was published in between.
+
+`^1.2.0` isn't a convention Dart merely documents — it's parsed into a
+concrete version range object (`>=1.2.0 <2.0.0`) by the pub tool itself,
+following semantic versioning's contract that a major version bump may
+break compatibility. The solver treats this range as a hard constraint
+during solving, not a soft preference.
+
+Once resolution finishes, `pub` doesn't copy the resolved packages into your
+project — it writes a `.dart_tool/package_config.json` file mapping each
+package name to an on-disk path (in the global pub cache, typically
+`~/.pub-cache`), and the Dart compiler/VM consults that file to resolve
+`import 'package:foo/foo.dart'` at compile time. This is why deleting
+`.dart_tool` and re-running `pub get` is a safe way to "reset" a project's
+dependency resolution without touching the shared, deduplicated pub cache
+that every project on your machine draws from.
+
 ## Exercise
 
 Run `dart create demo_cli` to scaffold a new console project. Add the `args`

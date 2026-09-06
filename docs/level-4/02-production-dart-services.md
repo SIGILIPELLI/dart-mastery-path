@@ -168,6 +168,39 @@ the more complete production pattern.
 | `dart run` vs `dart compile exe` | Signal delivery can differ — test against the real deployed artifact |
 | `/health` endpoint | Minimal liveness/readiness check for orchestrators |
 
+## How It Actually Works
+
+`Platform.environment` is a **read-only snapshot** of the process's
+environment variables taken once, at isolate startup, from the underlying
+OS process — it's populated via `dart:io`'s FFI-level call into the C
+runtime's environment table, not re-read on every access, which is why
+mutating the OS environment after your program starts (e.g., another
+process changing a variable) has no effect on values already read through
+`Platform.environment`.
+
+`ProcessSignal.watch()` works by registering a signal handler with the
+underlying OS through `dart:io`, and delivering the signal to your isolate
+as a `Stream` event, translated from the OS's native asynchronous-signal
+mechanism into Dart's cooperative event loop — the OS calls into the Dart
+VM's signal-handling C code the instant the signal arrives, but that code
+can't safely run arbitrary Dart immediately (Dart code can only run when
+the VM is at a safe point), so it defers by scheduling an event that the
+isolate's event loop picks up on its next iteration. This scheduling detour
+is exactly why signal handling behaves differently across platforms — POSIX
+signals (`SIGTERM`, `SIGINT` on Linux/macOS) map cleanly onto this model,
+while Windows has no direct signal equivalent and Dart's implementation
+there is layered on Windows console control events, which is why
+`SIGTERM`-style graceful shutdown is far less reliable on Windows than on
+POSIX systems.
+
+Graceful shutdown itself is a coordination problem solved entirely in your
+own code, not by the VM: once the signal stream fires, your handler
+typically stops accepting new connections (closing the `HttpServer`'s
+listen socket), then waits for in-flight requests to finish — this waiting
+is just ordinary `Future`/completion tracking (e.g., a counter of active
+requests plus a `Completer` that resolves when it hits zero), not a
+built-in "drain" primitive.
+
 ## Exercise
 
 Write a `GracefulServer` class that wraps `HttpServer.bind`, exposes a

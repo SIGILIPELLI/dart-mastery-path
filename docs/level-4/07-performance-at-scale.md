@@ -135,6 +135,34 @@ one batch's worth of work, not the whole run.
 | Bounded batch size | Balances throughput against how much work one failure can roll back |
 | Benchmark on real storage | In-memory vs. on-disk DBs show very different batching payoffs |
 
+## How It Actually Works
+
+Parallelizing CPU work across isolates gets genuine multi-core speedup
+because each isolate the VM spawns is scheduled by the OS onto its own
+native thread with its own heap — unlike `async`/`await` concurrency on a
+single isolate (which only overlaps *waiting* time on one core), multiple
+isolates can execute Dart bytecode/machine code simultaneously on separate
+CPU cores, because there's no shared mutable state between them requiring
+locks or synchronization to protect. The tradeoff, covered in the isolates
+lesson, is that getting data in and out costs a deep-copy serialization
+step across each isolate boundary — which is exactly why "parallelize CPU
+work" only pays off when the actual computation per unit of work
+significantly outweighs the fixed cost of spawning isolates and copying
+inputs/outputs across the boundary; splitting a small array into many tiny
+isolate tasks can lose to just doing it all on one isolate.
+
+Batching database writes trades round-trip/transaction overhead for
+increased in-flight risk — most databases (SQLite included) pay a real,
+fixed cost per transaction commit (fsync-level durability guarantees,
+lock acquisition, WAL bookkeeping), so wrapping many individual inserts
+into fewer, larger transactions amortizes that fixed cost across more rows.
+The over-batching trap is a direct consequence of that same durability
+mechanism: since nothing is durably committed until the transaction
+commits, a crash or error partway through building a very large batch loses
+every row accumulated in that not-yet-committed transaction, not just the
+one that failed — batch size is fundamentally a throughput-versus-blast-
+radius tradeoff, not a free efficiency win with no downside.
+
 ## Exercise
 
 Extend the prime-counting example to accept a `chunks` parameter and try

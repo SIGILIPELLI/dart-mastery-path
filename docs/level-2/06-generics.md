@@ -179,6 +179,36 @@ an `int`. Generics catch that at the call site instead.
 | `T` (generic) | Full — enforced per instantiation (`Stack<int>` vs `Stack<String>`) | Reusable containers/algorithms over a caller-chosen type |
 | `T extends Bound` | Full, plus lets you call `Bound`'s methods on `T` | Generic code that needs to compare, hash, or otherwise operate on `T` |
 
+## How It Actually Works
+
+Dart generics use **type erasure with reified type arguments** — a
+combination that's easy to state wrong. At compile time, a generic class
+like `Box<T>` has all of `T`'s usages checked against the bound
+(`T extends SomeType` restricts what members you can call on values of type
+`T` inside the class body). But unlike Java's fully-erased generics, Dart
+*keeps* the concrete type argument around at runtime as part of the object's
+actual runtime type — `Box<int>` and `Box<String>` are genuinely different
+runtime types, which is why `x is Box<int>` and `x.runtimeType` give
+meaningful, distinct answers at runtime, and why a `List<int>` can't have a
+`String` appended to it even via an `Object` reference to the same list —
+the runtime enforces the reified type argument, not just the compiler.
+
+This reification is exactly what separates real generics from "typed
+`dynamic`": a `dynamic` container performs no type checking at all on
+insertion or extraction, while `List<T>` inserts a genuine runtime type
+check whenever you add an element through a reference whose static type
+doesn't already guarantee the element type matches — you can trigger this by
+upcasting `List<int>` to `List<num>` and then trying to add a `double`
+through that reference, which throws at runtime because the underlying
+object is still, at its core, a reified `List<int>`.
+
+Bounded type parameters (`T extends Comparable<T>`) let the compiler resolve
+member calls on `T`-typed values statically, at compile time, against the
+bound's interface — calling `a.compareTo(b)` inside a generic function
+constrained this way compiles to a normal virtual dispatch through
+`Comparable`'s interface, with no runtime type inspection needed to know
+`compareTo` exists.
+
 ## Exercise
 
 Write a generic class `Cache<K, V>` with a private `Map<K, V> _store`, a

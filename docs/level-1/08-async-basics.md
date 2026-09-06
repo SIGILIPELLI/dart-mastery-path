@@ -164,6 +164,43 @@ Future<void> main() async {
 | `try`/`catch` | Standard way to handle errors from an `await`ed `Future` |
 | `Stream<T>` | Like a `Future`, but can emit many values over time |
 
+## How It Actually Works
+
+Dart is single-threaded *within an isolate* — there is exactly one call
+stack, and `async`/`await` never spawns a thread. What actually happens is
+that each isolate runs an **event loop** built around two queues: the
+**microtask queue** and the **event queue**. When you `await` a `Future`
+that isn't already completed, the current `async` function's remaining code
+is packaged up as a continuation and the function *returns control* to its
+caller immediately — the isolate is free to run other code. When the
+awaited operation completes (a timer fires, I/O finishes, someone calls
+`Completer.complete()`), its continuation is scheduled: `Future` callbacks
+(`.then`, the resumption of an `await`) go on the **microtask queue**, which
+is always fully drained before the event loop looks at the **event queue**
+(timers, I/O callbacks, `Stream` events). This priority is exactly why
+chaining many `.then()`/`await` steps can starve timer callbacks if you're
+not careful — each microtask can schedule another microtask, and they all
+run before a single `Timer` gets a turn.
+
+`Future.wait` doesn't run futures "in parallel" in the threading sense —
+there's still one isolate, one stack. What it does is start all the given
+asynchronous operations (which is only meaningful if those operations
+themselves do concurrent work like real I/O, since I/O in Dart's `dart:io`
+is handled by the underlying event notification system, not by Dart code
+looping) before awaiting any of their results, so their **waiting time**
+overlaps instead of being serialized — the CPU-bound Dart code for each
+future still runs one snippet at a time, interleaved via the event loop, but
+the wall-clock wait for e.g. three independent network calls collapses to
+roughly the slowest one instead of the sum of all three.
+
+A `try`/`catch` around an `await` works because the compiler transforms your
+`async` function into a state machine under the hood — each `await` point is
+a suspension point, and exceptions thrown inside the asynchronous operation
+are captured and delivered back into that state machine's `catch` handling
+exactly as if the code had executed synchronously, even though real
+(unrelated) code from other parts of the event loop may have run on the same
+thread in between.
+
 ## Exercise
 
 Write an `async` function `fetchTemperature(String city)` that simulates a

@@ -165,6 +165,34 @@ void main() {
 | `Map<K, V>` | `{'a': 1}` | Insertion order | Keys unique | By key: `map['a']` |
 | `Set<T>` | `{1, 2, 3}` | Insertion order | No | By value: `set.contains(x)` |
 
+## How It Actually Works
+
+`List`, `Map`, and `Set` literals aren't three unrelated syntaxes — the
+compiler decides which concrete class to instantiate based on the literal's
+static context, then wires up growable storage underneath. A growable
+`List` in Dart is backed by an array that's over-allocated and doubled in
+capacity when it fills up (the classic amortized-O(1)-append strategy) —
+`.add()` is fast on average but occasionally triggers a full reallocation
+and copy, which is why building a very large list with repeated `.add()`
+calls, while still fine in practice, does more total copying than
+constructing it with a known-size constructor.
+
+`Map` and `Set` are hash-based: both hash the key (or element) via its
+`hashCode` and bucket it accordingly, which is exactly why overriding `==`
+without overriding `hashCode` consistently (equal objects must produce equal
+hash codes) silently breaks lookups — two "equal" keys can land in different
+buckets and the map will report `containsKey` as false even though a `==`
+check on the same two objects returns true.
+
+The spread operator (`...`) and collection-if/collection-for are resolved
+entirely at compile time into equivalent imperative code — `[...a, ...b]`
+desugars to something like "create a new growable list, iterate `a` and
+`b`, appending each element," and `if (cond) x` inside a literal desugars to
+a conditional append. There's no separate "spread" runtime representation;
+by the time your code reaches the VM, it's ordinary loop and append
+operations, which is why spreading a `null` collection without `...?`
+throws immediately — the desugared code calls `.iterator` on `null`.
+
 ## Exercise
 
 Given a `List<Map<String, dynamic>>` where each map represents a person with

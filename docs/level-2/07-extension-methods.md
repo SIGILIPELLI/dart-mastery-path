@@ -163,6 +163,37 @@ already has.
 | Override an existing member | No — extensions are picked only when no real member matches |
 | Be generic (`extension E<T> on List<T>`) | Yes |
 
+## How It Actually Works
+
+Extension methods are a purely **compile-time, static-dispatch** feature —
+there is no runtime object modification happening at all, which is the
+single most important mechanism to understand about them. When the compiler
+sees `someString.isPalindrome`, it looks at the *static type* of
+`someString` and searches for an applicable extension whose `on` clause
+matches, then rewrites the call into an ordinary static function call
+(`StringExtension.isPalindrome(someString)`) before code generation. This is
+exactly why extension methods don't show up in `runtimeType`, don't
+participate in `is`/`as` checks, can't be overridden polymorphically, and —
+critically — are resolved based on the *static* type of the receiver
+expression, not its runtime type: if you have `Object o = 'hello'` and an
+extension only applies to `String`, calling it through `o` fails to resolve
+even though `o`'s runtime value actually is a `String`.
+
+Colliding extension names are a compile-time ambiguity, not a runtime
+conflict — if two imported extensions both declare a member with the same
+name applicable to the same type, the compiler can't determine which one
+you mean and requires you to disambiguate (import with a prefix, or use
+explicit extension-application syntax `ExtensionName(value).member`). There
+is no "closest match" or override-resolution fallback the way there is for
+inherited methods, because extensions don't participate in any inheritance
+chain at all.
+
+Because extensions add no real storage, they cannot declare instance
+fields with backing storage — an extension "getter" must be computed from
+the receiver's existing state on every call (there's nowhere to persist a
+new field on an object you don't own), which is also why extensions can't
+add fields that participate in a class's `==`/`hashCode`/serialization.
+
 ## Exercise
 
 Write an extension `DurationFormatting on Duration` with a getter

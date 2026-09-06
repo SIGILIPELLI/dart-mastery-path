@@ -128,6 +128,33 @@ seconds versus a minute or more once a project has real dependencies.
 | `COPY pubspec.* ./` before `COPY . .` | Caches `pub get` separately so code edits don't force a re-resolve |
 | `ENV PORT` + reading it in the app | Standard way to make the container's port configurable at run time |
 
+## How It Actually Works
+
+`dart compile exe` performs whole-program AOT compilation exactly as
+described in the setup lesson — but at Docker-deployment scale, the reason
+this matters is the resulting binary embeds a **snapshot** of everything
+the AOT compiler's type-flow analysis determined was reachable: your code,
+the Dart core libraries it actually uses, and a minimal Dart runtime
+(GC, isolate bootstrap, no JIT compiler at all, since AOT binaries never
+compile anything at runtime). This is why the final Docker stage in a
+multi-stage build can start from an extremely minimal base image
+(`scratch` or a slim Debian) with no Dart SDK installed at all — the
+compiled binary is genuinely self-contained native machine code, not a
+script needing an interpreter present on the target.
+
+The `COPY pubspec.* ./` before `COPY . .` ordering is a direct exploitation
+of how Docker's **layer caching** works: Docker hashes each instruction's
+inputs and reuses a cached layer if the inputs are unchanged. If you copy
+your entire source tree first, then every layer *after* that copy is
+invalidated on every source change, forcing `pub get` to re-run and
+re-download every dependency on every build — even a one-line change to a
+`.dart` file busts the dependency-install layer. Copying only the
+`pubspec.yaml`/`pubspec.lock` first, running `pub get` against just those,
+and *then* copying the rest of the source means Docker's cache for the
+`pub get` layer survives untouched across builds where only your source
+code changed, not your dependencies — a substantial CI build-time win at
+scale.
+
 ## Exercise
 
 Write a `Dockerfile` for the Task API project from

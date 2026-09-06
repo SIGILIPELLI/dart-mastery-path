@@ -143,6 +143,34 @@ Two practical strategies, in increasing order of effort:
 | Split into smaller models | Independent `ChangeNotifier`s scoped separately avoid unrelated rebuilds |
 | `ValueListenableBuilder` / selector pattern | Rebuild only on a specific derived value, not the whole model |
 
+## How It Actually Works
+
+`InheritedWidget` (and `InheritedNotifier` built on it) works by having
+Flutter's `Element` tree register a **dependency edge** the first time a
+descendant calls `context.dependOnInheritedWidgetOfExactType<T>()` — the
+framework records, in the requesting element's own bookkeeping, that it
+depends on that specific `InheritedElement`. When the `InheritedWidget`
+above it rebuilds with new data, the framework calls
+`updateShouldNotify(oldWidget)` on the new widget instance; if that returns
+true, it walks its recorded dependent set and calls `didChangeDependencies()`
+(triggering a rebuild) on **every one of them** — regardless of which
+specific piece of data inside the inherited widget each dependent actually
+uses. There's no per-field dependency tracking at this layer, only
+per-`InheritedWidget`-subtree tracking, which is exactly the mechanism
+behind "rebuilds ALL dependents, every time": from the framework's point of
+view, a widget that reads *any* field is indistinguishable from one that
+reads *all* of them.
+
+Splitting state into narrower `InheritedWidget`s (or using a
+`Selector`-style wrapper from a state-management package) works because it
+changes what `updateShouldNotify` is actually comparing and, more
+importantly, changes *which* `InheritedElement` widgets register their
+dependency against — a widget that only reads one narrow piece of state
+depends on the narrow `InheritedWidget` wrapping just that value, so a
+change to an unrelated sibling value (living in a different, un-nested
+`InheritedWidget`) never touches its dependent set at all, and it is never
+marked dirty in the first place.
+
 ## Exercise
 
 Split `AppState` into `CartState extends ChangeNotifier` (holds

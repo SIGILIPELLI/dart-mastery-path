@@ -189,6 +189,41 @@ void main() {
 | Private member | Prefix with `_`, e.g. `_balance` |
 | Static member | `static const pi = 3.14159;` |
 
+## How It Actually Works
+
+Every Dart object carries a hidden pointer to its class's **class descriptor**
+(similar in spirit to a C++ vtable), which the runtime uses to resolve method
+calls, field offsets, and type checks (`is`/`as`). When you call
+`instance.method()`, the compiler (JIT or AOT) generates code that follows
+that pointer to look up `method`'s compiled entry — for a non-overridden,
+final, or statically-known-concrete-type call, this can often be resolved and
+inlined directly at compile time; for a call through an interface/overridable
+method, it stays a genuine virtual dispatch resolved via the descriptor at
+call time.
+
+Named constructors (`Point.origin()`) are not separate classes or factories
+under the hood — they're just alternate entry points into the same
+allocation routine, all producing instances of the same class layout, which
+is why `Point.origin() is Point` is always true.
+
+`static` members are the one place where Dart deliberately does *not*
+allocate per-instance: a static field lives once, in the isolate's static
+memory associated with the class, initialized lazily the first time it (or
+any static member of that class) is touched — not eagerly at isolate
+startup. That lazy-initialization semantics is why a `static final` field
+that reads an environment or does expensive setup only pays that cost if
+the program actually uses it.
+
+Overriding `==` and `hashCode` changes how the object behaves inside every
+hash-based collection: the default `Object.==`/`hashCode` (identity-based)
+are backed by an internal object identity value baked in at allocation time.
+Once you override them to compare fields, `Set`/`Map` lookups start hashing
+and comparing your fields instead of the object's identity — which is
+exactly what makes value-equality classes usable as map keys, but also means
+mutating a field used in `hashCode` *after* inserting the object into a
+`Set`/`Map` corrupts that collection's internal bucket structure (the object
+is now in the wrong bucket for its new hash).
+
 ## Exercise
 
 Design a `Book` class with private fields `_title`, `_author`, and `_pages`,

@@ -212,6 +212,38 @@ keeping `TaskService` free of `shelf` types: fast, deterministic tests for
 the logic that actually matters, with the HTTP layer left thin enough that
 it barely needs testing of its own beyond the end-to-end run above.
 
+## How It Actually Works
+
+Separating the database logic from the HTTP layer isn't just a style
+preference in this project — it lines up with a real boundary in how Dart
+executes each concern. The HTTP layer (shelf handlers) operates entirely on
+the event loop, `await`ing I/O without blocking; the database layer, if
+built on `sqlite3`'s synchronous FFI bindings, executes SQL calls
+*synchronously*, blocking the isolate for the duration of each query.
+Keeping that boundary explicit (one module that owns all direct SQL access)
+is what makes it straightforward to later swap in an async driver, or move
+the database calls to a worker isolate, without touching route-handling
+code — the seam already exists because the two layers were never
+interleaved.
+
+Wiring the layers together end to end exercises the same request lifecycle
+as the shelf lesson: `HttpServer` accepts a connection, the shelf pipeline
+converts it to a `Request`, your router dispatches to a handler, which calls
+into the database layer, gets a synchronous result back, and returns a
+`Response` that shelf serializes back onto the socket — all of this
+happening on the single isolate's event loop, with concurrent requests
+interleaved at each `await` point (or, if the SQL calls are synchronous,
+serialized for the duration of each individual query, since a blocking FFI
+call cannot yield to the event loop mid-call).
+
+Testing the service layer directly — calling your database/business-logic
+functions without going through HTTP at all — is possible specifically
+because the HTTP layer was kept as a thin adapter: the service functions are
+ordinary Dart functions/classes with no dependency on `shelf.Request`
+objects, so a test can call them directly and assert on plain Dart return
+values, without a real socket, a running server, or even the event loop
+being involved in most of the assertions.
+
 ## Stretch goals
 
 - Add `DELETE /tasks/<id>` and a `deleteTask` method on `TaskService`;

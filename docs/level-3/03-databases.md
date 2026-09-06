@@ -143,6 +143,31 @@ violations.
 | `.dispose()` | Required on `Database` and `PreparedStatement` — native resources, no GC finalizer |
 | `SqliteException` | Thrown for constraint violations and SQL errors — catch it specifically |
 
+## How It Actually Works
+
+The SQL injection hole in string-interpolated `execute()` calls exists
+because the database engine parses the SQL text you hand it *before* it has
+any notion of "your data" versus "your query structure" — interpolating
+user input directly into the SQL string means the parser can't distinguish
+a value like `Robert'; DROP TABLE users;--` from actual SQL syntax, because
+by the time it reaches the parser, it's indistinguishable from
+syntax. Parameterized queries (`?` placeholders with a separate arguments
+list) avoid this because the driver sends the query text and the parameter
+values as **separate channels** to the database engine — the engine
+compiles the query plan once, treating placeholders as opaque value slots,
+and substitutes the actual values afterward, so no user-supplied string is
+ever re-parsed as SQL syntax.
+
+Constraints (`UNIQUE`, `NOT NULL`, `FOREIGN KEY`) are enforced by the
+database engine's own storage layer at the moment a row is written, which is
+why they surface as a runtime `SqliteException` from your Dart code rather
+than as a Dart-level compile-time or type-system check — Dart's type system
+has no visibility into your schema at all; the `sqlite3` package's Dart API
+is just a thin FFI (foreign function interface) binding calling directly
+into the native SQLite C library, so the actual constraint-checking logic
+runs inside SQLite's own C code, and Dart only sees the resulting error code
+translated into an exception object.
+
 ## Exercise
 
 Create a `projects` table (`id`, `name TEXT UNIQUE`, `owner TEXT NOT NULL`)

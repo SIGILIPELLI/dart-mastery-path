@@ -202,6 +202,36 @@ A single class can combine all three: `class Lion extends Animal with Hunter
 implements Comparable<Lion> { ... }` — extend one base, mix in one or more
 behaviors, and commit to one or more interfaces.
 
+## How It Actually Works
+
+The reason "every class is an interface for free" in Dart is a language
+design choice with real compile-time consequences: Dart doesn't have a
+separate `interface` keyword because every class declaration implicitly
+generates *two* things — a concrete implementation, and an abstract
+interface (its full public member signature set) that `implements` can bind
+to. When you write `class Duck implements Flyer`, the compiler checks
+`Duck` against `Flyer`'s member signatures structurally and requires `Duck`
+to provide its *own* implementation of every one — none of `Flyer`'s method
+bodies are inherited, only the shape.
+
+Mixins are resolved via **linearization**: when a class does
+`class C extends Base with M1, M2`, the compiler builds a synthetic
+inheritance chain — `Base -> Base+M1 -> Base+M1+M2 -> C` — where each mixin
+application creates an anonymous intermediate class inserted into the actual
+superclass chain. This is why `super.someMethod()` inside a mixin calls
+whatever came immediately before it in that linearized chain (which could be
+another mixin), not necessarily the "real" base class — mixin method
+resolution is genuinely dynamic with respect to application order, which is
+also why the order you list mixins in `with M1, M2` changes behavior when
+both define the same method.
+
+Abstract classes are enforced purely by the analyzer/compiler at
+compile time — there's no runtime "abstract" flag stopping instantiation
+in the way, say, a runtime reflection check would. `abstract class Shape`
+simply produces a class descriptor with no allocation entry point for
+unimplemented abstract members; attempting `Shape()` is rejected before
+your program ever runs, not caught by an exception at runtime.
+
 ## Exercise
 
 Model a small plugin system: an abstract class `Plugin` with an abstract

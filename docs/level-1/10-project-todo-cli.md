@@ -209,6 +209,39 @@ dart compile exe bin/todo_cli.dart -o todo
 | Null safety | `int? _parseIndex(...)`, `tryParse`, null checks |
 | Packages | `dart:convert` and `dart:io` core libraries |
 
+## How It Actually Works
+
+Reading and writing the task list as JSON round-trips through Dart's `dart:convert`
+`jsonDecode`/`jsonEncode`, which operate on `dynamic` — this is one of the rare
+places idiomatic Dart code leans on `dynamic` deliberately, because JSON has no
+static shape until you decide to parse it into your own classes. `jsonDecode`
+builds a tree of `Map<String, dynamic>`, `List<dynamic>`, `String`, `num`,
+`bool`, and `null` values purely by walking the text once (a single-pass
+recursive-descent-style parser); every `map['field']` access after that is a
+dynamic dispatch resolved at runtime, which is exactly why a typo in a JSON
+key doesn't fail until you actually run the code and get `null` (or a cast
+exception) rather than at compile time — there's no static type checking the
+key names against the actual JSON contents.
+
+Compiling this CLI to a standalone binary with `dart compile exe` performs
+whole-program tree-shaking as part of AOT compilation: the compiler's
+type-flow analysis determines which classes, methods, and package code paths
+are actually reachable from `main()` and discards the rest, which is part of
+why a compiled CLI tool that only uses a slice of a large dependency doesn't
+carry the whole dependency's dead code into the final binary — unlike the
+`dart run` JIT path, where the full source and package config are still
+around at runtime (though unused code simply never gets JIT-compiled to
+begin with).
+
+File I/O for the JSON storage (`File(...).readAsStringSync()` /
+`writeAsStringSync()`) is synchronous and blocks the isolate's event loop for
+its duration — fine for a small CLI tool that isn't juggling other
+concurrent work, but the same operations have async counterparts
+(`readAsString()`/`writeAsString()`) that yield control back to the event
+loop while the underlying OS call is in flight, which matters once a program
+needs to stay responsive to other events (network, timers, isolate messages)
+while doing file I/O.
+
 ## Exercise
 
 Extend the to-do app with a `due <index> <YYYY-MM-DD>` command that attaches

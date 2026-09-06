@@ -184,6 +184,36 @@ reaching `NoteService`; the authenticated calls after login see an
 initially-empty list, then the note they just created — end-to-end proof
 that auth, storage, and per-user scoping all work together correctly.
 
+## How It Actually Works
+
+Salted hashes for auth in this capstone rely on the same mechanism covered
+in the security-practices lesson: a slow, memory-hard hash function
+(bcrypt/Argon2) combined with a unique per-user random salt means each
+password verification is a deliberately expensive computation performed
+once per login attempt — the server re-derives the hash from the submitted
+password plus the stored salt and compares it to the stored hash, never
+storing or transmitting the plaintext password itself after registration.
+
+Bearer tokens work as a **stateless-to-the-network, stateful-on-the-server**
+mechanism: the token itself (whether a random opaque string looked up in a
+sessions table, or a self-contained signed JWT) is just an artifact the
+client re-presents on every request; the middleware that authenticates
+every `/notes` request in one place is exactly the shelf middleware-as-
+function-composition pattern from the APIs lesson — a wrapping `Handler`
+that inspects the `Authorization` header before the inner route handler
+ever runs, short-circuiting with a 401 `Response` if the token doesn't
+resolve to a valid session/user, so no individual route handler needs to
+duplicate that check.
+
+"Private per-user data" is enforced at the database-query level, not by
+trusting client input: every notes query the service layer runs is scoped
+by the authenticated user's ID extracted from the validated token — not
+from any user ID the client could put in a request body or URL — which is
+what actually prevents one authenticated user from reading another user's
+notes by guessing or manipulating an ID, closing the same class of
+trust-boundary mistake the path-traversal lesson covered for filesystem
+paths.
+
 ## Stretch goals
 
 - Replace the in-memory `_tokens` map with a `sessions` table (token,

@@ -504,6 +504,39 @@ wrong branch and every test call went through the "forecast" response. That
 kind of mistake is exactly what a test written *before* trusting the
 implementation is for.
 
+## How It Actually Works
+
+"Streaming multiple cities concurrently" in this project relies on the same
+single-threaded event-loop model covered earlier in this level: each HTTP
+request kicked off (via `package:http` or `dart:io`'s `HttpClient`)
+delegates the actual socket I/O to the operating system, and the isolate's
+event loop is notified via a completion callback once bytes are available —
+Dart code itself never blocks waiting on the network. Firing off several
+requests before awaiting any of them (the same pattern as `Future.wait`) lets
+their *wait time* overlap, so the total wall-clock time for N independent API
+calls tracks closer to the slowest single call rather than the sum of all
+of them, even though only one Dart call stack ever executes at a time.
+
+The two chained API calls in the service layer (e.g., resolve city name to
+coordinates, then fetch weather for those coordinates) compile down to a
+straight-line `async`/`await` state machine: the compiler generates a
+resumption point after the first `await`, and the second HTTP call's code
+only becomes reachable once the first `Future` completes and its result is
+bound — this is why a failure in the first call, via a thrown exception,
+naturally short-circuits the whole chain when wrapped in try/catch, without
+you needing to manually check "did the first call succeed?" before making
+the second.
+
+Testing the service without hitting the network typically means providing a
+fake `http.Client` (or injecting a function) instead of the real one — this
+works because Dart's interfaces are structural at the call-site level: any
+object implementing the same method signature (`send`, `get`, etc.) can
+stand in for the real client, and since the actual HTTP calls happen behind
+an `await`ed `Future`, a fake client can return an already-completed
+`Future.value(fakeResponse)` and the rest of the `async` code proceeds
+exactly as if a real network round-trip had happened, just without the
+event-loop suspension actually waiting on anything.
+
 ## Stretch goals
 
 - **Cache geocoding results.** City coordinates don't change — add a

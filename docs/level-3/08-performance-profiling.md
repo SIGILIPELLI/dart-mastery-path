@@ -125,6 +125,41 @@ in the DevTools timeline.
 | `Set` vs `List` for membership checks | O(1) average vs O(n) per `.contains()` call |
 | CPU-bound work on the main isolate | Blocks everything else sharing that isolate |
 
+## How It Actually Works
+
+`String +=` in a loop is quadratic because Dart `String`s are **immutable** —
+there is no in-place append. Every `s += chunk` allocates an entirely new
+string object sized to hold the combined contents and copies both the old
+`s` and `chunk`'s bytes into it; the old `s` becomes garbage. Across `n`
+iterations building a string that ends up length `L`, the total bytes
+copied across all those reallocations sums to O(L²)/O(n²)-like growth, not
+O(n) — which is exactly why `StringBuffer` exists: it maintains an internal
+growable buffer (much like `List`'s doubling-array strategy) and only
+materializes the final immutable `String` once, via `.toString()`, turning
+the whole operation back into amortized linear time.
+
+`dart:developer`'s `Timeline` API doesn't do timing itself in Dart code —
+`Timeline.startSync`/`finishSync` (and `TimelineTask`) emit structured
+events into the VM's own low-overhead tracing buffer, the same
+infrastructure DevTools' timeline view reads from. This is a genuinely
+different mechanism from a `Stopwatch`: a `Stopwatch` measures wall-clock
+time from within your Dart code with no OS/VM visibility into what else was
+happening concurrently (GC pauses, other isolates, JIT compilation), while
+`Timeline` events are visible alongside VM-level events like garbage
+collection pauses in the profiler, letting you see whether a slow span
+was your code or the VM pausing to collect garbage.
+
+The reason a GC pause can dominate a profile in the first place: Dart uses
+a generational garbage collector — most allocations (which in idiomatic
+Dart code, given `String`/closure/collection immutability patterns, is a
+lot of allocations) go into a young generation collected frequently but
+cheaply via a copying/scavenging pass; only objects that survive several
+young-generation collections get promoted to an older generation collected
+less often but more expensively. Code that allocates heavily in tight loops
+(exactly what the quadratic `String +=` pattern does) drives young-gen
+collection frequency up, which is one of the most common real sources of
+GC-attributable slowdowns profiling reveals in Dart programs.
+
 ## Exercise
 
 Write two functions that both build a `List<int>` of the squares of

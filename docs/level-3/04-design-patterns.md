@@ -179,6 +179,37 @@ property a singleton needs to guarantee.
 | Strategy | Swap an algorithm without changing the caller | Interface held as a mutable field |
 | `identical(a, b)` | True object-identity check | Ignores any `==` override |
 
+## How It Actually Works
+
+A Dart Singleton implemented via a `static final instance = Foo._internal()`
+field relies on the same lazy static-initialization mechanism covered in the
+classes lesson: the static field is only initialized the first time it's
+touched, and the Dart runtime guarantees that initialization happens exactly
+once *per isolate* — this "per isolate" qualifier is not a footnote, it's
+the actual mechanism: because isolates share no memory (see the isolates
+lesson), a "singleton" in Dart is only a singleton within one isolate's
+memory space. Spawn a second isolate that imports the same class, and it
+gets its own, entirely separate singleton instance — there's no
+cross-isolate enforcement possible without explicit message-passing.
+
+`identical()` checks true reference/pointer equality — the VM compares the
+two operands' underlying object addresses (or, for eligible small
+immutable objects, canonicalized identity), completely bypassing any
+overridden `==`. This is exactly why `identical()` is the correct way to
+verify singleton-ness: even if a class's `==` were (mis)overridden to
+compare fields and return true for two structurally-identical-but-distinct
+instances, `identical()` would correctly report `false`, because it's
+checking the one thing that actually defines "is this the same singleton
+object" — its allocation identity.
+
+Observer's `notifyListeners()` iterating a mutable listener list while a
+listener callback adds/removes another listener is a genuine
+concurrent-modification hazard at the Dart language level — `List` iteration
+uses an internal cursor/index that the mutation invalidates, which is why
+Dart's own `ChangeNotifier` implementation (and well-written custom
+observers) iterate over a defensive copy of the listener list rather than
+the live list itself.
+
 ## Exercise
 
 Implement the Strategy pattern for a `Logger` class with a mutable

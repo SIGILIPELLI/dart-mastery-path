@@ -163,6 +163,36 @@ middleware's job is to catch errors thrown further in.
 | `jsonEncode` on non-`String` map keys | Throws at runtime — stringify keys first |
 | `logRequests()` | Built-in middleware that prints one line per request |
 
+## How It Actually Works
+
+A `shelf` server is fundamentally a function: `Handler` is `typedef Handler =
+FutureOr<Response> Function(Request request)`. Every incoming HTTP
+connection accepted by `dart:io`'s `HttpServer` (which itself listens via
+the OS's non-blocking socket APIs and hands off completed requests to the
+event loop) is converted into a `shelf.Request` and passed through this
+function chain — there's no hidden framework magic; routing, middleware, and
+your handler are all literally just functions composed together, which is
+why middleware can be understood purely as "a function that takes a
+`Handler` and returns a new `Handler`" wrapping the original with code that
+runs before and/or after.
+
+Because each request is handled asynchronously (the handler function
+returns a `FutureOr<Response>`), a single `dart:io` isolate can serve many
+concurrent connections without threads — while one request's handler is
+`await`ing a database query or another I/O operation, the event loop is free
+to process other requests' events. This is the same single-isolate,
+event-loop concurrency model from the async-basics lesson, just applied to
+serving HTTP instead of console I/O — true parallelism across CPU cores
+requires spawning separate isolates (see the isolates lesson), each running
+its own instance of the shelf pipeline.
+
+`jsonEncode` rejecting non-`String` map keys is rooted in the JSON
+specification itself, not a Dart limitation — JSON objects only have string
+keys, so `dart:convert`'s encoder walks your `Map` and, upon finding a
+non-`String` key, throws rather than silently calling `.toString()` on it
+(which could produce ambiguous or lossy output, e.g. two different objects
+whose `toString()` collides).
+
 ## Exercise
 
 Build a `shelf_router` API with two routes: `POST /echo`, which reads the

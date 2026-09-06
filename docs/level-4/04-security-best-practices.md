@@ -140,6 +140,47 @@ detect.
 | Path traversal (`../`) | User input joined onto a path can escape the intended directory |
 | `Uri.file(path).normalizePath()` | Collapses `..`/`.` before validating the path is still in-bounds |
 
+## How It Actually Works
+
+A plain hash function (`sha256`, `md5`) is designed to be *fast* — that's
+its whole job as a cryptographic primitive for integrity checking, and it's
+exactly the wrong property for password storage: an attacker with a stolen
+hash database can compute billions of candidate hashes per second on
+commodity GPU hardware, because there's no algorithmic reason a fast hash
+takes longer than a single arithmetic-heavy pass over the input. Password
+hashing algorithms (`bcrypt`, `scrypt`, `Argon2`) are deliberately
+**slow and memory-hard** by design — they run the underlying mixing function
+thousands of times in a loop, and/or require large amounts of RAM per
+guess, specifically to make brute-force guessing computationally expensive
+per attempt, which a general-purpose fast hash simply never was built to
+do. A per-password random salt, stored alongside the hash, defeats
+precomputed rainbow-table attacks by forcing an attacker to redo the
+expensive hashing work for every single password rather than reusing one
+precomputed table across an entire stolen database.
+
+`Random()` (Dart's default, non-seeded constructor) is a standard
+pseudorandom number generator optimized for statistical distribution and
+speed, using an algorithm whose internal state can, in principle, be
+inferred from a sequence of its outputs — fine for shuffling a game board,
+unacceptable for anything security-sensitive because an attacker who can
+observe or guess enough outputs could predict future ones. `Random.secure()`
+instead sources entropy from the operating system's cryptographically
+secure random number generator (e.g., `/dev/urandom` on POSIX, `CryptGenRandom`-
+family APIs on Windows) — a fundamentally different data source designed to
+resist exactly that kind of prediction, at some cost in speed since it may
+block briefly on entropy availability at OS level.
+
+Path traversal succeeds because filesystem path resolution happens after
+string concatenation — a path like `uploads/../../etc/passwd` is a
+syntactically valid relative path, and the OS's own path-resolution logic
+(not Dart's) walks the `..` segments up out of the intended directory before
+ever checking whether the final resolved path was supposed to be reachable.
+The fix (`p.normalize()` plus checking the resolved path stays under an
+allowed root, or rejecting `..` outright) has to happen in your own code
+specifically because the OS filesystem API has no concept of "the directory
+this request was supposed to be confined to" — that's an application-level
+invariant.
+
 ## Exercise
 
 Write a function `String? safeJoin(String root, String userPath)` that

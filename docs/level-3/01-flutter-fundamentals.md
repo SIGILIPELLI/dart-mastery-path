@@ -175,6 +175,38 @@ like it should obviously pass.
 | `flutter test` + `flutter_test` | Render widgets in memory; no simulator required |
 | `tester.pump()` | Advance a frame so `setState` rebuilds are reflected before assertions |
 
+## How It Actually Works
+
+Flutter renders by maintaining **three parallel trees**: the immutable
+`Widget` tree you write, an `Element` tree that persists across rebuilds and
+mediates between widgets and render objects, and a `RenderObject` tree that
+does actual layout and painting. When `setState()` is called on a
+`StatefulWidget`, Flutter doesn't rebuild the whole app — it marks that
+element "dirty" and schedules a frame; on the next frame, the framework
+calls `build()` again for the dirty subtree, producing a *new* widget tree
+for that region, and then runs **reconciliation**: it walks the new widget
+tree against the *existing* element tree and, for each position, checks
+whether the new widget's `runtimeType` and `key` match the existing
+element's widget. If they match, Flutter **updates the existing Element and
+RenderObject in place** (cheap — just re-configures the object) rather than
+discarding and recreating it; if they don't match, the old element (and its
+subtree) is discarded and a new one is created from scratch.
+
+This is exactly the mechanism behind "the trap: losing state by rebuilding
+the wrong node" — because matching is keyed on `(runtimeType, key)`
+position in the tree, reordering a list of `StatefulWidget`s without giving
+each a stable `Key` causes Flutter to match by *position*, not identity —
+element 3's state silently ends up attached to whatever widget is now at
+position 3, not the widget it used to represent. A stable `ValueKey`/
+`ObjectKey` gives the reconciliation algorithm the identity signal it needs
+to move the *same* Element (and its State object) to follow its widget.
+
+`State` objects are the reason `StatefulWidget` and its `State` are split:
+the `Widget` itself is rebuilt (a new instance) on every `build()`, cheap and
+disposable, while the associated `State` object — created once via
+`createState()` — is retained across rebuilds by the `Element`, which is
+where mutable data safely lives between frames.
+
 ## Exercise
 
 Build a `StatefulWidget` called `LikeButton` that shows a heart icon and a

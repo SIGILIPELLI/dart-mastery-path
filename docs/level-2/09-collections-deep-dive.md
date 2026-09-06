@@ -155,6 +155,36 @@ pipeline early instead of processing every element first.
 | Group by a key | `Map.putIfAbsent` inside a loop |
 | Force a lazy `Iterable` to compute now | `.toList()` |
 
+## How It Actually Works
+
+`map`/`where` and most of `Iterable`'s transformation methods are **lazy**
+because `Iterable` in Dart is defined as a protocol (an `iterator` getter
+returning something with `moveNext()`/`current`), and `.map()`/`.where()`
+return wrapper objects implementing that same protocol without eagerly
+computing anything — each wrapper's `moveNext()` pulls the next element from
+its source iterable and applies the transformation/predicate on demand, one
+element at a time. This is why calling `.map(expensiveFn)` on a million-item
+list is instantaneous — no work happens until something actually iterates
+the result (a `for`-in loop, `.toList()`, `.first`, etc.), and if you never
+iterate it, `expensiveFn` never runs at all. It's also why side effects
+inside a `.map()` callback can run more times than you expect if you
+iterate the same lazy `Iterable` more than once — each iteration re-walks
+the whole lazy chain from the source.
+
+The "core five" collection types share the underlying `Iterable` interface,
+but their concrete storage strategies differ in ways that affect Big-O
+behavior in practice: `List` gives O(1) index access because it's backed by
+a contiguous (over-allocated, doubling) array; `Set`/`Map` give average O(1)
+lookup because they're hash tables bucketing by `hashCode`, but degrade
+toward O(n) per bucket if many elements collide on the same hash — a real
+risk if you override `hashCode` poorly (e.g., always returning a constant).
+
+"Grouping" isn't a separate data structure — it's just building a
+`Map<K, List<V>>` by hand (or via `groupBy` from `package:collection`),
+which internally is one lazy pass over the source `Iterable`, inserting into
+list buckets keyed by hash — there's no special-cased "group" runtime
+construct in Dart at all.
+
 ## Exercise
 
 Given a `List<Employee>` like the one above, write one expression (chaining

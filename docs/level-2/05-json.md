@@ -210,6 +210,37 @@ void main() {
 | Array of objects | `(decoded as List).map((e) => T.fromJson(e)).toList()` |
 | Round-trip a model | `T.fromJson(jsonDecode(text))` then `jsonEncode(model.toJson())` |
 
+## How It Actually Works
+
+`jsonDecode` performs a single-pass parse of the input string into a tree of
+plain Dart objects (`Map<String, dynamic>`, `List<dynamic>`, `String`,
+`num`, `bool`, `Null`) with no knowledge of your model classes at all — the
+"typed model" layer (`fromJson`/`toJson`) is entirely hand-written or
+generated code sitting *on top of* that untyped tree, not part of the
+`dart:convert` decoding step itself. This separation is exactly why a cast
+like `json['age'] as int` can fail at runtime instead of compile time: the
+compiler has no way to know what shape the decoded `dynamic` map actually
+has until the cast executes and the runtime checks the actual object's
+class against `int`.
+
+Because `num` (not `int` or `double` specifically) is what JSON numbers
+decode to when there's no decimal point ambiguity, a JSON value like `42`
+decodes to a Dart `int`, while `42.0` decodes to a `double` — and casting
+`json['x'] as int` on a value that happens to arrive as `42.0` from an API
+that changed its serialization throws a runtime `TypeError`, not a silent
+truncation. This is a common real-world JSON-model bug precisely because
+Dart's static type system can't see through the `dynamic` boundary to catch
+it ahead of time.
+
+`toJson()` produces exactly the same kind of untyped tree (`Map<String,
+dynamic>`) that `jsonDecode` produces — `jsonEncode` then walks that tree
+recursively, calling `.toString()`/formatting primitives and recursing into
+nested maps/lists, which is why any object placed into a `toJson()` map that
+isn't itself a `Map`, `List`, `String`, `num`, `bool`, or `null` (or doesn't
+implement its own `toJson()` that `jsonEncode` knows to call) throws a
+`JsonUnsupportedObjectError` at the point of encoding, not at the point you
+constructed the object.
+
 ## Exercise
 
 Model a small `Product` class with `name` (`String`), `price` (`double`),

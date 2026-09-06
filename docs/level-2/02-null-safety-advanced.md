@@ -190,6 +190,39 @@ patterns or APIs to a null-safe codebase:
   explicitly, or validate before casting. [Module 5](05-json.md) covers this
   in depth.
 
+## How It Actually Works
+
+Type promotion is implemented by Dart's **flow analysis** pass, which walks
+the control-flow graph of your function and tracks, at every program point,
+the most specific type it can *prove* a variable holds. A check like
+`if (x != null)` narrows `x`'s known type from `T?` to `T` for the guarded
+branch — but this proof is invalidated the instant the analyzer can't
+guarantee the variable's value hasn't changed since the check. That's
+precisely why promotion "silently stops working" for fields (a getter could
+be overridden to return something different on each call, so the compiler
+can't trust two reads of `this.field` to agree) and for local variables
+captured by a closure that could run between the check and the use (the
+closure might reassign it). Promotion only holds for effectively-final
+locals and parameters where the flow graph can prove no intervening
+assignment or reentrant call could invalidate it.
+
+`late` combines two runtime mechanisms: deferred definite-assignment
+checking, and (when given an initializer) memoization. The compiler
+generates a hidden sentinel/flag alongside the field — first access checks
+the flag, runs the initializer exactly once if unset, caches the result,
+and returns it forever after; direct assignment before that first read
+simply sets the value and flips the flag without running the initializer at
+all. This is genuinely different from a plain field, which is written
+during the constructor's execution (or fails to compile if not assigned by
+the end of it).
+
+The `!` operator's runtime check is a single conditional branch inserted by
+the compiler — cheap, but real: it is the sole place in a null-safe program
+where a null safety violation surfaces as an exception rather than a
+compile-time rejection, because you've asked the compiler to trust
+information it cannot itself verify (often information from a nullable API
+boundary, JSON, or FFI).
+
 ## Exercise
 
 Write a class `Profile` with a mutable nullable field `String? bio`. Add a

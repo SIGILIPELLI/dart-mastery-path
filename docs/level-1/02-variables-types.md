@@ -157,6 +157,42 @@ data like decoded JSON.
 | `dynamic` | Type checked at runtime only |
 | `Object` / `Object?` | Statically typed as "any object" (nullable variant allows `null`) |
 
+## How It Actually Works
+
+`var` and `dynamic` look similar on the page but produce completely different
+compiled code:
+
+- With `var`, type inference happens once, at compile time, from the
+  initializer expression. The compiler then bakes that concrete type into
+  every subsequent use — a `var name = 'Ada'` becomes, as far as the compiler
+  and the AOT/JIT backends are concerned, indistinguishable from `String name
+  = 'Ada'`. Field and method lookups on `name` resolve to fixed offsets/vtable
+  slots at compile time, which is what makes them fast and lets the analyzer
+  catch `name = 42` before you ever run the program.
+- With `dynamic`, the compiler emits no static type information for that
+  variable at all. Every member access (`b.length`, `b + 1`) becomes a
+  dynamic dispatch — at runtime, the VM looks up the object's actual runtime
+  class, checks whether it implements the requested method/getter, and calls
+  it, or throws a `NoSuchMethodError` if it doesn't. This is strictly slower
+  than a statically-resolved call and defeats the analyzer's ability to catch
+  mistakes ahead of time — the cost isn't just stylistic.
+
+`final` vs `const` is also a real compile-time/runtime split, not just a
+convention: a `const` value is folded directly into the compiled constant
+pool (for collections, this means `const [1, 2, 3]` is a single canonicalized,
+immutable object reused everywhere it's referenced — two `const [1,2,3]`
+literals are `identical()`), while `final` allocates a normal object at
+runtime whose reference simply can't be reassigned afterward. That's why
+`const now = DateTime.now()` is rejected — the compiler cannot compute
+"now" while compiling your source.
+
+Integer division producing a `double` for `/` but truncating for `~/` is
+rooted in Dart's number model: on native (JIT/AOT) targets, `int` is a true
+64-bit integer type, so `~/` performs actual integer truncating division in
+hardware, while `/` always promotes both operands to `double` and uses
+floating-point division — two different CPU instructions, not just two
+different print formats.
+
 ## Exercise
 
 Write a program that declares your name (`String`), birth year (`int`), and

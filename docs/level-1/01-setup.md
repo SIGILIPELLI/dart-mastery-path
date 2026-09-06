@@ -114,6 +114,37 @@ dart format hello.dart
 Running `dart format .` on a whole project keeps every file in a consistent
 style automatically.
 
+## How It Actually Works
+
+`dart run` and `dart compile exe` are not just two flags on the same engine —
+they use fundamentally different execution strategies:
+
+- **`dart run` (JIT path).** The Dart VM parses your source into an
+  intermediate representation and starts executing it through an
+  interpreter/baseline-JIT almost immediately — that's why there's no visible
+  "compiling..." pause. As functions get called repeatedly (rare for a
+  one-shot script, common in long-running servers), the VM's profiling counters
+  flag "hot" functions and hand them to an optimizing compiler that generates
+  machine code specialized for the types actually observed at runtime
+  (speculative optimization). If a later call violates those assumptions —
+  say a variable that was always an `int` suddenly holds a `String` — the VM
+  deoptimizes back to unoptimized code rather than crashing.
+- **`dart compile exe` (AOT path).** Here there is no runtime profiling step
+  at all. The AOT compiler performs whole-program type-flow analysis ahead of
+  time, generates native machine code for every reachable function, and links
+  it with a minimal Dart runtime (a small snapshot of the core libraries plus
+  a garbage collector) into one executable. This is why AOT binaries start in
+  milliseconds with no warm-up and no `dart` SDK dependency — the "VM" you're
+  running is really just a runtime shim, not the full JIT compiler.
+
+The `void main()` entry point matters mechanically too: the compiled/interpreted
+program's isolate (Dart's unit of concurrency — see the Level 3 isolates
+lesson) starts by scheduling `main()` on its event loop. Nothing else runs
+until `main` returns *and* the event loop's queues (microtasks, then
+event-queue callbacks like timers) drain — which is why a synchronous
+`print` inside `main` always fires before, say, a `Future.delayed` callback
+scheduled earlier in the same function.
+
 ## Exercise
 
 Write a program `greeter.dart` whose `main` function reads command-line

@@ -203,6 +203,45 @@ explaining why its failure is safe to ignore.
 | `await` inside `try`/`catch` | Catches errors from the awaited `Future` normally |
 | Un-awaited `Future` | Its error bypasses any surrounding `try`/`catch` |
 
+## How It Actually Works
+
+Dart's exception model draws a real, load-bearing line between `Error` and
+`Exception`: an `Error` (like `RangeError`, `TypeError`,
+`StateError`) signals a *programming bug* — something that, by definition,
+shouldn't have been possible if the code were correct — while `Exception`
+signals an *expected, recoverable failure condition* (bad input, a failed
+network call). The Dart VM treats these somewhat differently in
+practice: uncaught `Error`s are the ones you're expected to fix, not catch,
+which is why blanket `catch (e)` clauses that swallow *everything*
+including programming errors are considered an anti-pattern — they hide
+bugs that should have crashed loudly during development.
+
+`finally` is guaranteed to run by the compiler restructuring your function's
+control-flow graph so that every possible exit path from the `try` block
+(normal completion, `return`, `break`, `continue`, or an uncaught exception
+propagating out) is routed through the `finally` block before actually
+leaving. This is a compile-time transformation, not a runtime "best effort"
+— even a `return` statement inside a `try` doesn't actually return until
+`finally` has executed, and if `finally` itself contains a `return`, it
+silently overrides whatever the `try`/`catch` was about to return.
+
+`rethrow` differs from `throw e` at a genuine data level: Dart attaches a
+`StackTrace` object to a thrown exception's propagation, and `rethrow`
+reuses the *original* stack trace captured at the original throw site, while
+`throw e` inside a `catch` block creates a brand-new stack trace rooted at
+the `throw` statement itself — which is why debugging a rethrown-with-`throw`
+exception often shows you the `catch` block's location instead of where the
+error actually originated.
+
+Inside `async` functions, exceptions thrown during an `await`ed operation
+are captured by the compiler-generated state machine and delivered into the
+`catch` clause of the enclosing `try` exactly as if execution were
+synchronous — but an exception thrown by a `Future` that nobody ever awaits
+or attaches a `.catchError` to becomes an **unhandled async error**, reported
+to the isolate's uncaught-error handler (or by the `Zone` running the code)
+rather than to any `try`/`catch` in your function, since there's no
+active call stack for it to unwind through by the time it fires.
+
 ## Exercise
 
 Define an exception hierarchy for a simple file-parsing tool: a base

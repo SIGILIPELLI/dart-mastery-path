@@ -187,6 +187,34 @@ rebuild-on-notify mechanism underneath is the same one covered here.
 | `InheritedWidget` | Makes data available to descendants without constructor threading |
 | Provider / Riverpod / Bloc | Layer more structure/testability on top of the same notify-and-rebuild core |
 
+## How It Actually Works
+
+`ChangeNotifier` is a small, concrete implementation of the observer
+pattern built into Flutter's foundation library: it keeps a `List` of
+listener closures, and `notifyListeners()` walks that list calling each one.
+The mechanism that connects a `ChangeNotifier` to actual widget rebuilds —
+`ListenableBuilder` (or `AnimatedBuilder`) — registers its own internal
+callback as a listener in `initState()`, and that callback simply calls
+`setState(() {})` with an empty body. This is the entire bridge between
+"my data changed" and "the screen updates": `notifyListeners()` fires the
+listener, the listener calls `setState`, `setState` marks the `Element`
+dirty, and the framework's normal build/reconcile pass (from the Flutter
+fundamentals lesson) picks it up on the next frame — there's no special
+"reactive" runtime machinery beneath the bigger state-management packages
+(Provider, Riverpod, Bloc); they're all, at bottom, organizing this same
+listener-registration-plus-`setState` mechanism more ergonomically and
+with better scoping (so a change to one piece of state only rebuilds the
+specific widgets that actually read it, rather than an entire subtree).
+
+Mutating the listener list while `notifyListeners()` is iterating it is a
+real hazard for the reason covered in the collections lessons: `List`
+iteration holds an internal cursor that a concurrent `add`/`remove` on the
+same list invalidates, throwing a `ConcurrentModificationError` — this is
+precisely why a listener callback that itself calls
+`addListener`/`removeListener` (common when a widget disposes mid-notification)
+needs the notifier to iterate over a defensive copy, which is exactly what
+Flutter's actual `ChangeNotifier` implementation does internally.
+
 ## Exercise
 
 Extend `CartModel` with a `remove()` method (clamped at 0, never negative)

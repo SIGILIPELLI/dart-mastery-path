@@ -170,6 +170,39 @@ void main() {
 | `?.` | Access a member only if the receiver isn't `null` |
 | `late` | Defer non-null initialization until before first use |
 
+## How It Actually Works
+
+Dart's null safety is *sound*, which is a specific, checkable guarantee: the
+compiler proves that a variable typed `T` (no `?`) can never hold `null` at
+runtime, not just "probably won't." This is enforced at two points —
+statically by the analyzer/compiler rejecting code that could assign `null`
+to a non-nullable type, and at API boundaries (like FFI or platform channels
+that hand you supposedly-typed data from outside Dart's type system) by
+runtime null checks inserted by the compiler. Because the guarantee is sound
+rather than merely advisory, the AOT and JIT compilers can use non-nullability
+as an *optimization signal*: a field declared `int` (not `int?`) can be
+stored unboxed/without a null-check branch on every read, because the
+compiler has proven no null ever reaches it — this is a real performance win,
+not just a documentation aid.
+
+The `!` null-assertion operator compiles to an actual runtime check — it
+inserts a conditional that throws a `TypeError` if the value is null, then
+otherwise treats the value as the non-nullable type from that point on. It's
+the *only* null-safety construct that can still crash at runtime (by design —
+you're telling the compiler "trust me"), whereas `?.`, `??`, and type
+promotion are all compiler-verified and can't fail at runtime for the case
+they check.
+
+`late` variables use a different mechanism entirely: the compiler generates a
+hidden backing field plus a boolean "initialized" flag. A `late` field/local
+skips Dart's usual "definite assignment" compile-time check and instead
+defers that check to first access — reading it before it's set throws a
+`LateInitializationError` at runtime. For `late` fields with an initializer
+expression, the field is genuinely lazy: the initializer only runs the first
+time the field is read, exactly like a lazily-initialized `static final`, and
+subsequent reads return the cached value instead of re-running the
+initializer.
+
 ## Exercise
 
 Write a function `String describeUser(String? name, int? age)` that returns

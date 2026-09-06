@@ -131,6 +131,32 @@ before spending time running the test suite at all.
 | Line coverage ≠ branch coverage | A "covered" line can still hide an untested conditional path |
 | `dart analyze --fatal-infos` in CI | Fail the build on any analyzer issue, not just errors |
 
+## How It Actually Works
+
+Dart's coverage tooling (`dart test --coverage`) doesn't statically infer
+which lines could theoretically execute — it works by asking the Dart VM's
+own **service protocol** (the same debugging/introspection API DevTools
+uses) for line-hit information gathered while your tests actually ran. The
+VM instruments compiled code with lightweight counters keyed by source
+position, and after the test run, the coverage tool queries the running
+VM's service isolate for which positions were actually hit, translating VM
+token positions back to source line numbers via the compiled kernel's debug
+metadata.
+
+This mechanism explains exactly why "coverage numbers hide untested
+branches": line coverage only records whether a given source line's
+*compiled code* executed at least once — it says nothing about which of
+several `&&`/`||`-joined conditions on that line were actually evaluated, or
+which branch of a ternary/`switch` on a single line ran. A single `if (a &&
+b)` line can show as "covered" the moment any test evaluates it, even if no
+test ever exercised the case where `a` is true and `b` is false.
+
+Test tags (`@Tags(['slow'])` or the `tags:` argument) are metadata the test
+runner attaches to a `Test` object at collection time, before any test
+actually runs — `dart test --exclude-tag slow` filters the test *plan*
+itself, so excluded tests are never even scheduled onto the runner's
+zone-based execution, not run-and-then-hidden from the report.
+
 ## Exercise
 
 Add `tags: ['unit']` to every fast test and `tags: ['integration']` to

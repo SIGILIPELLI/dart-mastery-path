@@ -159,6 +159,38 @@ consumer reads before deciding whether upgrading is safe.
 | Doc comments (`///`) | Rendered as the generated API reference on pub.dev |
 | Semver (`MAJOR.MINOR.PATCH`) | `PATCH` = fix, `MINOR` = compatible addition, `MAJOR` = breaking change |
 
+## How It Actually Works
+
+`dart pub publish` runs the **pana** (package analysis) checks locally
+before anything is uploaded — these checks parse your `pubspec.yaml` and
+directory structure the same way `pub.dev`'s own scoring system does after
+publication, which is why it can flag issues like a missing `LICENSE` or
+malformed `CHANGELOG.md` ahead of time. pub.dev's exact-filename
+expectations (`CHANGELOG.md`, `LICENSE`, `README.md`, case- and
+naming-sensitive) exist because the tooling that renders your package's
+page and computes its pub score does simple, direct filesystem lookups by
+name rather than any fuzzy matching — `changelog.md` or `License.txt`
+simply won't be found by code doing `File('CHANGELOG.md').existsSync()`.
+
+Semantic versioning has real mechanical consequences via the version
+solver covered in the packages lesson: bumping only the patch version
+(`1.2.3` → `1.2.4`) signals to every consumer's `^1.2.x` constraint that
+the update is safe to pull in automatically, while a major bump (`1.2.3` →
+`2.0.0`) is specifically what the solver treats as a signal that existing
+`^1.x.x` constraints must NOT resolve to it, protecting consumers from an
+unreviewed breaking change reaching their build. This is why an accidental
+breaking change shipped as a patch version doesn't just violate a
+convention — it actively defeats the constraint-solving mechanism every
+downstream project relies on to avoid breakage.
+
+Publishing itself uploads an immutable, content-addressed archive to
+pub.dev — once a version number is published, it can never be
+republished with different contents (only "retracted"), which is precisely
+why version numbers must be bumped for every change, however small; the
+registry's guarantee that `foo: 1.2.3` always resolves to the exact same
+bytes everywhere is what makes `pubspec.lock` a meaningful, reproducible
+promise across machines and CI runs.
+
 ## Exercise
 
 Add a third extension method, `String wordCount()`, returning the number of

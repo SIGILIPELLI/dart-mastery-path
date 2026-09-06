@@ -211,6 +211,39 @@ rewritten with `.listen()` (keeps going unless you opt in with
 | `.map()` / `.where()` | Lazily transform stream values as they arrive |
 | `cancelOnError: true` | Make `.listen()` behave like `await for` on error |
 
+## How It Actually Works
+
+An `async*` generator function is transformed by the compiler into a state
+machine plus a `StreamController`-like object, very similarly to how `async`
+functions become `Future`-driven state machines. Each `yield` suspends the
+generator and hands one event to the stream's internal buffer; execution
+resumes only when the underlying controller determines a listener is ready
+for more (this is where **backpressure** enters — an `async*` generator
+naturally pauses at its `yield` point rather than racing ahead and
+buffering unboundedly, unlike a plain `Stream.fromIterable` which just push
+everything through).
+
+Single-subscription vs. broadcast is not a usage convention — it changes the
+internal buffering strategy of the `Stream` object itself. A
+single-subscription stream lazily starts producing events only once
+`.listen()` is called, and buffers/holds events if the listener applies
+backpressure (e.g., pauses the subscription); it guarantees each event is
+delivered to exactly one listener and enforces (via a runtime check) that a
+second `.listen()` call throws a `StateError`. A broadcast stream, by
+contrast, has no single-subscriber contract — it does not buffer events for
+listeners that haven't subscribed yet, and it fans out each event to every
+currently-subscribed listener independently, which is why broadcast streams
+routinely drop early events if you subscribe after the producer already
+started emitting.
+
+`Stream.map`/`.where` don't eagerly transform anything at the point you call
+them — they return a *new* Stream wrapping the original, whose
+`.listen()` implementation pulls from the source and applies the
+transformation lazily, per-event, only once someone actually subscribes to
+the transformed stream. This lazy-wrapping chain is why building up a long
+pipeline of stream transformations is cheap until the final `.listen()`
+triggers the whole chain to start pulling data.
+
 ## Exercise
 
 Write a function `Stream<int> countdown(int from)` that yields values from

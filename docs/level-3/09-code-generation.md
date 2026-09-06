@@ -146,6 +146,34 @@ dart run build_runner watch   # regenerate continuously while you edit
 | `.g.dart` files | Generated — never hand-edit; regenerate instead |
 | `(json['x'] as num).toInt()` | Generator's defensive cast for numeric fields from JSON |
 
+## How It Actually Works
+
+Dart code generation (via `build_runner` and packages like `json_serializable`)
+doesn't run inside the normal Dart VM/AOT compilation pipeline at all — it's
+a separate, earlier phase. `build_runner` uses the **analyzer package** (the
+same static-analysis engine that powers the IDE's error checking) to parse
+your annotated source files into an AST *without executing them*, walks that
+AST looking for the annotations (`@JsonSerializable()`, etc.) your generator
+registers interest in, and then your generator emits new Dart *source text*
+as a `.g.dart` file. That generated file is then compiled normally, right
+alongside your hand-written code, by the regular Dart toolchain.
+
+This is exactly why the `part`/`part of` declaration is not optional
+boilerplate: `part` establishes that the generated file shares the *same
+library* (the same top-level namespace and private-member visibility) as
+your original file, which is required because generated code for a
+`fromJson`/`toJson` typically needs to construct your class using its
+private fields and constructors directly — without `part`, the generated
+code would be a separate library with no access to those private members,
+and code generation for that class simply couldn't work.
+
+Watch mode (`build_runner watch`) works by having the build system register
+file-system watchers on your source directories and re-run only the
+affected generation steps incrementally when a file changes — it maintains
+a dependency graph between input files and generated outputs so that
+editing one model doesn't force regenerating every `.g.dart` file in the
+project, only the ones whose inputs actually changed.
+
 ## Exercise
 
 Create an `@JsonSerializable()` class `Product` with fields `name` (String),

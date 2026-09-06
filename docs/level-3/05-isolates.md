@@ -127,6 +127,41 @@ objects around freely on a single isolate into isolate-based code.
 | Sendable data | Primitives, String, collections of sendable types, `SendPort` |
 | Not sendable | Arbitrary custom objects, open file/socket handles, most closures |
 
+## How It Actually Works
+
+Spawning an isolate is genuinely expensive compared to scheduling a
+`Future` on the same isolate — `Isolate.spawn` asks the Dart VM to allocate
+an entirely new heap, a new stack, and a new event loop, then load and
+initialize the target function's code into that fresh environment. This is
+why isolates are reached for to offload real CPU-bound work (a large sort, a
+sieve, image processing) rather than every asynchronous operation — the
+spawn cost (typically single-digit milliseconds, more on constrained
+devices) only pays off if the work you're offloading is substantial enough
+to be worth escaping the main isolate's event loop for.
+
+Messages sent via `SendPort.send()` are not references into the sender's
+heap — the VM performs a **deep copy** of the message graph into a format
+that can be reconstructed independently in the receiving isolate's own heap,
+because the two isolates' garbage collectors run independently and neither
+can safely hold a live pointer into the other's memory (that's precisely
+the "no shared memory" guarantee that lets each isolate's GC pause
+independently without needing to coordinate stop-the-world pauses across
+isolates). The VM has a fixed table of types it knows how to copy this way —
+primitives, strings, and recursively copyable collections of those, plus a
+few special zero-copy-eligible types like `TransferableTypedData` (which
+transfers ownership of a byte buffer rather than copying it) and
+`SendPort` itself (which is copyable because it's really just an opaque
+routing handle, not a reference to memory). An arbitrary custom object has
+no VM-level rule for how to reconstruct it in another isolate's heap — its
+class's constructor and state aren't things the copying mechanism can
+introspect — so `send()` rejects it outright rather than silently doing
+something wrong.
+
+`Isolate.run` builds on top of `Isolate.spawn` plus a matched
+`ReceivePort`/`SendPort` pair and automatic isolate shutdown once the result
+is sent and received — it's pure convenience code around the primitives
+above, not a different concurrency mechanism.
+
 ## Exercise
 
 Write a function `Future<List<int>> primesUpTo(int n)` that runs on a
