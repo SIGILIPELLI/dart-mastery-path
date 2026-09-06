@@ -1058,6 +1058,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2327,6 +2338,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2571,6 +2593,35 @@ running <code>list</code> again in a new terminal session still shows your saved
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>Reading and writing the task list as JSON round-trips through Dart's <code>dart:convert</code>
+<code>jsonDecode</code>/<code>jsonEncode</code>, which operate on <code>dynamic</code> — this is one of the rare
+places idiomatic Dart code leans on <code>dynamic</code> deliberately, because JSON has no
+static shape until you decide to parse it into your own classes. <code>jsonDecode</code>
+builds a tree of <code>Map&lt;String, dynamic&gt;</code>, <code>List&lt;dynamic&gt;</code>, <code>String</code>, <code>num</code>,
+<code>bool</code>, and <code>null</code> values purely by walking the text once (a single-pass
+recursive-descent-style parser); every <code>map['field']</code> access after that is a
+dynamic dispatch resolved at runtime, which is exactly why a typo in a JSON
+key doesn't fail until you actually run the code and get <code>null</code> (or a cast
+exception) rather than at compile time — there's no static type checking the
+key names against the actual JSON contents.</p>
+<p>Compiling this CLI to a standalone binary with <code>dart compile exe</code> performs
+whole-program tree-shaking as part of AOT compilation: the compiler's
+type-flow analysis determines which classes, methods, and package code paths
+are actually reachable from <code>main()</code> and discards the rest, which is part of
+why a compiled CLI tool that only uses a slice of a large dependency doesn't
+carry the whole dependency's dead code into the final binary — unlike the
+<code>dart run</code> JIT path, where the full source and package config are still
+around at runtime (though unused code simply never gets JIT-compiled to
+begin with).</p>
+<p>File I/O for the JSON storage (<code>File(...).readAsStringSync()</code> /
+<code>writeAsStringSync()</code>) is synchronous and blocks the isolate's event loop for
+its duration — fine for a small CLI tool that isn't juggling other
+concurrent work, but the same operations have async counterparts
+(<code>readAsString()</code>/<code>writeAsString()</code>) that yield control back to the event
+loop while the underlying OS call is in flight, which matters once a program
+needs to stay responsive to other events (network, timers, isolate messages)
+while doing file I/O.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Extend the to-do app with a <code>due &lt;index&gt; &lt;YYYY-MM-DD&gt;</code> command that attaches
 an optional <code>DateTime? dueDate</code> to a task, and update <code>list</code> to show overdue

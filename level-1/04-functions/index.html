@@ -901,6 +901,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2349,6 +2360,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2529,6 +2551,33 @@ even after the enclosing function returns.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>A <strong>closure</strong> works because Dart doesn't allocate stack frames the way C does —
+when a function is created, any local variables it references from an
+enclosing scope are lifted onto the heap into a "context" object (sometimes
+called a captured-variable box) rather than living purely on the call stack.
+The closure carries a reference to that context alongside its code pointer.
+That's why a closure returned from a function keeps working correctly after
+the enclosing function has already returned — the variables it closed over
+outlive the stack frame that created them, kept alive by the garbage
+collector as long as the closure itself is reachable. This is also why two
+closures created in the same loop iteration that both capture a loop
+variable share the <em>same</em> captured box if the variable is declared outside
+the loop body, but each get their <em>own</em> box if it's declared with <code>for (var
+i ...)</code> — Dart creates a fresh binding per iteration specifically to make
+per-iteration closures behave intuitively.</p>
+<p>Functions as first-class values means a function literal like <code>(x) =&gt; x * 2</code>
+compiles to an actual object at runtime — an instance of a synthetic
+<code>Function</code>/closure type carrying a pointer to compiled code plus its captured
+context. Passing it around, storing it in a <code>List&lt;Function&gt;</code>, or calling it
+via <code>()</code> is ordinary object manipulation and a virtual call through that
+function object, not a special "callback" mechanism.</p>
+<p>Recursion has no special-cased support in the Dart VM — each call pushes a
+genuine stack frame, and deep enough unbounded recursion (no tail-call
+optimization is guaranteed) will throw a <code>StackOverflowError</code> once the
+isolate's stack limit is hit. Because each isolate has its own separate call
+stack (see the Level 3 isolates lesson), a stack overflow in one isolate
+can't corrupt another isolate's state.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Write a function <code>describeBox</code> that takes required named parameters <code>width</code>
 and <code>height</code> (both <code>double</code>) and an optional named parameter <code>label</code> (default

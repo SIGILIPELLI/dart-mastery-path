@@ -1620,6 +1620,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2283,6 +2294,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2499,6 +2521,33 @@ property a singleton needs to guarantee.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>A Dart Singleton implemented via a <code>static final instance = Foo._internal()</code>
+field relies on the same lazy static-initialization mechanism covered in the
+classes lesson: the static field is only initialized the first time it's
+touched, and the Dart runtime guarantees that initialization happens exactly
+once <em>per isolate</em> — this "per isolate" qualifier is not a footnote, it's
+the actual mechanism: because isolates share no memory (see the isolates
+lesson), a "singleton" in Dart is only a singleton within one isolate's
+memory space. Spawn a second isolate that imports the same class, and it
+gets its own, entirely separate singleton instance — there's no
+cross-isolate enforcement possible without explicit message-passing.</p>
+<p><code>identical()</code> checks true reference/pointer equality — the VM compares the
+two operands' underlying object addresses (or, for eligible small
+immutable objects, canonicalized identity), completely bypassing any
+overridden <code>==</code>. This is exactly why <code>identical()</code> is the correct way to
+verify singleton-ness: even if a class's <code>==</code> were (mis)overridden to
+compare fields and return true for two structurally-identical-but-distinct
+instances, <code>identical()</code> would correctly report <code>false</code>, because it's
+checking the one thing that actually defines "is this the same singleton
+object" — its allocation identity.</p>
+<p>Observer's <code>notifyListeners()</code> iterating a mutable listener list while a
+listener callback adds/removes another listener is a genuine
+concurrent-modification hazard at the Dart language level — <code>List</code> iteration
+uses an internal cursor/index that the mutation invalidates, which is why
+Dart's own <code>ChangeNotifier</code> implementation (and well-written custom
+observers) iterate over a defensive copy of the listener list rather than
+the live list itself.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Implement the Strategy pattern for a <code>Logger</code> class with a mutable
 <code>LogFormatter</code> field. Write two formatters — <code>PlainFormatter</code> (returns the

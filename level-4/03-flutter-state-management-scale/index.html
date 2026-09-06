@@ -1946,6 +1946,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2239,6 +2250,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2420,6 +2442,31 @@ scaling problem this module's title refers to.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p><code>InheritedWidget</code> (and <code>InheritedNotifier</code> built on it) works by having
+Flutter's <code>Element</code> tree register a <strong>dependency edge</strong> the first time a
+descendant calls <code>context.dependOnInheritedWidgetOfExactType&lt;T&gt;()</code> — the
+framework records, in the requesting element's own bookkeeping, that it
+depends on that specific <code>InheritedElement</code>. When the <code>InheritedWidget</code>
+above it rebuilds with new data, the framework calls
+<code>updateShouldNotify(oldWidget)</code> on the new widget instance; if that returns
+true, it walks its recorded dependent set and calls <code>didChangeDependencies()</code>
+(triggering a rebuild) on <strong>every one of them</strong> — regardless of which
+specific piece of data inside the inherited widget each dependent actually
+uses. There's no per-field dependency tracking at this layer, only
+per-<code>InheritedWidget</code>-subtree tracking, which is exactly the mechanism
+behind "rebuilds ALL dependents, every time": from the framework's point of
+view, a widget that reads <em>any</em> field is indistinguishable from one that
+reads <em>all</em> of them.</p>
+<p>Splitting state into narrower <code>InheritedWidget</code>s (or using a
+<code>Selector</code>-style wrapper from a state-management package) works because it
+changes what <code>updateShouldNotify</code> is actually comparing and, more
+importantly, changes <em>which</em> <code>InheritedElement</code> widgets register their
+dependency against — a widget that only reads one narrow piece of state
+depends on the narrow <code>InheritedWidget</code> wrapping just that value, so a
+change to an unrelated sibling value (living in a different, un-nested
+<code>InheritedWidget</code>) never touches its dependent set at all, and it is never
+marked dirty in the first place.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Split <code>AppState</code> into <code>CartState extends ChangeNotifier</code> (holds
 <code>cartItems</code>) and <code>UserState extends ChangeNotifier</code> (holds <code>userName</code>), each

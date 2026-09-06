@@ -1721,6 +1721,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2261,6 +2272,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2428,6 +2450,37 @@ in the DevTools timeline.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p><code>String +=</code> in a loop is quadratic because Dart <code>String</code>s are <strong>immutable</strong> —
+there is no in-place append. Every <code>s += chunk</code> allocates an entirely new
+string object sized to hold the combined contents and copies both the old
+<code>s</code> and <code>chunk</code>'s bytes into it; the old <code>s</code> becomes garbage. Across <code>n</code>
+iterations building a string that ends up length <code>L</code>, the total bytes
+copied across all those reallocations sums to O(L²)/O(n²)-like growth, not
+O(n) — which is exactly why <code>StringBuffer</code> exists: it maintains an internal
+growable buffer (much like <code>List</code>'s doubling-array strategy) and only
+materializes the final immutable <code>String</code> once, via <code>.toString()</code>, turning
+the whole operation back into amortized linear time.</p>
+<p><code>dart:developer</code>'s <code>Timeline</code> API doesn't do timing itself in Dart code —
+<code>Timeline.startSync</code>/<code>finishSync</code> (and <code>TimelineTask</code>) emit structured
+events into the VM's own low-overhead tracing buffer, the same
+infrastructure DevTools' timeline view reads from. This is a genuinely
+different mechanism from a <code>Stopwatch</code>: a <code>Stopwatch</code> measures wall-clock
+time from within your Dart code with no OS/VM visibility into what else was
+happening concurrently (GC pauses, other isolates, JIT compilation), while
+<code>Timeline</code> events are visible alongside VM-level events like garbage
+collection pauses in the profiler, letting you see whether a slow span
+was your code or the VM pausing to collect garbage.</p>
+<p>The reason a GC pause can dominate a profile in the first place: Dart uses
+a generational garbage collector — most allocations (which in idiomatic
+Dart code, given <code>String</code>/closure/collection immutability patterns, is a
+lot of allocations) go into a young generation collected frequently but
+cheaply via a copying/scavenging pass; only objects that survive several
+young-generation collections get promoted to an older generation collected
+less often but more expensively. Code that allocates heavily in tight loops
+(exactly what the quadratic <code>String +=</code> pattern does) drives young-gen
+collection frequency up, which is one of the most common real sources of
+GC-attributable slowdowns profiling reveals in Dart programs.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Write two functions that both build a <code>List&lt;int&gt;</code> of the squares of
 <code>0..n-1</code>: one using <code>list.add(i * i)</code> inside a plain <code>for</code> loop after

@@ -1749,6 +1749,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2261,6 +2272,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2436,6 +2458,30 @@ the builder automatically on every file save during active development:</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>Dart code generation (via <code>build_runner</code> and packages like <code>json_serializable</code>)
+doesn't run inside the normal Dart VM/AOT compilation pipeline at all — it's
+a separate, earlier phase. <code>build_runner</code> uses the <strong>analyzer package</strong> (the
+same static-analysis engine that powers the IDE's error checking) to parse
+your annotated source files into an AST <em>without executing them</em>, walks that
+AST looking for the annotations (<code>@JsonSerializable()</code>, etc.) your generator
+registers interest in, and then your generator emits new Dart <em>source text</em>
+as a <code>.g.dart</code> file. That generated file is then compiled normally, right
+alongside your hand-written code, by the regular Dart toolchain.</p>
+<p>This is exactly why the <code>part</code>/<code>part of</code> declaration is not optional
+boilerplate: <code>part</code> establishes that the generated file shares the <em>same
+library</em> (the same top-level namespace and private-member visibility) as
+your original file, which is required because generated code for a
+<code>fromJson</code>/<code>toJson</code> typically needs to construct your class using its
+private fields and constructors directly — without <code>part</code>, the generated
+code would be a separate library with no access to those private members,
+and code generation for that class simply couldn't work.</p>
+<p>Watch mode (<code>build_runner watch</code>) works by having the build system register
+file-system watchers on your source directories and re-run only the
+affected generation steps incrementally when a file changes — it maintains
+a dependency graph between input files and generated outputs so that
+editing one model doesn't force regenerating every <code>.g.dart</code> file in the
+project, only the ones whose inputs actually changed.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Create an <code>@JsonSerializable()</code> class <code>Product</code> with fields <code>name</code> (String),
 <code>price</code> (double), and <code>inStock</code> (bool, defaulting to <code>true</code> when absent from

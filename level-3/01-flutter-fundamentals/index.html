@@ -1525,6 +1525,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2261,6 +2272,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2471,6 +2493,34 @@ like it should obviously pass.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>Flutter renders by maintaining <strong>three parallel trees</strong>: the immutable
+<code>Widget</code> tree you write, an <code>Element</code> tree that persists across rebuilds and
+mediates between widgets and render objects, and a <code>RenderObject</code> tree that
+does actual layout and painting. When <code>setState()</code> is called on a
+<code>StatefulWidget</code>, Flutter doesn't rebuild the whole app — it marks that
+element "dirty" and schedules a frame; on the next frame, the framework
+calls <code>build()</code> again for the dirty subtree, producing a <em>new</em> widget tree
+for that region, and then runs <strong>reconciliation</strong>: it walks the new widget
+tree against the <em>existing</em> element tree and, for each position, checks
+whether the new widget's <code>runtimeType</code> and <code>key</code> match the existing
+element's widget. If they match, Flutter <strong>updates the existing Element and
+RenderObject in place</strong> (cheap — just re-configures the object) rather than
+discarding and recreating it; if they don't match, the old element (and its
+subtree) is discarded and a new one is created from scratch.</p>
+<p>This is exactly the mechanism behind "the trap: losing state by rebuilding
+the wrong node" — because matching is keyed on <code>(runtimeType, key)</code>
+position in the tree, reordering a list of <code>StatefulWidget</code>s without giving
+each a stable <code>Key</code> causes Flutter to match by <em>position</em>, not identity —
+element 3's state silently ends up attached to whatever widget is now at
+position 3, not the widget it used to represent. A stable <code>ValueKey</code>/
+<code>ObjectKey</code> gives the reconciliation algorithm the identity signal it needs
+to move the <em>same</em> Element (and its State object) to follow its widget.</p>
+<p><code>State</code> objects are the reason <code>StatefulWidget</code> and its <code>State</code> are split:
+the <code>Widget</code> itself is rebuilt (a new instance) on every <code>build()</code>, cheap and
+disposable, while the associated <code>State</code> object — created once via
+<code>createState()</code> — is retained across rebuilds by the <code>Element</code>, which is
+where mutable data safely lives between frames.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Build a <code>StatefulWidget</code> called <code>LikeButton</code> that shows a heart icon and a
 like count starting at 0, and increments the count by 1 each time the icon

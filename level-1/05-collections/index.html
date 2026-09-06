@@ -896,6 +896,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2283,6 +2294,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2481,6 +2503,30 @@ automatically discarded.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p><code>List</code>, <code>Map</code>, and <code>Set</code> literals aren't three unrelated syntaxes — the
+compiler decides which concrete class to instantiate based on the literal's
+static context, then wires up growable storage underneath. A growable
+<code>List</code> in Dart is backed by an array that's over-allocated and doubled in
+capacity when it fills up (the classic amortized-O(1)-append strategy) —
+<code>.add()</code> is fast on average but occasionally triggers a full reallocation
+and copy, which is why building a very large list with repeated <code>.add()</code>
+calls, while still fine in practice, does more total copying than
+constructing it with a known-size constructor.</p>
+<p><code>Map</code> and <code>Set</code> are hash-based: both hash the key (or element) via its
+<code>hashCode</code> and bucket it accordingly, which is exactly why overriding <code>==</code>
+without overriding <code>hashCode</code> consistently (equal objects must produce equal
+hash codes) silently breaks lookups — two "equal" keys can land in different
+buckets and the map will report <code>containsKey</code> as false even though a <code>==</code>
+check on the same two objects returns true.</p>
+<p>The spread operator (<code>...</code>) and collection-if/collection-for are resolved
+entirely at compile time into equivalent imperative code — <code>[...a, ...b]</code>
+desugars to something like "create a new growable list, iterate <code>a</code> and
+<code>b</code>, appending each element," and <code>if (cond) x</code> inside a literal desugars to
+a conditional append. There's no separate "spread" runtime representation;
+by the time your code reaches the VM, it's ordinary loop and append
+operations, which is why spreading a <code>null</code> collection without <code>...?</code>
+throws immediately — the desugared code calls <code>.iterator</code> on <code>null</code>.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Given a <code>List&lt;Map&lt;String, dynamic&gt;&gt;</code> where each map represents a person with
 <code>'name'</code> (String) and <code>'age'</code> (int) keys, write code that: filters to only

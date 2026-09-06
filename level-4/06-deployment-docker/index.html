@@ -2030,6 +2030,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2239,6 +2250,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2401,6 +2423,30 @@ seconds versus a minute or more once a project has real dependencies.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p><code>dart compile exe</code> performs whole-program AOT compilation exactly as
+described in the setup lesson — but at Docker-deployment scale, the reason
+this matters is the resulting binary embeds a <strong>snapshot</strong> of everything
+the AOT compiler's type-flow analysis determined was reachable: your code,
+the Dart core libraries it actually uses, and a minimal Dart runtime
+(GC, isolate bootstrap, no JIT compiler at all, since AOT binaries never
+compile anything at runtime). This is why the final Docker stage in a
+multi-stage build can start from an extremely minimal base image
+(<code>scratch</code> or a slim Debian) with no Dart SDK installed at all — the
+compiled binary is genuinely self-contained native machine code, not a
+script needing an interpreter present on the target.</p>
+<p>The <code>COPY pubspec.* ./</code> before <code>COPY . .</code> ordering is a direct exploitation
+of how Docker's <strong>layer caching</strong> works: Docker hashes each instruction's
+inputs and reuses a cached layer if the inputs are unchanged. If you copy
+your entire source tree first, then every layer <em>after</em> that copy is
+invalidated on every source change, forcing <code>pub get</code> to re-run and
+re-download every dependency on every build — even a one-line change to a
+<code>.dart</code> file busts the dependency-install layer. Copying only the
+<code>pubspec.yaml</code>/<code>pubspec.lock</code> first, running <code>pub get</code> against just those,
+and <em>then</em> copying the rest of the source means Docker's cache for the
+<code>pub get</code> layer survives untouched across builds where only your source
+code changed, not your dependencies — a substantial CI build-time win at
+scale.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Write a <code>Dockerfile</code> for the Task API project from
 <a href="../../level-3/10-project-rest-api-db/">Level 3's capstone</a>, using the

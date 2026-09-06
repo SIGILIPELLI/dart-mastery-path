@@ -2136,6 +2136,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2276,6 +2287,17 @@
     <span class="md-ellipsis">
       
         Cheat sheet
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
       
     </span>
   </a>
@@ -2435,6 +2457,33 @@ future code that would have genuinely benefited from the check.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>The Dart linter operates on the same <strong>analyzer</strong> AST-based infrastructure
+that powers <code>dart analyze</code> and your IDE's error squiggles — each lint rule
+is a small visitor that walks the parsed syntax tree (not the compiled
+output) looking for a specific pattern, which is why lints run instantly
+without executing your code at all and can catch issues even in code paths
+that never run during testing.</p>
+<p><code>unawaited_futures</code> only firing inside <code>async</code> functions is a direct
+consequence of how the rule is scoped: it specifically flags a
+<code>Future</code>-returning expression statement (a call whose result is discarded)
+written inside a function itself marked <code>async</code>, on the theory that if
+you're already in async-aware code, forgetting an <code>await</code> is very likely a
+mistake rather than intentional fire-and-forget. A plain synchronous
+function calling an async function and discarding its <code>Future</code> doesn't
+trigger the same lint, because the rule's heuristic is "you were clearly
+thinking about async control flow here (you marked the function <code>async</code>)
+and still dropped this one" — outside that context, discarding a <code>Future</code>
+looks intentional often enough that the lint would generate too many false
+positives to be useful, so the analyzer team scoped it narrowly.</p>
+<p><code>dart fix</code> works by having each lint rule optionally ship a matching
+<strong>code-transform</strong> (a mechanical AST rewrite, similar in spirit to a
+generator's output but modifying your existing source in place instead of
+producing new files) — it's why <code>dart fix --apply</code> can only auto-correct
+lints that have an unambiguous mechanical fix (adding <code>await</code>, removing
+dead code) and cannot auto-fix lints whose correction requires
+understanding intent (like <code>prefer_final_fields</code> when reassignment is
+actually load-bearing elsewhere).</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Add <code>avoid_dynamic_calls</code> and <code>always_declare_return_types</code> to your
 <code>analysis_options.yaml</code>'s rule list. Write a small file that violates both

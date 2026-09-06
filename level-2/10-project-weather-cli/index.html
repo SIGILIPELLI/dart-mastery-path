@@ -1456,6 +1456,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#stretch-goals" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2371,6 +2382,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#stretch-goals" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2856,6 +2878,35 @@ puts "geocoding" in the <strong>host</strong>, not the path — so it silently m
 wrong branch and every test call went through the "forecast" response. That
 kind of mistake is exactly what a test written <em>before</em> trusting the
 implementation is for.</p>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>"Streaming multiple cities concurrently" in this project relies on the same
+single-threaded event-loop model covered earlier in this level: each HTTP
+request kicked off (via <code>package:http</code> or <code>dart:io</code>'s <code>HttpClient</code>)
+delegates the actual socket I/O to the operating system, and the isolate's
+event loop is notified via a completion callback once bytes are available —
+Dart code itself never blocks waiting on the network. Firing off several
+requests before awaiting any of them (the same pattern as <code>Future.wait</code>) lets
+their <em>wait time</em> overlap, so the total wall-clock time for N independent API
+calls tracks closer to the slowest single call rather than the sum of all
+of them, even though only one Dart call stack ever executes at a time.</p>
+<p>The two chained API calls in the service layer (e.g., resolve city name to
+coordinates, then fetch weather for those coordinates) compile down to a
+straight-line <code>async</code>/<code>await</code> state machine: the compiler generates a
+resumption point after the first <code>await</code>, and the second HTTP call's code
+only becomes reachable once the first <code>Future</code> completes and its result is
+bound — this is why a failure in the first call, via a thrown exception,
+naturally short-circuits the whole chain when wrapped in try/catch, without
+you needing to manually check "did the first call succeed?" before making
+the second.</p>
+<p>Testing the service without hitting the network typically means providing a
+fake <code>http.Client</code> (or injecting a function) instead of the real one — this
+works because Dart's interfaces are structural at the call-site level: any
+object implementing the same method signature (<code>send</code>, <code>get</code>, etc.) can
+stand in for the real client, and since the actual HTTP calls happen behind
+an <code>await</code>ed <code>Future</code>, a fake client can return an already-completed
+<code>Future.value(fakeResponse)</code> and the rest of the <code>async</code> code proceeds
+exactly as if a real network round-trip had happened, just without the
+event-loop suspension actually waiting on anything.</p>
 <h2 id="stretch-goals">Stretch goals<a class="headerlink" href="#stretch-goals" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Cache geocoding results.</strong> City coordinates don't change — add a

@@ -1362,6 +1362,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2239,6 +2250,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2469,6 +2491,32 @@ pipeline early instead of processing every element first.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p><code>map</code>/<code>where</code> and most of <code>Iterable</code>'s transformation methods are <strong>lazy</strong>
+because <code>Iterable</code> in Dart is defined as a protocol (an <code>iterator</code> getter
+returning something with <code>moveNext()</code>/<code>current</code>), and <code>.map()</code>/<code>.where()</code>
+return wrapper objects implementing that same protocol without eagerly
+computing anything — each wrapper's <code>moveNext()</code> pulls the next element from
+its source iterable and applies the transformation/predicate on demand, one
+element at a time. This is why calling <code>.map(expensiveFn)</code> on a million-item
+list is instantaneous — no work happens until something actually iterates
+the result (a <code>for</code>-in loop, <code>.toList()</code>, <code>.first</code>, etc.), and if you never
+iterate it, <code>expensiveFn</code> never runs at all. It's also why side effects
+inside a <code>.map()</code> callback can run more times than you expect if you
+iterate the same lazy <code>Iterable</code> more than once — each iteration re-walks
+the whole lazy chain from the source.</p>
+<p>The "core five" collection types share the underlying <code>Iterable</code> interface,
+but their concrete storage strategies differ in ways that affect Big-O
+behavior in practice: <code>List</code> gives O(1) index access because it's backed by
+a contiguous (over-allocated, doubling) array; <code>Set</code>/<code>Map</code> give average O(1)
+lookup because they're hash tables bucketing by <code>hashCode</code>, but degrade
+toward O(n) per bucket if many elements collide on the same hash — a real
+risk if you override <code>hashCode</code> poorly (e.g., always returning a constant).</p>
+<p>"Grouping" isn't a separate data structure — it's just building a
+<code>Map&lt;K, List&lt;V&gt;&gt;</code> by hand (or via <code>groupBy</code> from <code>package:collection</code>),
+which internally is one lazy pass over the source <code>Iterable</code>, inserting into
+list buckets keyed by hash — there's no special-cased "group" runtime
+construct in Dart at all.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Given a <code>List&lt;Employee&gt;</code> like the one above, write one expression (chaining
 <code>where</code>, <code>map</code>, and <code>fold</code> or <code>reduce</code>) that computes the <strong>average salary of

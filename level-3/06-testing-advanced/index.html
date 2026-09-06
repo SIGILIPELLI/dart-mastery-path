@@ -1665,6 +1665,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2261,6 +2272,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2472,6 +2494,34 @@ This is exactly the same shape of mistake as <code>FakeRepository</code>'s worki
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p><code>throwsA</code> and other asynchronous/exception matchers work because
+<code>package:matcher</code> doesn't inspect a <em>value</em> — it wraps a <strong>closure</strong> and
+invokes it itself inside a controlled <code>try</code>/<code>catch</code>, capturing whatever
+exception (or lack of one) results. This is exactly why <code>throwsA</code> needs an
+uncalled closure (<code>() =&gt; doTheThing()</code>) rather than the already-evaluated
+result of calling the function (<code>doTheThing()</code>): if you call the function
+yourself when passing it to <code>expect</code>, the exception is thrown immediately,
+during argument evaluation, before <code>expect</code>/<code>throwsA</code> ever gets a chance to
+install its <code>try</code>/<code>catch</code> around the call — the exception propagates out of
+your test function directly instead of being captured as an expected
+outcome.</p>
+<p><code>completion()</code> similarly wraps a <code>Future</code> rather than a resolved value —
+internally it registers a <code>.then()</code>/<code>.catchError()</code> pair on the future and
+tells the test runner's zone-based scheduler (the same <code>Zone</code> mechanism
+that lets the runner attribute async errors to specific tests) to keep the
+test alive until that future settles, then asserts against the eventual
+result or error.</p>
+<p>Fakes over mocking frameworks is a design choice that interacts with
+Dart's static, sound type system: a hand-written fake is a real class
+implementing the same interface, so the compiler checks it structurally
+just like any other implementation — a fake naturally stays in sync with
+interface changes (a signature change is a compile error in the fake too),
+whereas a fully dynamic mock built via reflection-like intercepting proxies
+can silently drift out of sync with an interface it doesn't statically
+implement, an outcome Dart's AOT-compiled, tree-shaken runtime model
+(which discourages heavy runtime reflection) makes actively awkward to rely
+on anyway.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Write a <code>RetryingClient</code> class that takes a <code>Future&lt;String&gt; Function()</code>
 fetcher and a <code>Clock</code>, and retries the fetcher up to 3 times with a 1-second

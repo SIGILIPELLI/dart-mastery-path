@@ -1255,6 +1255,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2305,6 +2316,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2544,6 +2566,30 @@ against a <code>Future</code> or <code>Stream</code> — no special ceremony nee
 <a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a><span class="w">  </span><span class="p">});</span>
 <a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a><span class="p">}</span>
 </code></pre></div>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p><code>package:test</code> runs each test inside its own <strong>error zone</strong> (a Dart <code>Zone</code>) —
+a mechanism the Dart runtime provides for intercepting uncaught errors,
+print calls, and scheduling within a delimited region of code. This is how
+the test runner can catch an exception thrown from deep inside an
+asynchronous callback that has nothing structurally to do with the <code>test()</code>
+function's own call stack (say, an error thrown inside a <code>Timer</code> callback
+started by the code under test) and correctly attribute it as <em>that specific
+test's</em> failure rather than crashing the whole process.</p>
+<p><code>setUp</code>/<code>tearDown</code> execute around <strong>every</strong> test in their enclosing <code>group</code>,
+run via the same zone-based scheduling — the test runner literally
+constructs a fresh execution context per test, which is why state declared
+at the top of a <code>group</code> and reassigned in <code>setUp</code> doesn't leak between
+tests even though it's "the same variable" textually: each test's <code>setUp</code>
+call reassigns it before that test's body runs, and Dart doesn't share
+mutable closures across tests unless you deliberately hoist them outside
+<code>setUp</code>.</p>
+<p>Testing async code with <code>expectLater</code>/awaited <code>expect</code> calls works because
+the test framework registers the test function itself as a <code>Future</code>-returning
+callback with the runner — the runner <code>await</code>s your test body's returned
+<code>Future</code> before considering the test finished, which is exactly why a test
+that fires off an unawaited async operation and returns can pass "green"
+while that operation's assertion failure surfaces later, sometimes
+attributed to the <em>next</em> test, unless you explicitly await it.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Create a small <code>lib/string_utils.dart</code> with a function <code>String
 truncate(String input, int maxLength)</code> that returns <code>input</code> unchanged if

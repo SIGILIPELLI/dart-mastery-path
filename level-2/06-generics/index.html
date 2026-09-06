@@ -1289,6 +1289,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2261,6 +2272,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2467,6 +2489,32 @@ an <code>int</code>. Generics catch that at the call site instead.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>Dart generics use <strong>type erasure with reified type arguments</strong> — a
+combination that's easy to state wrong. At compile time, a generic class
+like <code>Box&lt;T&gt;</code> has all of <code>T</code>'s usages checked against the bound
+(<code>T extends SomeType</code> restricts what members you can call on values of type
+<code>T</code> inside the class body). But unlike Java's fully-erased generics, Dart
+<em>keeps</em> the concrete type argument around at runtime as part of the object's
+actual runtime type — <code>Box&lt;int&gt;</code> and <code>Box&lt;String&gt;</code> are genuinely different
+runtime types, which is why <code>x is Box&lt;int&gt;</code> and <code>x.runtimeType</code> give
+meaningful, distinct answers at runtime, and why a <code>List&lt;int&gt;</code> can't have a
+<code>String</code> appended to it even via an <code>Object</code> reference to the same list —
+the runtime enforces the reified type argument, not just the compiler.</p>
+<p>This reification is exactly what separates real generics from "typed
+<code>dynamic</code>": a <code>dynamic</code> container performs no type checking at all on
+insertion or extraction, while <code>List&lt;T&gt;</code> inserts a genuine runtime type
+check whenever you add an element through a reference whose static type
+doesn't already guarantee the element type matches — you can trigger this by
+upcasting <code>List&lt;int&gt;</code> to <code>List&lt;num&gt;</code> and then trying to add a <code>double</code>
+through that reference, which throws at runtime because the underlying
+object is still, at its core, a reified <code>List&lt;int&gt;</code>.</p>
+<p>Bounded type parameters (<code>T extends Comparable&lt;T&gt;</code>) let the compiler resolve
+member calls on <code>T</code>-typed values statically, at compile time, against the
+bound's interface — calling <code>a.compareTo(b)</code> inside a generic function
+constrained this way compiles to a normal virtual dispatch through
+<code>Comparable</code>'s interface, with no runtime type inspection needed to know
+<code>compareTo</code> exists.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Write a generic class <code>Cache&lt;K, V&gt;</code> with a private <code>Map&lt;K, V&gt; _store</code>, a
 method <code>V? get(K key)</code>, a method <code>void set(K key, V value)</code>, and a method

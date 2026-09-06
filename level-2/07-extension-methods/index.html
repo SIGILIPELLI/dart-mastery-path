@@ -1328,6 +1328,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2283,6 +2294,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2476,6 +2498,33 @@ already has.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>Extension methods are a purely <strong>compile-time, static-dispatch</strong> feature —
+there is no runtime object modification happening at all, which is the
+single most important mechanism to understand about them. When the compiler
+sees <code>someString.isPalindrome</code>, it looks at the <em>static type</em> of
+<code>someString</code> and searches for an applicable extension whose <code>on</code> clause
+matches, then rewrites the call into an ordinary static function call
+(<code>StringExtension.isPalindrome(someString)</code>) before code generation. This is
+exactly why extension methods don't show up in <code>runtimeType</code>, don't
+participate in <code>is</code>/<code>as</code> checks, can't be overridden polymorphically, and —
+critically — are resolved based on the <em>static</em> type of the receiver
+expression, not its runtime type: if you have <code>Object o = 'hello'</code> and an
+extension only applies to <code>String</code>, calling it through <code>o</code> fails to resolve
+even though <code>o</code>'s runtime value actually is a <code>String</code>.</p>
+<p>Colliding extension names are a compile-time ambiguity, not a runtime
+conflict — if two imported extensions both declare a member with the same
+name applicable to the same type, the compiler can't determine which one
+you mean and requires you to disambiguate (import with a prefix, or use
+explicit extension-application syntax <code>ExtensionName(value).member</code>). There
+is no "closest match" or override-resolution fallback the way there is for
+inherited methods, because extensions don't participate in any inheritance
+chain at all.</p>
+<p>Because extensions add no real storage, they cannot declare instance
+fields with backing storage — an extension "getter" must be computed from
+the receiver's existing state on every call (there's nowhere to persist a
+new field on an object you don't own), which is also why extensions can't
+add fields that participate in a class's <code>==</code>/<code>hashCode</code>/serialization.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Write an extension <code>DurationFormatting on Duration</code> with a getter
 <code>readable</code> that returns a human-friendly string like <code>"1h 5m 30s"</code> (omit any

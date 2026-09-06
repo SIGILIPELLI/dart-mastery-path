@@ -1570,6 +1570,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2239,6 +2250,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2419,6 +2441,28 @@ violations.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>The SQL injection hole in string-interpolated <code>execute()</code> calls exists
+because the database engine parses the SQL text you hand it <em>before</em> it has
+any notion of "your data" versus "your query structure" — interpolating
+user input directly into the SQL string means the parser can't distinguish
+a value like <code>Robert'; DROP TABLE users;--</code> from actual SQL syntax, because
+by the time it reaches the parser, it's indistinguishable from
+syntax. Parameterized queries (<code>?</code> placeholders with a separate arguments
+list) avoid this because the driver sends the query text and the parameter
+values as <strong>separate channels</strong> to the database engine — the engine
+compiles the query plan once, treating placeholders as opaque value slots,
+and substitutes the actual values afterward, so no user-supplied string is
+ever re-parsed as SQL syntax.</p>
+<p>Constraints (<code>UNIQUE</code>, <code>NOT NULL</code>, <code>FOREIGN KEY</code>) are enforced by the
+database engine's own storage layer at the moment a row is written, which is
+why they surface as a runtime <code>SqliteException</code> from your Dart code rather
+than as a Dart-level compile-time or type-system check — Dart's type system
+has no visibility into your schema at all; the <code>sqlite3</code> package's Dart API
+is just a thin FFI (foreign function interface) binding calling directly
+into the native SQLite C library, so the actual constraint-checking logic
+runs inside SQLite's own C code, and Dart only sees the resulting error code
+translated into an exception object.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Create a <code>projects</code> table (<code>id</code>, <code>name TEXT UNIQUE</code>, <code>owner TEXT NOT NULL</code>)
 and a function <code>void addProject(Database db, String name, String owner)</code>

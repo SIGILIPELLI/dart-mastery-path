@@ -1216,6 +1216,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2283,6 +2294,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2544,6 +2566,35 @@ rewritten with <code>.listen()</code> (keeps going unless you opt in with
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>An <code>async*</code> generator function is transformed by the compiler into a state
+machine plus a <code>StreamController</code>-like object, very similarly to how <code>async</code>
+functions become <code>Future</code>-driven state machines. Each <code>yield</code> suspends the
+generator and hands one event to the stream's internal buffer; execution
+resumes only when the underlying controller determines a listener is ready
+for more (this is where <strong>backpressure</strong> enters — an <code>async*</code> generator
+naturally pauses at its <code>yield</code> point rather than racing ahead and
+buffering unboundedly, unlike a plain <code>Stream.fromIterable</code> which just push
+everything through).</p>
+<p>Single-subscription vs. broadcast is not a usage convention — it changes the
+internal buffering strategy of the <code>Stream</code> object itself. A
+single-subscription stream lazily starts producing events only once
+<code>.listen()</code> is called, and buffers/holds events if the listener applies
+backpressure (e.g., pauses the subscription); it guarantees each event is
+delivered to exactly one listener and enforces (via a runtime check) that a
+second <code>.listen()</code> call throws a <code>StateError</code>. A broadcast stream, by
+contrast, has no single-subscriber contract — it does not buffer events for
+listeners that haven't subscribed yet, and it fans out each event to every
+currently-subscribed listener independently, which is why broadcast streams
+routinely drop early events if you subscribe after the producer already
+started emitting.</p>
+<p><code>Stream.map</code>/<code>.where</code> don't eagerly transform anything at the point you call
+them — they return a <em>new</em> Stream wrapping the original, whose
+<code>.listen()</code> implementation pulls from the source and applies the
+transformation lazily, per-event, only once someone actually subscribes to
+the transformed stream. This lazy-wrapping chain is why building up a long
+pipeline of stream transformations is cheap until the final <code>.listen()</code>
+triggers the whole chain to start pulling data.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Write a function <code>Stream&lt;int&gt; countdown(int from)</code> that yields values from
 <code>from</code> down to <code>1</code>, one every 300ms, then throws an error instead of a final

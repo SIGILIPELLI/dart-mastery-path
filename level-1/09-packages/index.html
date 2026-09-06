@@ -1030,6 +1030,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2327,6 +2338,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2514,6 +2536,30 @@ after <code>pubspec.yaml</code>'s <code>name</code> field.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>Running <code>dart pub get</code> doesn't just download files — it runs a real
+<strong>version-solving</strong> algorithm (PubGrub, the same family of SAT-based solver
+used by other modern package managers) that must simultaneously satisfy
+every version constraint declared across your <code>pubspec.yaml</code> <em>and</em> every
+transitive dependency's own <code>pubspec.yaml</code>. The output is written to
+<code>pubspec.lock</code>, which pins the exact resolved version of every package —
+that's why committing <code>pubspec.lock</code> (for applications, not for published
+packages) matters: without it, two machines running <code>pub get</code> against the
+same loose constraints (<code>^1.2.0</code>) could resolve to different concrete
+versions if a new compatible release was published in between.</p>
+<p><code>^1.2.0</code> isn't a convention Dart merely documents — it's parsed into a
+concrete version range object (<code>&gt;=1.2.0 &lt;2.0.0</code>) by the pub tool itself,
+following semantic versioning's contract that a major version bump may
+break compatibility. The solver treats this range as a hard constraint
+during solving, not a soft preference.</p>
+<p>Once resolution finishes, <code>pub</code> doesn't copy the resolved packages into your
+project — it writes a <code>.dart_tool/package_config.json</code> file mapping each
+package name to an on-disk path (in the global pub cache, typically
+<code>~/.pub-cache</code>), and the Dart compiler/VM consults that file to resolve
+<code>import 'package:foo/foo.dart'</code> at compile time. This is why deleting
+<code>.dart_tool</code> and re-running <code>pub get</code> is a safe way to "reset" a project's
+dependency resolution without touching the shared, deduplicated pub cache
+that every project on your machine draws from.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Run <code>dart create demo_cli</code> to scaffold a new console project. Add the <code>args</code>
 package as a dependency with <code>dart pub add args</code>, then edit

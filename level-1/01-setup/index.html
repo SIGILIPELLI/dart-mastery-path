@@ -795,6 +795,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2305,6 +2316,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2441,6 +2463,35 @@ trying out the snippets in this course before you have the SDK set up locally.</
 </code></pre></div>
 <p>Running <code>dart format .</code> on a whole project keeps every file in a consistent
 style automatically.</p>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p><code>dart run</code> and <code>dart compile exe</code> are not just two flags on the same engine —
+they use fundamentally different execution strategies:</p>
+<ul>
+<li><strong><code>dart run</code> (JIT path).</strong> The Dart VM parses your source into an
+  intermediate representation and starts executing it through an
+  interpreter/baseline-JIT almost immediately — that's why there's no visible
+  "compiling..." pause. As functions get called repeatedly (rare for a
+  one-shot script, common in long-running servers), the VM's profiling counters
+  flag "hot" functions and hand them to an optimizing compiler that generates
+  machine code specialized for the types actually observed at runtime
+  (speculative optimization). If a later call violates those assumptions —
+  say a variable that was always an <code>int</code> suddenly holds a <code>String</code> — the VM
+  deoptimizes back to unoptimized code rather than crashing.</li>
+<li><strong><code>dart compile exe</code> (AOT path).</strong> Here there is no runtime profiling step
+  at all. The AOT compiler performs whole-program type-flow analysis ahead of
+  time, generates native machine code for every reachable function, and links
+  it with a minimal Dart runtime (a small snapshot of the core libraries plus
+  a garbage collector) into one executable. This is why AOT binaries start in
+  milliseconds with no warm-up and no <code>dart</code> SDK dependency — the "VM" you're
+  running is really just a runtime shim, not the full JIT compiler.</li>
+</ul>
+<p>The <code>void main()</code> entry point matters mechanically too: the compiled/interpreted
+program's isolate (Dart's unit of concurrency — see the Level 3 isolates
+lesson) starts by scheduling <code>main()</code> on its event loop. Nothing else runs
+until <code>main</code> returns <em>and</em> the event loop's queues (microtasks, then
+event-queue callbacks like timers) drain — which is why a synchronous
+<code>print</code> inside <code>main</code> always fires before, say, a <code>Future.delayed</code> callback
+scheduled earlier in the same function.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Write a program <code>greeter.dart</code> whose <code>main</code> function reads command-line
 arguments and prints a personalized greeting for each name passed in (e.g.

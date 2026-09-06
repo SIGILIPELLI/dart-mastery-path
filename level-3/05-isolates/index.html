@@ -1637,6 +1637,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2261,6 +2272,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2425,6 +2447,37 @@ objects around freely on a single isolate into isolate-based code.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>Spawning an isolate is genuinely expensive compared to scheduling a
+<code>Future</code> on the same isolate — <code>Isolate.spawn</code> asks the Dart VM to allocate
+an entirely new heap, a new stack, and a new event loop, then load and
+initialize the target function's code into that fresh environment. This is
+why isolates are reached for to offload real CPU-bound work (a large sort, a
+sieve, image processing) rather than every asynchronous operation — the
+spawn cost (typically single-digit milliseconds, more on constrained
+devices) only pays off if the work you're offloading is substantial enough
+to be worth escaping the main isolate's event loop for.</p>
+<p>Messages sent via <code>SendPort.send()</code> are not references into the sender's
+heap — the VM performs a <strong>deep copy</strong> of the message graph into a format
+that can be reconstructed independently in the receiving isolate's own heap,
+because the two isolates' garbage collectors run independently and neither
+can safely hold a live pointer into the other's memory (that's precisely
+the "no shared memory" guarantee that lets each isolate's GC pause
+independently without needing to coordinate stop-the-world pauses across
+isolates). The VM has a fixed table of types it knows how to copy this way —
+primitives, strings, and recursively copyable collections of those, plus a
+few special zero-copy-eligible types like <code>TransferableTypedData</code> (which
+transfers ownership of a byte buffer rather than copying it) and
+<code>SendPort</code> itself (which is copyable because it's really just an opaque
+routing handle, not a reference to memory). An arbitrary custom object has
+no VM-level rule for how to reconstruct it in another isolate's heap — its
+class's constructor and state aren't things the copying mechanism can
+introspect — so <code>send()</code> rejects it outright rather than silently doing
+something wrong.</p>
+<p><code>Isolate.run</code> builds on top of <code>Isolate.spawn</code> plus a matched
+<code>ReceivePort</code>/<code>SendPort</code> pair and automatic isolate shutdown once the result
+is sent and received — it's pure convenience code around the primitives
+above, not a different concurrency mechanism.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Write a function <code>Future&lt;List&lt;int&gt;&gt; primesUpTo(int n)</code> that runs on a
 separate isolate via <code>Isolate.run</code> and returns all primes below <code>n</code> using a

@@ -1373,6 +1373,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2317,6 +2328,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2550,6 +2572,40 @@ explaining why its failure is safe to ignore.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>Dart's exception model draws a real, load-bearing line between <code>Error</code> and
+<code>Exception</code>: an <code>Error</code> (like <code>RangeError</code>, <code>TypeError</code>,
+<code>StateError</code>) signals a <em>programming bug</em> — something that, by definition,
+shouldn't have been possible if the code were correct — while <code>Exception</code>
+signals an <em>expected, recoverable failure condition</em> (bad input, a failed
+network call). The Dart VM treats these somewhat differently in
+practice: uncaught <code>Error</code>s are the ones you're expected to fix, not catch,
+which is why blanket <code>catch (e)</code> clauses that swallow <em>everything</em>
+including programming errors are considered an anti-pattern — they hide
+bugs that should have crashed loudly during development.</p>
+<p><code>finally</code> is guaranteed to run by the compiler restructuring your function's
+control-flow graph so that every possible exit path from the <code>try</code> block
+(normal completion, <code>return</code>, <code>break</code>, <code>continue</code>, or an uncaught exception
+propagating out) is routed through the <code>finally</code> block before actually
+leaving. This is a compile-time transformation, not a runtime "best effort"
+— even a <code>return</code> statement inside a <code>try</code> doesn't actually return until
+<code>finally</code> has executed, and if <code>finally</code> itself contains a <code>return</code>, it
+silently overrides whatever the <code>try</code>/<code>catch</code> was about to return.</p>
+<p><code>rethrow</code> differs from <code>throw e</code> at a genuine data level: Dart attaches a
+<code>StackTrace</code> object to a thrown exception's propagation, and <code>rethrow</code>
+reuses the <em>original</em> stack trace captured at the original throw site, while
+<code>throw e</code> inside a <code>catch</code> block creates a brand-new stack trace rooted at
+the <code>throw</code> statement itself — which is why debugging a rethrown-with-<code>throw</code>
+exception often shows you the <code>catch</code> block's location instead of where the
+error actually originated.</p>
+<p>Inside <code>async</code> functions, exceptions thrown during an <code>await</code>ed operation
+are captured by the compiler-generated state machine and delivered into the
+<code>catch</code> clause of the enclosing <code>try</code> exactly as if execution were
+synchronous — but an exception thrown by a <code>Future</code> that nobody ever awaits
+or attaches a <code>.catchError</code> to becomes an <strong>unhandled async error</strong>, reported
+to the isolate's uncaught-error handler (or by the <code>Zone</code> running the code)
+rather than to any <code>try</code>/<code>catch</code> in your function, since there's no
+active call stack for it to unwind through by the time it fires.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Define an exception hierarchy for a simple file-parsing tool: a base
 <code>ParseException implements Exception</code> with a <code>String reason</code> field, and two

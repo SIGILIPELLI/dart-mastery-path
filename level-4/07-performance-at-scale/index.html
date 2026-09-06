@@ -2058,6 +2058,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2232,6 +2243,17 @@
     <span class="md-ellipsis">
       
         Cheat sheet
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
       
     </span>
   </a>
@@ -2416,6 +2438,31 @@ one batch's worth of work, not the whole run.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>Parallelizing CPU work across isolates gets genuine multi-core speedup
+because each isolate the VM spawns is scheduled by the OS onto its own
+native thread with its own heap — unlike <code>async</code>/<code>await</code> concurrency on a
+single isolate (which only overlaps <em>waiting</em> time on one core), multiple
+isolates can execute Dart bytecode/machine code simultaneously on separate
+CPU cores, because there's no shared mutable state between them requiring
+locks or synchronization to protect. The tradeoff, covered in the isolates
+lesson, is that getting data in and out costs a deep-copy serialization
+step across each isolate boundary — which is exactly why "parallelize CPU
+work" only pays off when the actual computation per unit of work
+significantly outweighs the fixed cost of spawning isolates and copying
+inputs/outputs across the boundary; splitting a small array into many tiny
+isolate tasks can lose to just doing it all on one isolate.</p>
+<p>Batching database writes trades round-trip/transaction overhead for
+increased in-flight risk — most databases (SQLite included) pay a real,
+fixed cost per transaction commit (fsync-level durability guarantees,
+lock acquisition, WAL bookkeeping), so wrapping many individual inserts
+into fewer, larger transactions amortizes that fixed cost across more rows.
+The over-batching trap is a direct consequence of that same durability
+mechanism: since nothing is durably committed until the transaction
+commits, a crash or error partway through building a very large batch loses
+every row accumulated in that not-yet-committed transaction, not just the
+one that failed — batch size is fundamentally a throughput-versus-blast-
+radius tradeoff, not a free efficiency win with no downside.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Extend the prime-counting example to accept a <code>chunks</code> parameter and try
 1, 2, 4, and 8 chunks against the same <code>total</code>, printing elapsed time for

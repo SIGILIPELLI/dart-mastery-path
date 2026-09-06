@@ -862,6 +862,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2327,6 +2338,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2551,6 +2573,29 @@ inside a nested one:</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>Dart's newer <code>switch</code> <strong>expressions</strong> (as opposed to <code>switch</code> statements) are
+compiled using exhaustiveness analysis against the matched type: if you switch
+over an enum or a sealed class hierarchy, the compiler proves at compile time
+whether every case is covered, and refuses to compile if it isn't (unless you
+add a <code>default</code>/wildcard <code>_</code>). This isn't just a lint — it's the analyzer
+walking the declared subtype set of the matched value's static type, which is
+why exhaustiveness checking only works reliably on closed type hierarchies
+(enums, <code>sealed</code> classes), not on arbitrary open classes.</p>
+<p><code>break</code>, <code>continue</code>, and labeled loops compile to jump instructions in the
+underlying IR, but the "label" itself is purely a compile-time construct —
+by the time code reaches the VM's intermediate representation or the AOT
+backend, labels have already been resolved into direct control-flow edges
+between basic blocks. There's no runtime cost to a label versus an
+unlabeled loop; the label only exists to disambiguate <em>which</em> enclosing loop
+a <code>break</code>/<code>continue</code> targets during compilation.</p>
+<p>The null-aware operators (<code>??</code>, <code>?.</code>) are not simply syntactic sugar evaluated
+left-to-right at runtime with a null check — the compiler's type-flow analysis
+uses them as promotion evidence. After <code>if (x != null)</code> or <code>x?.something</code>,
+Dart's flow analysis can <em>promote</em> <code>x</code>'s static type from <code>T?</code> to <code>T</code> for the
+rest of that scope, meaning subsequent member accesses on <code>x</code> skip the
+null check entirely and compile to a direct (non-nullable) call — a real
+compile-time optimization, not just a readability nicety.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Write a program that loops from 1 to 30 and, for each number, prints "Fizz"
 if divisible by 3, "Buzz" if divisible by 5, "FizzBuzz" if divisible by both,

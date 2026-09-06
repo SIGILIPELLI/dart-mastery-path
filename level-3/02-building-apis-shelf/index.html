@@ -1553,6 +1553,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2261,6 +2272,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2459,6 +2481,32 @@ middleware's job is to catch errors thrown further in.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>A <code>shelf</code> server is fundamentally a function: <code>Handler</code> is <code>typedef Handler =
+FutureOr&lt;Response&gt; Function(Request request)</code>. Every incoming HTTP
+connection accepted by <code>dart:io</code>'s <code>HttpServer</code> (which itself listens via
+the OS's non-blocking socket APIs and hands off completed requests to the
+event loop) is converted into a <code>shelf.Request</code> and passed through this
+function chain — there's no hidden framework magic; routing, middleware, and
+your handler are all literally just functions composed together, which is
+why middleware can be understood purely as "a function that takes a
+<code>Handler</code> and returns a new <code>Handler</code>" wrapping the original with code that
+runs before and/or after.</p>
+<p>Because each request is handled asynchronously (the handler function
+returns a <code>FutureOr&lt;Response&gt;</code>), a single <code>dart:io</code> isolate can serve many
+concurrent connections without threads — while one request's handler is
+<code>await</code>ing a database query or another I/O operation, the event loop is free
+to process other requests' events. This is the same single-isolate,
+event-loop concurrency model from the async-basics lesson, just applied to
+serving HTTP instead of console I/O — true parallelism across CPU cores
+requires spawning separate isolates (see the isolates lesson), each running
+its own instance of the shelf pipeline.</p>
+<p><code>jsonEncode</code> rejecting non-<code>String</code> map keys is rooted in the JSON
+specification itself, not a Dart limitation — JSON objects only have string
+keys, so <code>dart:convert</code>'s encoder walks your <code>Map</code> and, upon finding a
+non-<code>String</code> key, throws rather than silently calling <code>.toString()</code> on it
+(which could produce ambiguous or lossy output, e.g. two different objects
+whose <code>toString()</code> collides).</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Build a <code>shelf_router</code> API with two routes: <code>POST /echo</code>, which reads the
 request body with <code>await request.readAsString()</code> and returns it back with

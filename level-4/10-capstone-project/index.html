@@ -2140,6 +2140,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#stretch-goals" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2230,6 +2241,17 @@
     <span class="md-ellipsis">
       
         Running it
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
       
     </span>
   </a>
@@ -2428,6 +2450,32 @@ in, an unauthenticated request, then an authenticated create-and-list:</p>
 reaching <code>NoteService</code>; the authenticated calls after login see an
 initially-empty list, then the note they just created — end-to-end proof
 that auth, storage, and per-user scoping all work together correctly.</p>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>Salted hashes for auth in this capstone rely on the same mechanism covered
+in the security-practices lesson: a slow, memory-hard hash function
+(bcrypt/Argon2) combined with a unique per-user random salt means each
+password verification is a deliberately expensive computation performed
+once per login attempt — the server re-derives the hash from the submitted
+password plus the stored salt and compares it to the stored hash, never
+storing or transmitting the plaintext password itself after registration.</p>
+<p>Bearer tokens work as a <strong>stateless-to-the-network, stateful-on-the-server</strong>
+mechanism: the token itself (whether a random opaque string looked up in a
+sessions table, or a self-contained signed JWT) is just an artifact the
+client re-presents on every request; the middleware that authenticates
+every <code>/notes</code> request in one place is exactly the shelf middleware-as-
+function-composition pattern from the APIs lesson — a wrapping <code>Handler</code>
+that inspects the <code>Authorization</code> header before the inner route handler
+ever runs, short-circuiting with a 401 <code>Response</code> if the token doesn't
+resolve to a valid session/user, so no individual route handler needs to
+duplicate that check.</p>
+<p>"Private per-user data" is enforced at the database-query level, not by
+trusting client input: every notes query the service layer runs is scoped
+by the authenticated user's ID extracted from the validated token — not
+from any user ID the client could put in a request body or URL — which is
+what actually prevents one authenticated user from reading another user's
+notes by guessing or manipulating an ID, closing the same class of
+trust-boundary mistake the path-traversal lesson covered for filesystem
+paths.</p>
 <h2 id="stretch-goals">Stretch goals<a class="headerlink" href="#stretch-goals" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Replace the in-memory <code>_tokens</code> map with a <code>sessions</code> table (token,

@@ -1693,6 +1693,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2261,6 +2272,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2484,6 +2506,31 @@ rebuild-on-notify mechanism underneath is the same one covered here.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p><code>ChangeNotifier</code> is a small, concrete implementation of the observer
+pattern built into Flutter's foundation library: it keeps a <code>List</code> of
+listener closures, and <code>notifyListeners()</code> walks that list calling each one.
+The mechanism that connects a <code>ChangeNotifier</code> to actual widget rebuilds —
+<code>ListenableBuilder</code> (or <code>AnimatedBuilder</code>) — registers its own internal
+callback as a listener in <code>initState()</code>, and that callback simply calls
+<code>setState(() {})</code> with an empty body. This is the entire bridge between
+"my data changed" and "the screen updates": <code>notifyListeners()</code> fires the
+listener, the listener calls <code>setState</code>, <code>setState</code> marks the <code>Element</code>
+dirty, and the framework's normal build/reconcile pass (from the Flutter
+fundamentals lesson) picks it up on the next frame — there's no special
+"reactive" runtime machinery beneath the bigger state-management packages
+(Provider, Riverpod, Bloc); they're all, at bottom, organizing this same
+listener-registration-plus-<code>setState</code> mechanism more ergonomically and
+with better scoping (so a change to one piece of state only rebuilds the
+specific widgets that actually read it, rather than an entire subtree).</p>
+<p>Mutating the listener list while <code>notifyListeners()</code> is iterating it is a
+real hazard for the reason covered in the collections lessons: <code>List</code>
+iteration holds an internal cursor that a concurrent <code>add</code>/<code>remove</code> on the
+same list invalidates, throwing a <code>ConcurrentModificationError</code> — this is
+precisely why a listener callback that itself calls
+<code>addListener</code>/<code>removeListener</code> (common when a widget disposes mid-notification)
+needs the notifier to iterate over a defensive copy, which is exactly what
+Flutter's actual <code>ChangeNotifier</code> implementation does internally.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Extend <code>CartModel</code> with a <code>remove()</code> method (clamped at 0, never negative)
 and a computed <code>String get summary</code> that returns <code>"empty"</code> when <code>items ==

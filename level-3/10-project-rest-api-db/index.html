@@ -1777,6 +1777,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#stretch-goals" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2261,6 +2272,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#stretch-goals" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2477,6 +2499,34 @@ all — just an in-memory database, exactly like <a href="../03-databases/">modu
 keeping <code>TaskService</code> free of <code>shelf</code> types: fast, deterministic tests for
 the logic that actually matters, with the HTTP layer left thin enough that
 it barely needs testing of its own beyond the end-to-end run above.</p>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>Separating the database logic from the HTTP layer isn't just a style
+preference in this project — it lines up with a real boundary in how Dart
+executes each concern. The HTTP layer (shelf handlers) operates entirely on
+the event loop, <code>await</code>ing I/O without blocking; the database layer, if
+built on <code>sqlite3</code>'s synchronous FFI bindings, executes SQL calls
+<em>synchronously</em>, blocking the isolate for the duration of each query.
+Keeping that boundary explicit (one module that owns all direct SQL access)
+is what makes it straightforward to later swap in an async driver, or move
+the database calls to a worker isolate, without touching route-handling
+code — the seam already exists because the two layers were never
+interleaved.</p>
+<p>Wiring the layers together end to end exercises the same request lifecycle
+as the shelf lesson: <code>HttpServer</code> accepts a connection, the shelf pipeline
+converts it to a <code>Request</code>, your router dispatches to a handler, which calls
+into the database layer, gets a synchronous result back, and returns a
+<code>Response</code> that shelf serializes back onto the socket — all of this
+happening on the single isolate's event loop, with concurrent requests
+interleaved at each <code>await</code> point (or, if the SQL calls are synchronous,
+serialized for the duration of each individual query, since a blocking FFI
+call cannot yield to the event loop mid-call).</p>
+<p>Testing the service layer directly — calling your database/business-logic
+functions without going through HTTP at all — is possible specifically
+because the HTTP layer was kept as a thin adapter: the service functions are
+ordinary Dart functions/classes with no dependency on <code>shelf.Request</code>
+objects, so a test can call them directly and assert on plain Dart return
+values, without a real socket, a running server, or even the event loop
+being involved in most of the assertions.</p>
 <h2 id="stretch-goals">Stretch goals<a class="headerlink" href="#stretch-goals" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Add <code>DELETE /tasks/&lt;id&gt;</code> and a <code>deleteTask</code> method on <code>TaskService</code>;

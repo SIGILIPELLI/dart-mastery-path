@@ -2108,6 +2108,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2276,6 +2287,17 @@
     <span class="md-ellipsis">
       
         Cheat sheet
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
       
     </span>
   </a>
@@ -2469,6 +2491,34 @@ consumer reads before deciding whether upgrading is safe.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p><code>dart pub publish</code> runs the <strong>pana</strong> (package analysis) checks locally
+before anything is uploaded — these checks parse your <code>pubspec.yaml</code> and
+directory structure the same way <code>pub.dev</code>'s own scoring system does after
+publication, which is why it can flag issues like a missing <code>LICENSE</code> or
+malformed <code>CHANGELOG.md</code> ahead of time. pub.dev's exact-filename
+expectations (<code>CHANGELOG.md</code>, <code>LICENSE</code>, <code>README.md</code>, case- and
+naming-sensitive) exist because the tooling that renders your package's
+page and computes its pub score does simple, direct filesystem lookups by
+name rather than any fuzzy matching — <code>changelog.md</code> or <code>License.txt</code>
+simply won't be found by code doing <code>File('CHANGELOG.md').existsSync()</code>.</p>
+<p>Semantic versioning has real mechanical consequences via the version
+solver covered in the packages lesson: bumping only the patch version
+(<code>1.2.3</code> → <code>1.2.4</code>) signals to every consumer's <code>^1.2.x</code> constraint that
+the update is safe to pull in automatically, while a major bump (<code>1.2.3</code> →
+<code>2.0.0</code>) is specifically what the solver treats as a signal that existing
+<code>^1.x.x</code> constraints must NOT resolve to it, protecting consumers from an
+unreviewed breaking change reaching their build. This is why an accidental
+breaking change shipped as a patch version doesn't just violate a
+convention — it actively defeats the constraint-solving mechanism every
+downstream project relies on to avoid breakage.</p>
+<p>Publishing itself uploads an immutable, content-addressed archive to
+pub.dev — once a version number is published, it can never be
+republished with different contents (only "retracted"), which is precisely
+why version numbers must be bumped for every change, however small; the
+registry's guarantee that <code>foo: 1.2.3</code> always resolves to the exact same
+bytes everywhere is what makes <code>pubspec.lock</code> a meaningful, reproducible
+promise across machines and CI runs.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Add a third extension method, <code>String wordCount()</code>, returning the number of
 whitespace-separated words (0 for an empty or whitespace-only string). Add

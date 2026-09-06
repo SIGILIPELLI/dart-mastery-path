@@ -1002,6 +1002,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2327,6 +2338,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2523,6 +2545,39 @@ instead of just one — covered in depth in Level 2. Here's a first taste:</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>Dart is single-threaded <em>within an isolate</em> — there is exactly one call
+stack, and <code>async</code>/<code>await</code> never spawns a thread. What actually happens is
+that each isolate runs an <strong>event loop</strong> built around two queues: the
+<strong>microtask queue</strong> and the <strong>event queue</strong>. When you <code>await</code> a <code>Future</code>
+that isn't already completed, the current <code>async</code> function's remaining code
+is packaged up as a continuation and the function <em>returns control</em> to its
+caller immediately — the isolate is free to run other code. When the
+awaited operation completes (a timer fires, I/O finishes, someone calls
+<code>Completer.complete()</code>), its continuation is scheduled: <code>Future</code> callbacks
+(<code>.then</code>, the resumption of an <code>await</code>) go on the <strong>microtask queue</strong>, which
+is always fully drained before the event loop looks at the <strong>event queue</strong>
+(timers, I/O callbacks, <code>Stream</code> events). This priority is exactly why
+chaining many <code>.then()</code>/<code>await</code> steps can starve timer callbacks if you're
+not careful — each microtask can schedule another microtask, and they all
+run before a single <code>Timer</code> gets a turn.</p>
+<p><code>Future.wait</code> doesn't run futures "in parallel" in the threading sense —
+there's still one isolate, one stack. What it does is start all the given
+asynchronous operations (which is only meaningful if those operations
+themselves do concurrent work like real I/O, since I/O in Dart's <code>dart:io</code>
+is handled by the underlying event notification system, not by Dart code
+looping) before awaiting any of their results, so their <strong>waiting time</strong>
+overlaps instead of being serialized — the CPU-bound Dart code for each
+future still runs one snippet at a time, interleaved via the event loop, but
+the wall-clock wait for e.g. three independent network calls collapses to
+roughly the slowest one instead of the sum of all three.</p>
+<p>A <code>try</code>/<code>catch</code> around an <code>await</code> works because the compiler transforms your
+<code>async</code> function into a state machine under the hood — each <code>await</code> point is
+a suspension point, and exceptions thrown inside the asynchronous operation
+are captured and delivered back into that state machine's <code>catch</code> handling
+exactly as if the code had executed synchronously, even though real
+(unrelated) code from other parts of the event loop may have run on the same
+thread in between.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Write an <code>async</code> function <code>fetchTemperature(String city)</code> that simulates a
 network call with <code>Future.delayed</code> (random 200-800ms) and returns a random

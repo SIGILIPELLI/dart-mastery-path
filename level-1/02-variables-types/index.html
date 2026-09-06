@@ -834,6 +834,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2327,6 +2338,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2549,6 +2571,39 @@ data like decoded JSON.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p><code>var</code> and <code>dynamic</code> look similar on the page but produce completely different
+compiled code:</p>
+<ul>
+<li>With <code>var</code>, type inference happens once, at compile time, from the
+  initializer expression. The compiler then bakes that concrete type into
+  every subsequent use — a <code>var name = 'Ada'</code> becomes, as far as the compiler
+  and the AOT/JIT backends are concerned, indistinguishable from <code>String name
+  = 'Ada'</code>. Field and method lookups on <code>name</code> resolve to fixed offsets/vtable
+  slots at compile time, which is what makes them fast and lets the analyzer
+  catch <code>name = 42</code> before you ever run the program.</li>
+<li>With <code>dynamic</code>, the compiler emits no static type information for that
+  variable at all. Every member access (<code>b.length</code>, <code>b + 1</code>) becomes a
+  dynamic dispatch — at runtime, the VM looks up the object's actual runtime
+  class, checks whether it implements the requested method/getter, and calls
+  it, or throws a <code>NoSuchMethodError</code> if it doesn't. This is strictly slower
+  than a statically-resolved call and defeats the analyzer's ability to catch
+  mistakes ahead of time — the cost isn't just stylistic.</li>
+</ul>
+<p><code>final</code> vs <code>const</code> is also a real compile-time/runtime split, not just a
+convention: a <code>const</code> value is folded directly into the compiled constant
+pool (for collections, this means <code>const [1, 2, 3]</code> is a single canonicalized,
+immutable object reused everywhere it's referenced — two <code>const [1,2,3]</code>
+literals are <code>identical()</code>), while <code>final</code> allocates a normal object at
+runtime whose reference simply can't be reassigned afterward. That's why
+<code>const now = DateTime.now()</code> is rejected — the compiler cannot compute
+"now" while compiling your source.</p>
+<p>Integer division producing a <code>double</code> for <code>/</code> but truncating for <code>~/</code> is
+rooted in Dart's number model: on native (JIT/AOT) targets, <code>int</code> is a true
+64-bit integer type, so <code>~/</code> performs actual integer truncating division in
+hardware, while <code>/</code> always promotes both operands to <code>double</code> and uses
+floating-point division — two different CPU instructions, not just two
+different print formats.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Write a program that declares your name (<code>String</code>), birth year (<code>int</code>), and
 height in meters (<code>double</code>) using <code>var</code>. Compute your age given a current year

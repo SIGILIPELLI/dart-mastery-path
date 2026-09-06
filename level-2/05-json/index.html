@@ -1261,6 +1261,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2261,6 +2272,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2509,6 +2531,33 @@ otherwise prevents. Two defenses, often used together:</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p><code>jsonDecode</code> performs a single-pass parse of the input string into a tree of
+plain Dart objects (<code>Map&lt;String, dynamic&gt;</code>, <code>List&lt;dynamic&gt;</code>, <code>String</code>,
+<code>num</code>, <code>bool</code>, <code>Null</code>) with no knowledge of your model classes at all — the
+"typed model" layer (<code>fromJson</code>/<code>toJson</code>) is entirely hand-written or
+generated code sitting <em>on top of</em> that untyped tree, not part of the
+<code>dart:convert</code> decoding step itself. This separation is exactly why a cast
+like <code>json['age'] as int</code> can fail at runtime instead of compile time: the
+compiler has no way to know what shape the decoded <code>dynamic</code> map actually
+has until the cast executes and the runtime checks the actual object's
+class against <code>int</code>.</p>
+<p>Because <code>num</code> (not <code>int</code> or <code>double</code> specifically) is what JSON numbers
+decode to when there's no decimal point ambiguity, a JSON value like <code>42</code>
+decodes to a Dart <code>int</code>, while <code>42.0</code> decodes to a <code>double</code> — and casting
+<code>json['x'] as int</code> on a value that happens to arrive as <code>42.0</code> from an API
+that changed its serialization throws a runtime <code>TypeError</code>, not a silent
+truncation. This is a common real-world JSON-model bug precisely because
+Dart's static type system can't see through the <code>dynamic</code> boundary to catch
+it ahead of time.</p>
+<p><code>toJson()</code> produces exactly the same kind of untyped tree (<code>Map&lt;String,
+dynamic&gt;</code>) that <code>jsonDecode</code> produces — <code>jsonEncode</code> then walks that tree
+recursively, calling <code>.toString()</code>/formatting primitives and recursing into
+nested maps/lists, which is why any object placed into a <code>toJson()</code> map that
+isn't itself a <code>Map</code>, <code>List</code>, <code>String</code>, <code>num</code>, <code>bool</code>, or <code>null</code> (or doesn't
+implement its own <code>toJson()</code> that <code>jsonEncode</code> knows to call) throws a
+<code>JsonUnsupportedObjectError</code> at the point of encoding, not at the point you
+constructed the object.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Model a small <code>Product</code> class with <code>name</code> (<code>String</code>), <code>price</code> (<code>double</code>),
 and <code>inStock</code> (<code>bool</code>, defaulting to <code>true</code> if the JSON omits it). Write

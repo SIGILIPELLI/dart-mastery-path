@@ -946,6 +946,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2327,6 +2338,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2546,6 +2568,36 @@ underscore <code>_</code> is private to its own <em>library</em> (usually meanin
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>Every Dart object carries a hidden pointer to its class's <strong>class descriptor</strong>
+(similar in spirit to a C++ vtable), which the runtime uses to resolve method
+calls, field offsets, and type checks (<code>is</code>/<code>as</code>). When you call
+<code>instance.method()</code>, the compiler (JIT or AOT) generates code that follows
+that pointer to look up <code>method</code>'s compiled entry — for a non-overridden,
+final, or statically-known-concrete-type call, this can often be resolved and
+inlined directly at compile time; for a call through an interface/overridable
+method, it stays a genuine virtual dispatch resolved via the descriptor at
+call time.</p>
+<p>Named constructors (<code>Point.origin()</code>) are not separate classes or factories
+under the hood — they're just alternate entry points into the same
+allocation routine, all producing instances of the same class layout, which
+is why <code>Point.origin() is Point</code> is always true.</p>
+<p><code>static</code> members are the one place where Dart deliberately does <em>not</em>
+allocate per-instance: a static field lives once, in the isolate's static
+memory associated with the class, initialized lazily the first time it (or
+any static member of that class) is touched — not eagerly at isolate
+startup. That lazy-initialization semantics is why a <code>static final</code> field
+that reads an environment or does expensive setup only pays that cost if
+the program actually uses it.</p>
+<p>Overriding <code>==</code> and <code>hashCode</code> changes how the object behaves inside every
+hash-based collection: the default <code>Object.==</code>/<code>hashCode</code> (identity-based)
+are backed by an internal object identity value baked in at allocation time.
+Once you override them to compare fields, <code>Set</code>/<code>Map</code> lookups start hashing
+and comparing your fields instead of the object's identity — which is
+exactly what makes value-equality classes usable as map keys, but also means
+mutating a field used in <code>hashCode</code> <em>after</em> inserting the object into a
+<code>Set</code>/<code>Map</code> corrupts that collection's internal bucket structure (the object
+is now in the wrong bucket for its new hash).</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Design a <code>Book</code> class with private fields <code>_title</code>, <code>_author</code>, and <code>_pages</code>,
 a standard constructor, a named constructor <code>Book.unknownAuthor(title, pages)</code>

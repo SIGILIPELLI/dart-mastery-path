@@ -1901,6 +1901,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2261,6 +2272,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2432,6 +2454,38 @@ automatically, because it's easy to miss in review.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p><code>Completer</code> is the primitive that bridges callback-based APIs into
+<code>Future</code>-based ones because a <code>Future</code> on its own has no public
+"complete me" method — <code>Future</code>'s constructors only let you wrap already-
+determined values or existing futures. <code>Completer</code> exposes the
+<code>.complete()</code>/<code>.completeError()</code> methods that a <code>Future</code> deliberately
+hides, and internally a <code>Completer</code>'s <code>.future</code> getter returns a <code>Future</code>
+object wired to that same completer's internal state — when a legacy
+callback fires, calling <code>completer.complete(value)</code> transitions that
+<code>Future</code> from pending to completed, which schedules every registered
+<code>.then()</code>/<code>await</code>er as a microtask. This is the exact mechanism <code>async</code>/
+<code>await</code> itself is built on beneath the compiler-generated state machine.</p>
+<p><code>eagerError</code> changes <code>Future.wait</code>'s internal bookkeeping about when to
+settle its own returned Future: by default, <code>Future.wait</code> waits for <em>every</em>
+input future to complete (success or failure) before resolving, collecting
+all errors' worth of information as far as tracking goes; with
+<code>eagerError: true</code>, it resolves (with an error) as soon as the <em>first</em>
+input future fails, without waiting for the rest — but critically, the
+other futures are still running to completion in the background (Dart has
+no way to "cancel" a <code>Future</code> mid-flight), they're just no longer being
+awaited by that particular <code>Future.wait</code> call, so any errors they later
+throw become unhandled unless something else is still listening.</p>
+<p>The missing-<code>await</code> trap is a direct consequence of <code>async</code> functions
+returning a <code>Future</code> immediately upon hitting their first <code>await</code> (or
+immediately, if there's no <code>await</code> before an early return) — if you call an
+<code>async</code> function without <code>await</code>ing or otherwise handling its returned
+<code>Future</code>, any exception inside it completes that <code>Future</code> as an error, and
+since nothing is listening for it, it becomes an <strong>unhandled async error</strong>,
+reported to the current <code>Zone</code>'s uncaught-error handler (which, unless
+customized, terminates an isolate's <code>main()</code> or crashes a Flutter app) —
+this looks like "throwing past a try/catch" but is really "the try/catch
+never got attached to the future that actually failed."</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Write a function <code>Future&lt;List&lt;String&gt;&gt; fetchAll(List&lt;Future&lt;String&gt; Function()&gt; tasks)</code>
 that runs all tasks concurrently with <code>Future.wait</code> and returns their

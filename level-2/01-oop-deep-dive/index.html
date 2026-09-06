@@ -1166,6 +1166,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2295,6 +2306,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2541,6 +2563,32 @@ knows must exist, without duck-typing risk.</p>
 <p>A single class can combine all three: <code>class Lion extends Animal with Hunter
 implements Comparable&lt;Lion&gt; { ... }</code> — extend one base, mix in one or more
 behaviors, and commit to one or more interfaces.</p>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>The reason "every class is an interface for free" in Dart is a language
+design choice with real compile-time consequences: Dart doesn't have a
+separate <code>interface</code> keyword because every class declaration implicitly
+generates <em>two</em> things — a concrete implementation, and an abstract
+interface (its full public member signature set) that <code>implements</code> can bind
+to. When you write <code>class Duck implements Flyer</code>, the compiler checks
+<code>Duck</code> against <code>Flyer</code>'s member signatures structurally and requires <code>Duck</code>
+to provide its <em>own</em> implementation of every one — none of <code>Flyer</code>'s method
+bodies are inherited, only the shape.</p>
+<p>Mixins are resolved via <strong>linearization</strong>: when a class does
+<code>class C extends Base with M1, M2</code>, the compiler builds a synthetic
+inheritance chain — <code>Base -&gt; Base+M1 -&gt; Base+M1+M2 -&gt; C</code> — where each mixin
+application creates an anonymous intermediate class inserted into the actual
+superclass chain. This is why <code>super.someMethod()</code> inside a mixin calls
+whatever came immediately before it in that linearized chain (which could be
+another mixin), not necessarily the "real" base class — mixin method
+resolution is genuinely dynamic with respect to application order, which is
+also why the order you list mixins in <code>with M1, M2</code> changes behavior when
+both define the same method.</p>
+<p>Abstract classes are enforced purely by the analyzer/compiler at
+compile time — there's no runtime "abstract" flag stopping instantiation
+in the way, say, a runtime reflection check would. <code>abstract class Shape</code>
+simply produces a class descriptor with no allocation entry point for
+unimplemented abstract members; attempting <code>Shape()</code> is rejected before
+your program ever runs, not caught by an exception at runtime.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Model a small plugin system: an abstract class <code>Plugin</code> with an abstract
 method <code>String get name</code> and a concrete method <code>void log(String msg)</code> that
