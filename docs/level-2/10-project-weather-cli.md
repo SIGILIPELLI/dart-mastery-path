@@ -556,3 +556,9 @@ event-loop suspension actually waiting on anything.
   object (round-tripping the `toJson()` pattern from [Module
   5](05-json.md)) instead of the human-readable string, so the tool's
   output can be piped into another program.
+
+## 🔀 See this in another language
+
+- [Python — 10 · Project — Weather/Data CLI](https://sigilipelli.github.io/python-mastery-path/level-2/10-project-weather-cli/)
+- [C# — 10 · Project — Weather CLI](https://sigilipelli.github.io/csharp-mastery-path/level-2/10-project-weather-cli/)
+- [Go — 10 · Project — Weather CLI](https://sigilipelli.github.io/go-mastery-path/level-2/10-project-weather-cli/)

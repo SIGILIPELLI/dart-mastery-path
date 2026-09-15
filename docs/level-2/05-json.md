@@ -245,6 +245,12 @@ implement its own `toJson()` that `jsonEncode` knows to call) throws a
 `JsonUnsupportedObjectError` at the point of encoding, not at the point you
 constructed the object.
 
+## 🔀 See this in another language
+
+- [JavaScript — 05 · Working with JSON & Fetch API](https://sigilipelli.github.io/javascript-mastery-path/level-2/05-json-fetch/)
+- [TypeScript — 08 · Working with JSON/APIs](https://sigilipelli.github.io/typescript-mastery-path/level-2/08-working-with-json-apis/)
+- [C# — 07 · Working with JSON (System.Text.Json)](https://sigilipelli.github.io/csharp-mastery-path/level-2/07-json-system-text-json/)
+
 ## Exercise
 
 Model a small `Product` class with `name` (`String`), `price` (`double`),

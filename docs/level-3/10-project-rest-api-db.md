@@ -262,3 +262,9 @@ being involved in most of the assertions.
 - Wrap the whole handler in a middleware that catches any uncaught
   exception and returns a JSON 500 instead of letting `shelf` return its
   default plain-text error page.
+
+## 🔀 See this in another language
+
+- [Java — 11 · Project — REST API + Database CRUD Service](https://sigilipelli.github.io/java-mastery-path/level-3/11-project-rest-api-db/)
+- [Swift — 10 · Project — REST API + Database Service](https://sigilipelli.github.io/swift-mastery-path/level-3/10-project-rest-api-db/)
+- [Kotlin — 10 · Project — REST API + Database Service](https://sigilipelli.github.io/kotlin-mastery-path/level-3/10-project-rest-api-db/)

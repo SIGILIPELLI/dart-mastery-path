@@ -153,6 +153,12 @@ dead code) and cannot auto-fix lints whose correction requires
 understanding intent (like `prefer_final_fields` when reassignment is
 actually load-bearing elsewhere).
 
+## 🔀 See this in another language
+
+- [Ruby — 09 · Code Quality & RuboCop](https://sigilipelli.github.io/ruby-mastery-path/level-4/09-code-quality-rubocop/)
+- [PHP — 09 · Code Quality Tools](https://sigilipelli.github.io/php-mastery-path/level-4/09-code-quality-tools/)
+- [Kotlin — 09 · Code Quality (detekt/ktlint)](https://sigilipelli.github.io/kotlin-mastery-path/level-4/09-code-quality/)
+
 ## Exercise
 
 Add `avoid_dynamic_calls` and `always_declare_return_types` to your

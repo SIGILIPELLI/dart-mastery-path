@@ -250,6 +250,10 @@ that fires off an unawaited async operation and returns can pass "green"
 while that operation's assertion failure surfaces later, sometimes
 attributed to the *next* test, unless you explicitly await it.
 
+## 🔀 See this in another language
+
+- [Go — 06 · Testing with the testing Package](https://sigilipelli.github.io/go-mastery-path/level-2/06-testing-package/)
+
 ## Exercise
 
 Create a small `lib/string_utils.dart` with a function `String

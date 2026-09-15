@@ -227,6 +227,11 @@ compile-time rejection, because you've asked the compiler to trust
 information it cannot itself verify (often information from a nullable API
 boundary, JSON, or FFI).
 
+## 🔀 See this in another language
+
+- [C# — 05 · Nullable Reference Types & Null Safety](https://sigilipelli.github.io/csharp-mastery-path/level-2/05-nullable-reference-types/)
+- [Kotlin — 04 · Null Safety Advanced](https://sigilipelli.github.io/kotlin-mastery-path/level-2/04-null-safety-advanced/)
+
 ## Exercise
 
 Write a class `Profile` with a mutable nullable field `String? bio`. Add a

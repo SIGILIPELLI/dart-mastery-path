@@ -195,6 +195,10 @@ registry's guarantee that `foo: 1.2.3` always resolves to the exact same
 bytes everywhere is what makes `pubspec.lock` a meaningful, reproducible
 promise across machines and CI runs.
 
+## 🔀 See this in another language
+
+- [R — 09 · Package Publishing (CRAN Basics)](https://sigilipelli.github.io/r-mastery-path/level-4/09-package-publishing-cran/)
+
 ## Exercise
 
 Add a third extension method, `String wordCount()`, returning the number of

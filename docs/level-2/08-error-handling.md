@@ -246,6 +246,12 @@ to the isolate's uncaught-error handler (or by the `Zone` running the code)
 rather than to any `try`/`catch` in your function, since there's no
 active call stack for it to unwind through by the time it fires.
 
+## 🔀 See this in another language
+
+- [JavaScript — 07 · Error Handling Advanced](https://sigilipelli.github.io/javascript-mastery-path/level-2/07-error-handling-advanced/)
+- [C — 06 · Error Handling Conventions](https://sigilipelli.github.io/c-mastery-path/level-2/06-error-handling/)
+- [C++ — 08 · Error Handling with Exceptions](https://sigilipelli.github.io/cpp-mastery-path/level-2/08-error-handling-exceptions/)
+
 ## Exercise
 
 Define an exception hierarchy for a simple file-parsing tool: a base
