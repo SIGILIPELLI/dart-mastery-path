@@ -1,3 +1,7 @@
+---
+description: "Variables & Types — Dart is statically typed but supports type inference with var — the type is locked in at compile time based on the initializer, it's…"
+---
+
 # 02 · Variables & Types
 
 ## Declaring variables
@@ -192,6 +196,12 @@ rooted in Dart's number model: on native (JIT/AOT) targets, `int` is a true
 hardware, while `/` always promotes both operands to `double` and uses
 floating-point division — two different CPU instructions, not just two
 different print formats.
+
+## 🔀 See this in another language
+
+- [R — Variables & Types](https://sigilipelli.github.io/r-mastery-path/level-1/02-variables-types/)
+- [Java — Variables, Data Types & Operators](https://sigilipelli.github.io/java-mastery-path/level-1/02-variables-data-types/)
+- [Go — Variables, Types & Operators](https://sigilipelli.github.io/go-mastery-path/level-1/02-variables-types-operators/)
 
 ## Exercise
 

@@ -1,3 +1,7 @@
+---
+description: "Project — CLI To-Do App — Time to combine everything from this level — variables, control flow, functions, collections, classes, null safety, and a touch…"
+---
+
 # 10 · Project — CLI To-Do App
 
 Time to combine everything from this level — variables, control flow,
@@ -241,6 +245,12 @@ concurrent work, but the same operations have async counterparts
 loop while the underlying OS call is in flight, which matters once a program
 needs to stay responsive to other events (network, timers, isolate messages)
 while doing file I/O.
+
+## 🔀 See this in another language
+
+- [R — Project — Data Analysis Script](https://sigilipelli.github.io/r-mastery-path/level-1/10-project-data-analysis/)
+- [Java — Project — CLI Contact Book](https://sigilipelli.github.io/java-mastery-path/level-1/10-project-contact-book/)
+- [Go — Project — CLI To-Do App](https://sigilipelli.github.io/go-mastery-path/level-1/10-project-todo-cli/)
 
 ## Exercise
 

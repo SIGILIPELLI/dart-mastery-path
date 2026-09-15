@@ -1,3 +1,7 @@
+---
+description: "State Management Concepts — Flutter fundamentals used setState inside a single State object — fine for state that only one widget cares about. 'State…"
+---
+
 # 07 · State Management Concepts
 
 [Flutter fundamentals](01-flutter-fundamentals.md) used `setState` inside a

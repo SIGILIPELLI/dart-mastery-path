@@ -1,3 +1,7 @@
+---
+description: "Performance & Profiling — Every prior module cared about correctness; this one is about speed and measuring it honestly. Dart's rule of thumb is the same…"
+---
+
 # 08 · Performance & Profiling
 
 Every prior module cared about correctness; this one is about speed and

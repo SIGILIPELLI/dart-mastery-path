@@ -1,3 +1,7 @@
+---
+description: "Working with JSON — JSON is the lingua franca of web APIs, config files, and inter-service communication — the Weather CLI project later in this level…"
+---
+
 # 05 · Working with JSON
 
 JSON is the lingua franca of web APIs, config files, and inter-service

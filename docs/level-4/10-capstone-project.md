@@ -1,3 +1,7 @@
+---
+description: "Capstone — Authenticated Notes API — This capstone pulls together the whole level: shelf routing and databases from Level 3, plus security (salted…"
+---
+
 # 10 · Capstone — Authenticated Notes API
 
 This capstone pulls together the whole level: [shelf routing](../level-3/02-building-apis-shelf.md)

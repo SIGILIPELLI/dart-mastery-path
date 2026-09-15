@@ -1,3 +1,7 @@
+---
+description: "Testing at Scale & CI — Testing advanced covered fakes and async matchers for individual tests. Once a suite has hundreds of tests, new problems show up…"
+---
+
 # 05 · Testing at Scale & CI
 
 [Testing advanced](../level-3/06-testing-advanced.md) covered fakes and

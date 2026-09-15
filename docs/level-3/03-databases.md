@@ -1,3 +1,7 @@
+---
+description: "Databases — Level 2's JSON module covered talking to APIs. Sooner or later a Dart service needs to persist data itself. This module uses the sqlite3…"
+---
+
 # 03 · Databases
 
 [Level 2's JSON module](../level-2/05-json.md) covered talking to APIs.

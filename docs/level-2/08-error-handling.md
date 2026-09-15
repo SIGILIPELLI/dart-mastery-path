@@ -1,3 +1,7 @@
+---
+description: "Error Handling — Async basics showed a quick try/catch around an await. This module covers the full picture: designing your own exception types, handling…"
+---
+
 # 08 · Error Handling
 
 [Async basics](../level-1/08-async-basics.md) showed a quick `try`/`catch`

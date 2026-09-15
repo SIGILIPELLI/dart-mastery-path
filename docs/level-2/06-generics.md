@@ -1,3 +1,7 @@
+---
+description: "Generics — You've been using generics since Level 1 every time you wrote List or Map — List and Map are themselves generic classes. This module covers…"
+---
+
 # 06 · Generics
 
 You've been using generics since Level 1 every time you wrote `List<int>` or

@@ -1,3 +1,7 @@
+---
+description: "Flutter State Management at Scale — State management concepts covered ChangeNotifier and ListenableBuilder for one widget listening to one model. A real…"
+---
+
 # 03 · Flutter State Management at Scale
 
 !!! note "This module needs the Flutter SDK"

@@ -1,3 +1,7 @@
+---
+description: "Collections (List, Map, Set) — A List is an ordered, indexable collection — Dart's equivalent of an array, but growable by default."
+---
+
 # 05 · Collections (List, Map, Set)
 
 ## Lists
@@ -192,6 +196,12 @@ a conditional append. There's no separate "spread" runtime representation;
 by the time your code reaches the VM, it's ordinary loop and append
 operations, which is why spreading a `null` collection without `...?`
 throws immediately — the desugared code calls `.iterator` on `null`.
+
+## 🔀 See this in another language
+
+- [R — Vectors & Basic Data Structures](https://sigilipelli.github.io/r-mastery-path/level-1/05-vectors-data-structures/)
+- [Java — Arrays & Basic Collections](https://sigilipelli.github.io/java-mastery-path/level-1/05-arrays-collections/)
+- [Go — Arrays, Slices & Maps](https://sigilipelli.github.io/go-mastery-path/level-1/05-arrays-slices-maps/)
 
 ## Exercise
 

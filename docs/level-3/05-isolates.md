@@ -1,3 +1,7 @@
+---
+description: "Isolates — Async basics explained that Dart's event loop runs Future/async code on a single thread — great for I/O, useless for CPU-heavy work, which…"
+---
+
 # 05 · Isolates
 
 [Async basics](../level-1/08-async-basics.md) explained that Dart's event

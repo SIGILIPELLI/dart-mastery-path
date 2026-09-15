@@ -1,3 +1,7 @@
+---
+description: "Design Patterns in Dart — Classes & objects and generics gave you the building blocks. Design patterns are named solutions to recurring structural…"
+---
+
 # 04 · Design Patterns in Dart
 
 [Classes & objects](../level-1/06-classes-objects.md) and

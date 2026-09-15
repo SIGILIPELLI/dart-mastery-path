@@ -1,3 +1,7 @@
+---
+description: "OOP Deep Dive — Level 1 covered basic classes: fields, constructors, getters, and simple inheritance with extends. Real Dart programs — and the Flutter…"
+---
+
 # 01 · OOP Deep Dive
 
 Level 1 covered basic classes: fields, constructors, getters, and simple

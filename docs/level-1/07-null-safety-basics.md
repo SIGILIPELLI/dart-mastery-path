@@ -1,3 +1,7 @@
+---
+description: "Null Safety Basics — Since Dart 2.12, every type is non-nullable by default. A variable declared String name can never hold null — the compiler guarantees…"
+---
+
 # 07 · Null Safety Basics
 
 ## What "sound null safety" means
@@ -202,6 +206,12 @@ expression, the field is genuinely lazy: the initializer only runs the first
 time the field is read, exactly like a lazily-initialized `static final`, and
 subsequent reads return the cached value instead of re-running the
 initializer.
+
+## 🔀 See this in another language
+
+- [R — Reading Data](https://sigilipelli.github.io/r-mastery-path/level-1/07-reading-data/)
+- [Java — Classes & Objects Basics](https://sigilipelli.github.io/java-mastery-path/level-1/07-classes-objects/)
+- [Go — Pointers](https://sigilipelli.github.io/go-mastery-path/level-1/07-pointers/)
 
 ## Exercise
 

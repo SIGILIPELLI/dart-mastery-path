@@ -1,3 +1,7 @@
+---
+description: "Deployment with Docker — Production Dart services covered configuring from the environment and shutting down gracefully — exactly what you need once that…"
+---
+
 # 06 · Deployment with Docker
 
 !!! note "Docker itself wasn't run for this module"

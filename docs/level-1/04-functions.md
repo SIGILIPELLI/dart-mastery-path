@@ -1,3 +1,7 @@
+---
+description: "Functions — Wrap parameters in [ ] to make them optional; give them a default with =."
+---
+
 # 04 · Functions
 
 ## Basic function syntax
@@ -185,6 +189,12 @@ optimization is guaranteed) will throw a `StackOverflowError` once the
 isolate's stack limit is hit. Because each isolate has its own separate call
 stack (see the Level 3 isolates lesson), a stack overflow in one isolate
 can't corrupt another isolate's state.
+
+## 🔀 See this in another language
+
+- [R — Functions](https://sigilipelli.github.io/r-mastery-path/level-1/04-functions/)
+- [Java — Methods & Parameters](https://sigilipelli.github.io/java-mastery-path/level-1/04-methods-parameters/)
+- [Go — Functions & Multiple Returns](https://sigilipelli.github.io/go-mastery-path/level-1/04-functions-multiple-returns/)
 
 ## Exercise
 

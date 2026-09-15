@@ -1,3 +1,7 @@
+---
+description: "Async Basics — Dart is single-threaded by default, but it's not blocking — I/O-bound work (network requests, file reads, timers) runs asynchronously via…"
+---
+
 # 08 · Async Basics
 
 ## Why async matters
@@ -200,6 +204,12 @@ are captured and delivered back into that state machine's `catch` handling
 exactly as if the code had executed synchronously, even though real
 (unrelated) code from other parts of the event loop may have run on the same
 thread in between.
+
+## 🔀 See this in another language
+
+- [R — Basic Plotting](https://sigilipelli.github.io/r-mastery-path/level-1/08-basic-plotting/)
+- [Java — Exception Handling Basics](https://sigilipelli.github.io/java-mastery-path/level-1/08-exception-handling/)
+- [Go — Error Handling](https://sigilipelli.github.io/go-mastery-path/level-1/08-error-handling/)
 
 ## Exercise
 

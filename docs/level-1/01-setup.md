@@ -1,3 +1,7 @@
+---
+description: "Setup & First Program — Dart programs run on the Dart SDK — the dart command-line tool that bundles a compiler, a VM, package manager (pub), and standard…"
+---
+
 # 01 · Setup & First Program
 
 ## Install the Dart SDK
@@ -144,6 +148,12 @@ until `main` returns *and* the event loop's queues (microtasks, then
 event-queue callbacks like timers) drain — which is why a synchronous
 `print` inside `main` always fires before, say, a `Future.delayed` callback
 scheduled earlier in the same function.
+
+## 🔀 See this in another language
+
+- [R — Setup & First Script](https://sigilipelli.github.io/r-mastery-path/level-1/01-setup/)
+- [Java — Setup & First Program](https://sigilipelli.github.io/java-mastery-path/level-1/01-setup/)
+- [Go — Setup & First Program](https://sigilipelli.github.io/go-mastery-path/level-1/01-setup/)
 
 ## Exercise
 

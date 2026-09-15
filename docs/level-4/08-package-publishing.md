@@ -1,3 +1,7 @@
+---
+description: "Package Publishing (pub.dev) — Packages covered consuming packages from pub.dev. This module covers the other side: structuring, versioning, and…"
+---
+
 # 08 · Package Publishing (pub.dev)
 
 [Packages](../level-1/09-packages.md) covered *consuming* packages from

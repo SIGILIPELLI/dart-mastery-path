@@ -1,3 +1,7 @@
+---
+description: "Streams — Async basics introduced Future for a single value that arrives later, plus a quick taste of Stream. A Stream is the sequence version: it can…"
+---
+
 # 03 · Streams
 
 [Async basics](../level-1/08-async-basics.md) introduced `Future` for a

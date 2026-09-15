@@ -1,3 +1,7 @@
+---
+description: "Project — Weather CLI — Time to combine everything from this level — streams, JSON, error handling, and testing — into one real program: a command-line…"
+---
+
 # 10 · Project — Weather CLI
 
 Time to combine everything from this level — [streams](03-streams.md),

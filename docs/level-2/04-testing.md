@@ -1,3 +1,7 @@
+---
+description: "Testing with the test package — Every lesson so far has been verified by eyeballing printed output. Real projects instead write automated tests: code that…"
+---
+
 # 04 · Testing with the test package
 
 Every lesson so far has been verified by eyeballing printed output. Real

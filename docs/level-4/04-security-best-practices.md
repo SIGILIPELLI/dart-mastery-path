@@ -1,3 +1,7 @@
+---
+description: "Security Best Practices — Databases covered SQL injection. This module covers the rest of the security fundamentals every production Dart service needs…"
+---
+
 # 04 · Security Best Practices
 
 [Databases](../level-3/03-databases.md) covered SQL injection. This module

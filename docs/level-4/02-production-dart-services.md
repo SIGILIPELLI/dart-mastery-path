@@ -1,3 +1,7 @@
+---
+description: "Production Dart Services — Building APIs with shelf got a server running. Running that server in production needs three more things this module covers…"
+---
+
 # 02 · Production Dart Services
 
 [Building APIs with shelf](../level-3/02-building-apis-shelf.md) got a

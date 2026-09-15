@@ -1,3 +1,7 @@
+---
+description: "Code Generation — JSON covered writing fromJson/toJson by hand. That's fine for one class; it gets tedious and error-prone (typo a field name once and you…"
+---
+
 # 09 · Code Generation
 
 [JSON](../level-2/05-json.md) covered writing `fromJson`/`toJson` by hand.

@@ -1,3 +1,7 @@
+---
+description: "Code Quality (`dart analyze` / lints) — Advanced async patterns showed a missing await crashing a program with an unhandled exception. This module covers…"
+---
+
 # 09 · Code Quality (`dart analyze` / lints)
 
 [Advanced async patterns](01-advanced-async-patterns.md) showed a missing

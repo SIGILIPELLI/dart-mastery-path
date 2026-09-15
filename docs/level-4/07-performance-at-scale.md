@@ -1,3 +1,7 @@
+---
+description: "Performance at Scale — Performance & profiling covered measuring and fixing single-function hotspots. At scale, two different techniques matter more…"
+---
+
 # 07 · Performance at Scale
 
 [Performance & profiling](../level-3/08-performance-profiling.md) covered

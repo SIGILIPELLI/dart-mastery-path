@@ -1,3 +1,7 @@
+---
+description: "Building APIs with `shelf` — Level 1's async basics and Level 2's streams covered async I/O in the abstract. shelf is the standard Dart package for…"
+---
+
 # 02 · Building APIs with `shelf`
 
 [Level 1's async basics](../level-1/08-async-basics.md) and

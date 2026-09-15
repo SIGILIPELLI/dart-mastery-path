@@ -1,3 +1,7 @@
+---
+description: "Classes & Objects Basics — Person(this.name, this.age) is Dart's shorthand for 'assign this constructor argument directly to the field of the same name' …"
+---
+
 # 06 · Classes & Objects Basics
 
 ## Defining a class
@@ -223,6 +227,12 @@ exactly what makes value-equality classes usable as map keys, but also means
 mutating a field used in `hashCode` *after* inserting the object into a
 `Set`/`Map` corrupts that collection's internal bucket structure (the object
 is now in the wrong bucket for its new hash).
+
+## 🔀 See this in another language
+
+- [R — Data Frames Basics](https://sigilipelli.github.io/r-mastery-path/level-1/06-data-frames-basics/)
+- [Java — Strings & String Formatting](https://sigilipelli.github.io/java-mastery-path/level-1/06-strings-formatting/)
+- [Go — Structs](https://sigilipelli.github.io/go-mastery-path/level-1/06-structs/)
 
 ## Exercise
 

@@ -1,3 +1,7 @@
+---
+description: "Control Flow — Dart requires the condition to be a bool — there's no implicit truthiness for numbers or strings, unlike JavaScript or Python."
+---
+
 # 03 · Control Flow
 
 ## `if` / `else if` / `else`
@@ -215,6 +219,12 @@ Dart's flow analysis can *promote* `x`'s static type from `T?` to `T` for the
 rest of that scope, meaning subsequent member accesses on `x` skip the
 null check entirely and compile to a direct (non-nullable) call — a real
 compile-time optimization, not just a readability nicety.
+
+## 🔀 See this in another language
+
+- [R — Control Flow](https://sigilipelli.github.io/r-mastery-path/level-1/03-control-flow/)
+- [Java — Control Flow](https://sigilipelli.github.io/java-mastery-path/level-1/03-control-flow/)
+- [Go — Control Flow](https://sigilipelli.github.io/go-mastery-path/level-1/03-control-flow/)
 
 ## Exercise
 

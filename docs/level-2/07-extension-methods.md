@@ -1,3 +1,7 @@
+---
+description: "Extension Methods — Sometimes you want to add a method to a type you don't control — a built-in type like String or int, or a class from a package you…"
+---
+
 # 07 · Extension Methods
 
 Sometimes you want to add a method to a type you don't control — a built-in

@@ -1,3 +1,7 @@
+---
+description: "Collections Deep Dive — Level 1 covered List, Set, and Map basics — creating them, indexing, and looping. This module covers Dart's functional collection…"
+---
+
 # 09 · Collections Deep Dive
 
 [Level 1](../level-1/05-collections.md) covered `List`, `Set`, and `Map`

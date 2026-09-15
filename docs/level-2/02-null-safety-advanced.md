@@ -1,3 +1,7 @@
+---
+description: "Null Safety Advanced — Level 1 covered the basics: ? marks a type nullable, ?? provides a fallback, and the compiler forces you to handle the null case…"
+---
+
 # 02 · Null Safety Advanced
 
 [Level 1](../level-1/07-null-safety-basics.md) covered the basics: `?` marks

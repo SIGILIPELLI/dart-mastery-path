@@ -1,3 +1,7 @@
+---
+description: "Testing Advanced — Level 2's testing module covered the basics — test(), expect(), and simple matchers. Real test suites also need to isolate code from…"
+---
+
 # 06 · Testing Advanced
 
 [Level 2's testing module](../level-2/04-testing.md) covered the basics —

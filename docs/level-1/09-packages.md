@@ -1,3 +1,7 @@
+---
+description: "Packages (pub, pubspec.yaml) — pub is Dart's package manager (bundled with the SDK), and pub.dev is the public package registry — Dart's equivalent of npm…"
+---
+
 # 09 · Packages (pub, pubspec.yaml)
 
 ## What is `pub`?
@@ -168,6 +172,12 @@ package name to an on-disk path (in the global pub cache, typically
 `.dart_tool` and re-running `pub get` is a safe way to "reset" a project's
 dependency resolution without touching the shared, deduplicated pub cache
 that every project on your machine draws from.
+
+## 🔀 See this in another language
+
+- [R — Packages](https://sigilipelli.github.io/r-mastery-path/level-1/09-packages/)
+- [Java — Packages & Build Tools Intro](https://sigilipelli.github.io/java-mastery-path/level-1/09-packages-build-tools/)
+- [Go — Packages & Modules](https://sigilipelli.github.io/go-mastery-path/level-1/09-packages-modules/)
 
 ## Exercise
 

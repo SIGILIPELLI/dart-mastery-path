@@ -1,3 +1,7 @@
+---
+description: "Advanced Async Patterns — Async basics and streams covered Future, async/await, and Stream. This module covers the patterns that show up once a codebase…"
+---
+
 # 01 · Advanced Async Patterns
 
 [Async basics](../level-1/08-async-basics.md) and

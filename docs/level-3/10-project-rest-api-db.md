@@ -1,3 +1,7 @@
+---
+description: "Project — REST API + Database Service — This project combines the last two modules — shelf and databases — into one small, real service: a Task API backed…"
+---
+
 # 10 · Project — REST API + Database Service
 
 This project combines the last two modules — [shelf](02-building-apis-shelf.md)
