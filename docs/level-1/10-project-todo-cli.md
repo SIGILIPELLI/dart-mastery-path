@@ -248,9 +248,9 @@ while doing file I/O.
 
 ## 🔀 See this in another language
 
-- [R — Project — Data Analysis Script](https://sigilipelli.github.io/r-mastery-path/level-1/10-project-data-analysis/)
-- [Java — Project — CLI Contact Book](https://sigilipelli.github.io/java-mastery-path/level-1/10-project-contact-book/)
-- [Go — Project — CLI To-Do App](https://sigilipelli.github.io/go-mastery-path/level-1/10-project-todo-cli/)
+- [R — Project — Data Analysis Script](https://learnmasterypath.com/r-mastery-path/level-1/10-project-data-analysis/)
+- [Java — Project — CLI Contact Book](https://learnmasterypath.com/java-mastery-path/level-1/10-project-contact-book/)
+- [Go — Project — CLI To-Do App](https://learnmasterypath.com/go-mastery-path/level-1/10-project-todo-cli/)
 
 ## Exercise
 

@@ -230,9 +230,9 @@ is now in the wrong bucket for its new hash).
 
 ## 🔀 See this in another language
 
-- [R — Data Frames Basics](https://sigilipelli.github.io/r-mastery-path/level-1/06-data-frames-basics/)
-- [Java — Strings & String Formatting](https://sigilipelli.github.io/java-mastery-path/level-1/06-strings-formatting/)
-- [Go — Structs](https://sigilipelli.github.io/go-mastery-path/level-1/06-structs/)
+- [R — Data Frames Basics](https://learnmasterypath.com/r-mastery-path/level-1/06-data-frames-basics/)
+- [Java — Strings & String Formatting](https://learnmasterypath.com/java-mastery-path/level-1/06-strings-formatting/)
+- [Go — Structs](https://learnmasterypath.com/go-mastery-path/level-1/06-structs/)
 
 ## Exercise
 

@@ -155,9 +155,9 @@ actually load-bearing elsewhere).
 
 ## 🔀 See this in another language
 
-- [Ruby — 09 · Code Quality & RuboCop](https://sigilipelli.github.io/ruby-mastery-path/level-4/09-code-quality-rubocop/)
-- [PHP — 09 · Code Quality Tools](https://sigilipelli.github.io/php-mastery-path/level-4/09-code-quality-tools/)
-- [Kotlin — 09 · Code Quality (detekt/ktlint)](https://sigilipelli.github.io/kotlin-mastery-path/level-4/09-code-quality/)
+- [Ruby — 09 · Code Quality & RuboCop](https://learnmasterypath.com/ruby-mastery-path/level-4/09-code-quality-rubocop/)
+- [PHP — 09 · Code Quality Tools](https://learnmasterypath.com/php-mastery-path/level-4/09-code-quality-tools/)
+- [Kotlin — 09 · Code Quality (detekt/ktlint)](https://learnmasterypath.com/kotlin-mastery-path/level-4/09-code-quality/)
 
 ## Exercise
 

@@ -151,9 +151,9 @@ scheduled earlier in the same function.
 
 ## 🔀 See this in another language
 
-- [R — Setup & First Script](https://sigilipelli.github.io/r-mastery-path/level-1/01-setup/)
-- [Java — Setup & First Program](https://sigilipelli.github.io/java-mastery-path/level-1/01-setup/)
-- [Go — Setup & First Program](https://sigilipelli.github.io/go-mastery-path/level-1/01-setup/)
+- [R — Setup & First Script](https://learnmasterypath.com/r-mastery-path/level-1/01-setup/)
+- [Java — Setup & First Program](https://learnmasterypath.com/java-mastery-path/level-1/01-setup/)
+- [Go — Setup & First Program](https://learnmasterypath.com/go-mastery-path/level-1/01-setup/)
 
 ## Exercise
 

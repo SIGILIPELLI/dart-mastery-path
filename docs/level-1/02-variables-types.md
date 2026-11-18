@@ -199,9 +199,9 @@ different print formats.
 
 ## 🔀 See this in another language
 
-- [R — Variables & Types](https://sigilipelli.github.io/r-mastery-path/level-1/02-variables-types/)
-- [Java — Variables, Data Types & Operators](https://sigilipelli.github.io/java-mastery-path/level-1/02-variables-data-types/)
-- [Go — Variables, Types & Operators](https://sigilipelli.github.io/go-mastery-path/level-1/02-variables-types-operators/)
+- [R — Variables & Types](https://learnmasterypath.com/r-mastery-path/level-1/02-variables-types/)
+- [Java — Variables, Data Types & Operators](https://learnmasterypath.com/java-mastery-path/level-1/02-variables-data-types/)
+- [Go — Variables, Types & Operators](https://learnmasterypath.com/go-mastery-path/level-1/02-variables-types-operators/)
 
 ## Exercise
 

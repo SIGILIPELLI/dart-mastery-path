@@ -192,9 +192,9 @@ can't corrupt another isolate's state.
 
 ## 🔀 See this in another language
 
-- [R — Functions](https://sigilipelli.github.io/r-mastery-path/level-1/04-functions/)
-- [Java — Methods & Parameters](https://sigilipelli.github.io/java-mastery-path/level-1/04-methods-parameters/)
-- [Go — Functions & Multiple Returns](https://sigilipelli.github.io/go-mastery-path/level-1/04-functions-multiple-returns/)
+- [R — Functions](https://learnmasterypath.com/r-mastery-path/level-1/04-functions/)
+- [Java — Methods & Parameters](https://learnmasterypath.com/java-mastery-path/level-1/04-methods-parameters/)
+- [Go — Functions & Multiple Returns](https://learnmasterypath.com/go-mastery-path/level-1/04-functions-multiple-returns/)
 
 ## Exercise
 

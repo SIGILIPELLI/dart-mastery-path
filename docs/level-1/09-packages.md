@@ -175,9 +175,9 @@ that every project on your machine draws from.
 
 ## 🔀 See this in another language
 
-- [R — Packages](https://sigilipelli.github.io/r-mastery-path/level-1/09-packages/)
-- [Java — Packages & Build Tools Intro](https://sigilipelli.github.io/java-mastery-path/level-1/09-packages-build-tools/)
-- [Go — Packages & Modules](https://sigilipelli.github.io/go-mastery-path/level-1/09-packages-modules/)
+- [R — Packages](https://learnmasterypath.com/r-mastery-path/level-1/09-packages/)
+- [Java — Packages & Build Tools Intro](https://learnmasterypath.com/java-mastery-path/level-1/09-packages-build-tools/)
+- [Go — Packages & Modules](https://learnmasterypath.com/go-mastery-path/level-1/09-packages-modules/)
 
 ## Exercise
 

@@ -252,7 +252,7 @@ attributed to the *next* test, unless you explicitly await it.
 
 ## 🔀 See this in another language
 
-- [Go — 06 · Testing with the testing Package](https://sigilipelli.github.io/go-mastery-path/level-2/06-testing-package/)
+- [Go — 06 · Testing with the testing Package](https://learnmasterypath.com/go-mastery-path/level-2/06-testing-package/)
 
 ## Exercise
 

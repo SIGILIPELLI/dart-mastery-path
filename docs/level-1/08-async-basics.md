@@ -207,9 +207,9 @@ thread in between.
 
 ## 🔀 See this in another language
 
-- [R — Basic Plotting](https://sigilipelli.github.io/r-mastery-path/level-1/08-basic-plotting/)
-- [Java — Exception Handling Basics](https://sigilipelli.github.io/java-mastery-path/level-1/08-exception-handling/)
-- [Go — Error Handling](https://sigilipelli.github.io/go-mastery-path/level-1/08-error-handling/)
+- [R — Basic Plotting](https://learnmasterypath.com/r-mastery-path/level-1/08-basic-plotting/)
+- [Java — Exception Handling Basics](https://learnmasterypath.com/java-mastery-path/level-1/08-exception-handling/)
+- [Go — Error Handling](https://learnmasterypath.com/go-mastery-path/level-1/08-error-handling/)
 
 ## Exercise
 

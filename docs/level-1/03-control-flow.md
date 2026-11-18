@@ -222,9 +222,9 @@ compile-time optimization, not just a readability nicety.
 
 ## 🔀 See this in another language
 
-- [R — Control Flow](https://sigilipelli.github.io/r-mastery-path/level-1/03-control-flow/)
-- [Java — Control Flow](https://sigilipelli.github.io/java-mastery-path/level-1/03-control-flow/)
-- [Go — Control Flow](https://sigilipelli.github.io/go-mastery-path/level-1/03-control-flow/)
+- [R — Control Flow](https://learnmasterypath.com/r-mastery-path/level-1/03-control-flow/)
+- [Java — Control Flow](https://learnmasterypath.com/java-mastery-path/level-1/03-control-flow/)
+- [Go — Control Flow](https://learnmasterypath.com/go-mastery-path/level-1/03-control-flow/)
 
 ## Exercise
 

@@ -209,9 +209,9 @@ initializer.
 
 ## 🔀 See this in another language
 
-- [R — Reading Data](https://sigilipelli.github.io/r-mastery-path/level-1/07-reading-data/)
-- [Java — Classes & Objects Basics](https://sigilipelli.github.io/java-mastery-path/level-1/07-classes-objects/)
-- [Go — Pointers](https://sigilipelli.github.io/go-mastery-path/level-1/07-pointers/)
+- [R — Reading Data](https://learnmasterypath.com/r-mastery-path/level-1/07-reading-data/)
+- [Java — Classes & Objects Basics](https://learnmasterypath.com/java-mastery-path/level-1/07-classes-objects/)
+- [Go — Pointers](https://learnmasterypath.com/go-mastery-path/level-1/07-pointers/)
 
 ## Exercise
 

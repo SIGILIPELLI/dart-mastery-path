@@ -197,7 +197,7 @@ promise across machines and CI runs.
 
 ## 🔀 See this in another language
 
-- [R — 09 · Package Publishing (CRAN Basics)](https://sigilipelli.github.io/r-mastery-path/level-4/09-package-publishing-cran/)
+- [R — 09 · Package Publishing (CRAN Basics)](https://learnmasterypath.com/r-mastery-path/level-4/09-package-publishing-cran/)
 
 ## Exercise
 
