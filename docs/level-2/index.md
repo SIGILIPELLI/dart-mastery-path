@@ -1,3 +1,7 @@
+---
+description: "Level 2 (Intermediate) of the free Dart Mastery Path: OOP Deep Dive, Null Safety Advanced, Streams, Testing with the test package, Working with JSON…"
+---
+
 # Level 2 · Intermediate
 
 ## Modules

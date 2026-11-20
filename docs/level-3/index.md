@@ -1,3 +1,7 @@
+---
+description: "Level 3 (Advanced) of the free Dart Mastery Path: Flutter Fundamentals, Building APIs (shelf package), Databases, Design Patterns in Dart, Isolates, Testing…"
+---
+
 # Level 3 · Advanced
 
 ## Modules

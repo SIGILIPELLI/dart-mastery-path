@@ -1,3 +1,7 @@
+---
+description: "Level 4 (Master) of the free Dart Mastery Path: Advanced Async Patterns, Production Dart Services, Flutter State Management at Scale, Security Best…"
+---
+
 # Level 4 · Master
 
 ## Modules
