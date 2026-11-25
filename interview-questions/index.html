@@ -1,0 +1,4366 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="178 Dart interview questions with answers and explanations, from beginner to advanced, organised by level. Free, from the Dart Mastery Path.">
+      
+      
+      
+        <link rel="canonical" href="https://learnmasterypath.com/dart-mastery-path/interview-questions/">
+      
+      
+        <link rel="prev" href="..">
+      
+      
+        <link rel="next" href="../cheat-sheet/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/favicon.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.2">
+    
+    
+  
+  <title>Dart Interview Questions and Answers (178 Questions)</title>
+
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="../stylesheets/progress-tracker.css">
+    
+      <link rel="stylesheet" href="../stylesheets/final-quiz.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-05VBGCXN12"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-05VBGCXN12');
+  </script>
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mastery Path">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="Dart Interview Questions and Answers (178 Questions)">
+  <meta property="og:description" content="178 Dart interview questions with answers and explanations, from beginner to advanced, organised by level. Free, from the Dart Mastery Path.">
+  <meta property="og:url" content="https://learnmasterypath.com/dart-mastery-path/interview-questions/">
+  <meta property="og:image" content="https://learnmasterypath.com/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Mastery Path: free structured courses, beginner to master">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Dart Interview Questions and Answers (178 Questions)">
+  <meta name="twitter:description" content="178 Dart interview questions with answers and explanations, from beginner to advanced, organised by level. Free, from the Dart Mastery Path.">
+  <meta name="twitter:image" content="https://learnmasterypath.com/og-image.png">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9440969811959397"
+     crossorigin="anonymous"></script><script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Mastery Path", "item": "https://learnmasterypath.com/"},
+      {"@type": "ListItem", "position": 2, "name": "Dart Mastery Path", "item": "https://learnmasterypath.com/dart-mastery-path/"},
+      {"@type": "ListItem", "position": 3, "name": "Interview Questions", "item": "https://learnmasterypath.com/dart-mastery-path/interview-questions/"}
+    ]
+  }
+  </script>
+  <style>
+    .md-banner a:hover { text-decoration: underline !important; }
+    .mp-related { margin-top: 2.4rem; padding-top: 1rem; border-top: 1px solid var(--md-default-fg-color--lightest); font-size: .78rem; }
+    .mp-related h2 { font-size: .9rem; margin: 0 0 .5rem; }
+    .mp-related ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: .4rem .9rem; }
+    .mp-related li { margin: 0 !important; }
+  </style>
+  <script type="application/json" id="mp-course-meta">{"home": false, "id": "dart-mastery-path", "name": "Dart Mastery Path", "repo": "https://github.com/SIGILIPELLI/dart-mastery-path", "src": "interview-questions.md", "url": "https://learnmasterypath.com/dart-mastery-path/"}</script>
+  <link rel="stylesheet" href="https://learnmasterypath.com/assets/learn.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="https://learnmasterypath.com/assets/course.css?v=1">
+  <script src="https://learnmasterypath.com/assets/learn.js" defer></script>
+  <script src="https://learnmasterypath.com/assets/signup.js" defer></script>
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#dart-interview-questions-and-answers" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+        <aside class="md-banner">
+          <div class="md-banner__inner md-grid md-typeset">
+            
+            
+  <a href="https://learnmasterypath.com/" style="color: inherit; text-decoration: none;">
+    &larr; Mastery Path &middot; all 100+ free courses
+  </a>
+  <span style="opacity: .6; margin: 0 .6em;">|</span>
+  <a href="https://learnmasterypath.com/search/" style="color: inherit; text-decoration: none;">Search all courses</a>
+  <span style="opacity: .6; margin: 0 .6em;">|</span>
+  <a href="https://learnmasterypath.com/resume/" style="color: inherit; font-weight: 700; text-decoration: none;">
+    Got the skills? Free resume ATS check &rarr;
+  </a>
+
+          </div>
+          
+        </aside>
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Dart Mastery Path" class="md-header__button md-logo" aria-label="Dart Mastery Path" data-md-component="logo">
+      <svg class="mp-mark" viewBox="0 0 160 160" role="img" aria-label="Mastery Path logo">
+  <circle cx="80" cy="80" r="74" fill="#FAF7EF" stroke="#2FA98D" stroke-width="5"/>
+  <rect class="mp-bar mp-bar-1" x="36" y="90" width="17" height="24" rx="5" fill="#2FA98D"/>
+  <rect class="mp-bar mp-bar-2" x="59" y="74" width="17" height="40" rx="5" fill="#7FC9B7"/>
+  <rect class="mp-bar mp-bar-3" x="82" y="56" width="17" height="58" rx="5" fill="#E0B457"/>
+  <rect class="mp-bar mp-bar-4" x="105" y="38" width="17" height="76" rx="5" fill="#C97B4A"/>
+  <circle class="mp-dot" cx="44.5" cy="82" r="7" fill="#22261f"/>
+</svg>
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Dart Mastery Path
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Dart Interview Questions and Answers (178 Questions)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/SIGILIPELLI/dart-mastery-path" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    dart-mastery-path
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Interview Questions
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../cheat-sheet/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Cheat Sheet
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../level-1/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Level 1 · Entry
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../level-2/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Level 2 · Intermediate
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../level-3/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Level 3 · Advanced
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../level-4/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Level 4 · Master
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../quiz/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Final Quiz
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Dart Mastery Path" class="md-nav__button md-logo" aria-label="Dart Mastery Path" data-md-component="logo">
+      <svg class="mp-mark" viewBox="0 0 160 160" role="img" aria-label="Mastery Path logo">
+  <circle cx="80" cy="80" r="74" fill="#FAF7EF" stroke="#2FA98D" stroke-width="5"/>
+  <rect class="mp-bar mp-bar-1" x="36" y="90" width="17" height="24" rx="5" fill="#2FA98D"/>
+  <rect class="mp-bar mp-bar-2" x="59" y="74" width="17" height="40" rx="5" fill="#7FC9B7"/>
+  <rect class="mp-bar mp-bar-3" x="82" y="56" width="17" height="58" rx="5" fill="#E0B457"/>
+  <rect class="mp-bar mp-bar-4" x="105" y="38" width="17" height="76" rx="5" fill="#C97B4A"/>
+  <circle class="mp-dot" cx="44.5" cy="82" r="7" fill="#22261f"/>
+</svg>
+    </a>
+    Dart Mastery Path
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/SIGILIPELLI/dart-mastery-path" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    dart-mastery-path
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interview Questions
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interview Questions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#level-1-entry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 1 · Entry
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Level 1 · Entry">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#01-setup-first-program" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        01 · Setup &amp; First Program
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#02-variables-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        02 · Variables &amp; Types
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#03-control-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        03 · Control Flow
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#04-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        04 · Functions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#05-collections-list-map-set" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        05 · Collections (List, Map, Set)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#06-classes-objects-basics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        06 · Classes &amp; Objects Basics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#07-null-safety-basics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        07 · Null Safety Basics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#08-async-basics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        08 · Async Basics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#09-packages-pub-pubspecyaml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        09 · Packages (pub, pubspec.yaml)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-project-cli-to-do-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10 · Project — CLI To-Do App
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-2-intermediate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 2 · Intermediate
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Level 2 · Intermediate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#01-oop-deep-dive" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        01 · OOP Deep Dive
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#02-null-safety-advanced" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        02 · Null Safety Advanced
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#03-streams" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        03 · Streams
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#04-testing-with-the-test-package" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        04 · Testing with the test package
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#05-working-with-json" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        05 · Working with JSON
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#06-generics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        06 · Generics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#07-extension-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        07 · Extension Methods
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#08-error-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        08 · Error Handling
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#09-collections-deep-dive" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        09 · Collections Deep Dive
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-project-weather-cli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10 · Project — Weather CLI
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-3-advanced" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 3 · Advanced
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Level 3 · Advanced">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#01-flutter-fundamentals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        01 · Flutter Fundamentals
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#02-building-apis-with-shelf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        02 · Building APIs with shelf
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#03-databases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        03 · Databases
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#04-design-patterns-in-dart" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        04 · Design Patterns in Dart
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#05-isolates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        05 · Isolates
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#06-testing-advanced" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        06 · Testing Advanced
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#07-state-management-concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        07 · State Management Concepts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#08-performance-profiling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        08 · Performance &amp; Profiling
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#09-code-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        09 · Code Generation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-project-rest-api-database-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10 · Project — REST API + Database Service
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-4-master" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 4 · Master
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Level 4 · Master">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#01-advanced-async-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        01 · Advanced Async Patterns
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#02-production-dart-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        02 · Production Dart Services
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#03-flutter-state-management-at-scale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        03 · Flutter State Management at Scale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#04-security-best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        04 · Security Best Practices
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#05-testing-at-scale-ci" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        05 · Testing at Scale &amp; CI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#06-deployment-with-docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        06 · Deployment with Docker
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#07-performance-at-scale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        07 · Performance at Scale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#08-package-publishing-pubdev" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        08 · Package Publishing (pub.dev)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#09-code-quality-dart-analyze-lints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        09 · Code Quality (dart analyze / lints)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-capstone-authenticated-notes-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10 · Capstone — Authenticated Notes API
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mixed-questions-across-all-levels" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mixed questions across all levels
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#practical-coding-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Practical coding questions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Practical coding questions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#totals-and-counts-with-collections" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Totals and counts with collections
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#typed-exceptions-and-streams" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Typed exceptions and streams
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cheat-sheet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cheat Sheet
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../level-1/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Level 1 · Entry
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Level 1 · Entry
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-1/01-setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    01 · Setup & First Program
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-1/02-variables-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    02 · Variables & Types
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-1/03-control-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    03 · Control Flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-1/04-functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    04 · Functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-1/05-collections/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    05 · Collections (List/Map/Set)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-1/06-classes-objects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    06 · Classes & Objects Basics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-1/07-null-safety-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    07 · Null Safety Basics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-1/08-async-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    08 · Async Basics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-1/09-packages/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    09 · Packages (pub, pubspec.yaml)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-1/10-project-todo-cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10 · Project — CLI To-Do App
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../level-2/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Level 2 · Intermediate
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Level 2 · Intermediate
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-2/01-oop-deep-dive/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    01 · OOP Deep Dive
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-2/02-null-safety-advanced/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    02 · Null Safety Advanced
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-2/03-streams/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    03 · Streams
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-2/04-testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    04 · Testing with the test package
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-2/05-json/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    05 · Working with JSON
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-2/06-generics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    06 · Generics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-2/07-extension-methods/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    07 · Extension Methods
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-2/08-error-handling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    08 · Error Handling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-2/09-collections-deep-dive/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    09 · Collections Deep Dive
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-2/10-project-weather-cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10 · Project — Weather CLI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../level-3/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Level 3 · Advanced
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Level 3 · Advanced
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-3/01-flutter-fundamentals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    01 · Flutter Fundamentals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-3/02-building-apis-shelf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    02 · Building APIs with `shelf`
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-3/03-databases/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    03 · Databases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-3/04-design-patterns/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    04 · Design Patterns in Dart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-3/05-isolates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    05 · Isolates
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-3/06-testing-advanced/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    06 · Testing Advanced
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-3/07-state-management-concepts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    07 · State Management Concepts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-3/08-performance-profiling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    08 · Performance & Profiling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-3/09-code-generation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    09 · Code Generation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-3/10-project-rest-api-db/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10 · Project — REST API + Database Service
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../level-4/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Level 4 · Master
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7" id="__nav_7_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Level 4 · Master
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-4/01-advanced-async-patterns/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    01 · Advanced Async Patterns
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-4/02-production-dart-services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    02 · Production Dart Services
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-4/03-flutter-state-management-scale/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    03 · Flutter State Management at Scale
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-4/04-security-best-practices/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    04 · Security Best Practices
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-4/05-testing-at-scale-ci/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    05 · Testing at Scale & CI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-4/06-deployment-docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    06 · Deployment with Docker
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-4/07-performance-at-scale/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    07 · Performance at Scale
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-4/08-package-publishing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    08 · Package Publishing (pub.dev)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-4/09-code-quality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    09 · Code Quality (`dart analyze` / lints)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-4/10-capstone-project/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10 · Capstone — Authenticated Notes API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../quiz/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Final Quiz
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#level-1-entry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 1 · Entry
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Level 1 · Entry">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#01-setup-first-program" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        01 · Setup &amp; First Program
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#02-variables-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        02 · Variables &amp; Types
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#03-control-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        03 · Control Flow
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#04-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        04 · Functions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#05-collections-list-map-set" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        05 · Collections (List, Map, Set)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#06-classes-objects-basics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        06 · Classes &amp; Objects Basics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#07-null-safety-basics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        07 · Null Safety Basics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#08-async-basics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        08 · Async Basics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#09-packages-pub-pubspecyaml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        09 · Packages (pub, pubspec.yaml)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-project-cli-to-do-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10 · Project — CLI To-Do App
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-2-intermediate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 2 · Intermediate
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Level 2 · Intermediate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#01-oop-deep-dive" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        01 · OOP Deep Dive
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#02-null-safety-advanced" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        02 · Null Safety Advanced
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#03-streams" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        03 · Streams
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#04-testing-with-the-test-package" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        04 · Testing with the test package
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#05-working-with-json" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        05 · Working with JSON
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#06-generics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        06 · Generics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#07-extension-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        07 · Extension Methods
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#08-error-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        08 · Error Handling
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#09-collections-deep-dive" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        09 · Collections Deep Dive
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-project-weather-cli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10 · Project — Weather CLI
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-3-advanced" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 3 · Advanced
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Level 3 · Advanced">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#01-flutter-fundamentals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        01 · Flutter Fundamentals
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#02-building-apis-with-shelf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        02 · Building APIs with shelf
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#03-databases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        03 · Databases
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#04-design-patterns-in-dart" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        04 · Design Patterns in Dart
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#05-isolates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        05 · Isolates
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#06-testing-advanced" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        06 · Testing Advanced
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#07-state-management-concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        07 · State Management Concepts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#08-performance-profiling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        08 · Performance &amp; Profiling
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#09-code-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        09 · Code Generation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-project-rest-api-database-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10 · Project — REST API + Database Service
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-4-master" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 4 · Master
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Level 4 · Master">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#01-advanced-async-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        01 · Advanced Async Patterns
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#02-production-dart-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        02 · Production Dart Services
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#03-flutter-state-management-at-scale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        03 · Flutter State Management at Scale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#04-security-best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        04 · Security Best Practices
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#05-testing-at-scale-ci" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        05 · Testing at Scale &amp; CI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#06-deployment-with-docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        06 · Deployment with Docker
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#07-performance-at-scale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        07 · Performance at Scale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#08-package-publishing-pubdev" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        08 · Package Publishing (pub.dev)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#09-code-quality-dart-analyze-lints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        09 · Code Quality (dart analyze / lints)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-capstone-authenticated-notes-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10 · Capstone — Authenticated Notes API
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mixed-questions-across-all-levels" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mixed questions across all levels
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#practical-coding-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Practical coding questions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Practical coding questions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#totals-and-counts-with-collections" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Totals and counts with collections
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#typed-exceptions-and-streams" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Typed exceptions and streams
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+              
+              <article class="md-content__inner md-typeset">
+                
+  
+                  
+
+
+  
+  
+
+
+<h1 id="dart-interview-questions-and-answers">Dart Interview Questions and Answers<a class="headerlink" href="#dart-interview-questions-and-answers" title="Permanent link">&para;</a></h1>
+<p><strong>178 questions</strong> with the correct answer and a short explanation, organised from beginner (Level 1) to advanced (Level 4). Every question comes from a lesson in the free Dart Mastery Path, so you can open the lesson to go deeper.</p>
+<div class="admonition tip">
+<p class="admonition-title">Practise, don't just read</p>
+<p>Each lesson also ends with an interactive quiz, and the <a href="../quiz/">final quiz</a> tests all four levels. Try to answer each question below before reading the answer.</p>
+</div>
+<h2 id="level-1-entry">Level 1 · Entry<a class="headerlink" href="#level-1-entry" title="Permanent link">&para;</a></h2>
+<h3 id="01-setup-first-program"><a href="../level-1/01-setup/">01 · Setup &amp; First Program</a><a class="headerlink" href="#01-setup-first-program" title="Permanent link">&para;</a></h3>
+<p><strong>Q1.</strong> What does the <code>dart</code> command bundle?</p>
+<p><strong>Answer:</strong> A compiler, VM, package manager (pub) and tooling</p>
+<p>One SDK for everything.</p>
+<p><strong>Q2.</strong> What does <code>dart run bin/main.dart</code> do?</p>
+<p><strong>Answer:</strong> Runs the program on the Dart VM (JIT)</p>
+<p>dart compile makes native executables.</p>
+<p><strong>Q3.</strong> What is the entry point of a Dart program?</p>
+<p><strong>Answer:</strong> The top-level main() function</p>
+<p>main can take List&lt;String&gt; args.</p>
+<p><strong>Q4.</strong> What does <code>dart create</code> do?</p>
+<p><strong>Answer:</strong> Scaffolds a new project with pubspec.yaml and sample code</p>
+<p>Templates: console, package, server-shelf.</p>
+<h3 id="02-variables-types"><a href="../level-1/02-variables-types/">02 · Variables &amp; Types</a><a class="headerlink" href="#02-variables-types" title="Permanent link">&para;</a></h3>
+<p><strong>Q5.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kt">void</span><span class="w"> </span><span class="n">main</span><span class="p">(){</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="p">;</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2.5</span><span class="p">;</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">y</span><span class="p">);</span><span class="w"> </span><span class="n">print</span><span class="p">((</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">y</span><span class="p">).</span><span class="n">runtimeType</span><span class="p">);</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="m">7</span><span class="w"> </span><span class="o">~/</span><span class="w"> </span><span class="m">2</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p><strong>Answer:</strong> 12.5
+double
+3</p>
+<p>~/ is integer division. Verified by running it with the Dart SDK.</p>
+<p><strong>Q6.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kt">void</span><span class="w"> </span><span class="n">main</span><span class="p">(){</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">];</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="m">3</span><span class="p">);</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">];</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="n">a</span><span class="p">);</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="n">b</span><span class="p">.</span><span class="n">length</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p><strong>Answer:</strong> [1, 2, 3]
+2</p>
+<p>final prevents reassigning the variable, not mutating the list. Verified by running it with the Dart SDK.</p>
+<p><strong>Q7.</strong> What's the difference between final and const?</p>
+<p><strong>Answer:</strong> final is set once at runtime; const is a compile-time constant</p>
+<p>Prefer const for constant values.</p>
+<p><strong>Q8.</strong> What does <code>var name = 'Ada';</code> infer?</p>
+<p><strong>Answer:</strong> String, fixed at compile time</p>
+<p>var isn't dynamic.</p>
+<h3 id="03-control-flow"><a href="../level-1/03-control-flow/">03 · Control Flow</a><a class="headerlink" href="#03-control-flow" title="Permanent link">&para;</a></h3>
+<p><strong>Q9.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kt">void</span><span class="w"> </span><span class="n">main</span><span class="p">(){</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="n">s</span><span class="o">=</span><span class="m">0</span><span class="p">;</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="m">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="m">10</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span><span class="w"> </span><span class="k">if</span><span class="p">(</span><span class="n">i</span><span class="p">.</span><span class="n">isEven</span><span class="p">)</span><span class="w"> </span><span class="k">continue</span><span class="p">;</span><span class="w"> </span><span class="k">if</span><span class="p">(</span><span class="n">i</span><span class="o">&gt;</span><span class="m">7</span><span class="p">)</span><span class="w"> </span><span class="k">break</span><span class="p">;</span><span class="w"> </span><span class="n">s</span><span class="o">+=</span><span class="n">i</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="n">s</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p><strong>Answer:</strong> 16</p>
+<p>1+3+5+7. Verified by running it with the Dart SDK.</p>
+<p><strong>Q10.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kt">void</span><span class="w"> </span><span class="n">main</span><span class="p">(){</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="n">n</span><span class="o">=</span><span class="m">3</span><span class="p">;</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">switch</span><span class="p">(</span><span class="n">n</span><span class="p">){</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s1">'one'</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s1">'few'</span><span class="p">,</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s1">'many'</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="n">r</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p><strong>Answer:</strong> few</p>
+<p>Switch expressions (Dart 3). Verified by running it with the Dart SDK.</p>
+<p><strong>Q11.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kt">void</span><span class="w"> </span><span class="n">main</span><span class="p">(){</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s1">'abc'</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="s1">''</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="n">c</span><span class="p">.</span><span class="n">toUpperCase</span><span class="p">());</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p><strong>Answer:</strong> A
+B
+C</p>
+<p>for-in iterates items. Verified by running it with the Dart SDK.</p>
+<p><strong>Q12.</strong> Is there implicit truthiness in Dart conditions?</p>
+<p><strong>Answer:</strong> No: conditions must be bool</p>
+<p>Write explicit comparisons.</p>
+<h3 id="04-functions"><a href="../level-1/04-functions/">04 · Functions</a><a class="headerlink" href="#04-functions" title="Permanent link">&para;</a></h3>
+<p><strong>Q13.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kt">String</span><span class="w"> </span><span class="n">greet</span><span class="p">(</span><span class="kt">String</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="kt">String</span><span class="w"> </span><span class="n">greeting</span><span class="o">=</span><span class="s1">'Hello'</span><span class="p">})</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s1">'</span><span class="si">$</span><span class="n">greeting</span><span class="s1">, </span><span class="si">$</span><span class="n">name</span><span class="s1">!'</span><span class="p">;</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="kt">void</span><span class="w"> </span><span class="n">main</span><span class="p">(){</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="n">greet</span><span class="p">(</span><span class="s1">'Ada'</span><span class="p">));</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="n">greet</span><span class="p">(</span><span class="s1">'Bo'</span><span class="p">,</span><span class="w"> </span><span class="nl">greeting:</span><span class="s1">'Hi'</span><span class="p">));</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p><strong>Answer:</strong> Hello, Ada!
+Hi, Bo!</p>
+<p>Named optional parameters. Verified by running it with the Dart SDK.</p>
+<p><strong>Q14.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kt">int</span><span class="w"> </span><span class="kt">Function</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="n">adder</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">n</span><span class="p">;</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="kt">void</span><span class="w"> </span><span class="n">main</span><span class="p">(){</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="n">add5</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">adder</span><span class="p">(</span><span class="m">5</span><span class="p">);</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="n">add5</span><span class="p">(</span><span class="m">10</span><span class="p">));</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p><strong>Answer:</strong> 15</p>
+<p>Closures capture n. Verified by running it with the Dart SDK.</p>
+<p><strong>Q15.</strong> What does <code>=&gt;</code> mean in a function?</p>
+<p><strong>Answer:</strong> Shorthand for a single expression body with an implicit return</p>
+<p>Equivalent to { return expr; }.</p>
+<p><strong>Q16.</strong> What are positional optional parameters?</p>
+<p><strong>Answer:</strong> Parameters in [brackets] that may be omitted</p>
+<p>e.g. void f(int a, [int b = 0]).</p>
+<h3 id="05-collections-list-map-set"><a href="../level-1/05-collections/">05 · Collections (List, Map, Set)</a><a class="headerlink" href="#05-collections-list-map-set" title="Permanent link">&para;</a></h3>
+<p><strong>Q17.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kt">void</span><span class="w"> </span><span class="n">main</span><span class="p">(){</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s1">'a'</span><span class="o">:</span><span class="m">1</span><span class="p">};</span><span class="w"> </span><span class="n">m</span><span class="p">[</span><span class="s1">'b'</span><span class="p">]</span><span class="o">=</span><span class="m">2</span><span class="p">;</span><span class="w"> </span><span class="n">m</span><span class="p">.</span><span class="n">update</span><span class="p">(</span><span class="s1">'a'</span><span class="p">,(</span><span class="n">v</span><span class="p">)</span><span class="o">=&gt;</span><span class="n">v</span><span class="o">+</span><span class="m">5</span><span class="p">);</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="n">m</span><span class="p">);</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="n">m</span><span class="p">.</span><span class="n">containsKey</span><span class="p">(</span><span class="s1">'c'</span><span class="p">));</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p><strong>Answer:</strong> {a: 6, b: 2}
+false</p>
+<p>Map literal printing. Verified by running it with the Dart SDK.</p>
+<p><strong>Q18.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kt">void</span><span class="w"> </span><span class="n">main</span><span class="p">(){</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">3</span><span class="p">};</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="m">2</span><span class="p">);</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="m">4</span><span class="p">);</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">length</span><span class="p">);</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">contains</span><span class="p">(</span><span class="m">4</span><span class="p">));</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p><strong>Answer:</strong> 4
+true</p>
+<p>Sets ignore duplicates. Verified by running it with the Dart SDK.</p>
+<p><strong>Q19.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kt">void</span><span class="w"> </span><span class="n">main</span><span class="p">(){</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="n">l</span><span class="o">=</span><span class="p">[</span><span class="m">3</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">];</span><span class="w"> </span><span class="n">l</span><span class="p">.</span><span class="n">sort</span><span class="p">();</span><span class="w"> </span><span class="n">l</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="m">9</span><span class="p">);</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="n">l</span><span class="p">);</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="n">l</span><span class="p">.</span><span class="n">reversed</span><span class="p">.</span><span class="n">toList</span><span class="p">());</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p><strong>Answer:</strong> [1, 2, 3, 9]
+[9, 3, 2, 1]</p>
+<p>sort is in place. Verified by running it with the Dart SDK.</p>
+<p><strong>Q20.</strong> Which collection stores unique values?</p>
+<p><strong>Answer:</strong> Set</p>
+<p>Use for membership tests.</p>
+<h3 id="06-classes-objects-basics"><a href="../level-1/06-classes-objects/">06 · Classes &amp; Objects Basics</a><a class="headerlink" href="#06-classes-objects-basics" title="Permanent link">&para;</a></h3>
+<p><strong>Q21.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kd">class</span><span class="w"> </span><span class="nc">P</span><span class="p">{</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="p">;</span><span class="w"> </span><span class="n">P</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="n">age</span><span class="p">);</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="n">toString</span><span class="p">()</span><span class="o">=&gt;</span><span class="s1">'</span><span class="si">$</span><span class="n">name</span><span class="s1">(</span><span class="si">$</span><span class="n">age</span><span class="s1">)'</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="kt">void</span><span class="w"> </span><span class="n">main</span><span class="p">(){</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="n">p</span><span class="o">=</span><span class="n">P</span><span class="p">(</span><span class="s1">'Ada'</span><span class="p">,</span><span class="m">36</span><span class="p">);</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">age</span><span class="o">++</span><span class="p">;</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="n">p</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p><strong>Answer:</strong> Ada(37)</p>
+<p>Initializing formals set fields. Verified by running it with the Dart SDK.</p>
+<p><strong>Q22.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="kd">class</span><span class="w"> </span><span class="nc">A</span><span class="p">{</span><span class="w"> </span><span class="n">A</span><span class="p">(){</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="s1">'A'</span><span class="p">);</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="kd">class</span><span class="w"> </span><span class="nc">B</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">A</span><span class="p">{</span><span class="w"> </span><span class="n">B</span><span class="p">(){</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="s1">'B'</span><span class="p">);</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="kt">void</span><span class="w"> </span><span class="n">main</span><span class="p">(){</span><span class="w"> </span><span class="n">B</span><span class="p">();</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p><strong>Answer:</strong> A
+B</p>
+<p>The super constructor runs first. Verified by running it with the Dart SDK.</p>
+<p><strong>Q23.</strong> What does <code>this.name</code> in a constructor parameter list do?</p>
+<p><strong>Answer:</strong> Assigns the argument directly to the field</p>
+<p>Concise initialization.</p>
+<p><strong>Q24.</strong> What does a leading underscore on a name mean?</p>
+<p><strong>Answer:</strong> Library-private: not visible outside the library</p>
+<p>No <code>private</code> keyword.</p>
+<h3 id="07-null-safety-basics"><a href="../level-1/07-null-safety-basics/">07 · Null Safety Basics</a><a class="headerlink" href="#07-null-safety-basics" title="Permanent link">&para;</a></h3>
+<p><strong>Q25.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="kt">void</span><span class="w"> </span><span class="n">main</span><span class="p">(){</span><span class="w"> </span><span class="kt">String</span><span class="o">?</span><span class="w"> </span><span class="n">s</span><span class="p">;</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="n">s</span><span class="o">?</span><span class="p">.</span><span class="n">length</span><span class="p">);</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="s1">'none'</span><span class="p">);</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">??=</span><span class="w"> </span><span class="s1">'x'</span><span class="p">;</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="n">s</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p><strong>Answer:</strong> null
+none
+x</p>
+<p>?. ?? and ??= operators. Verified by running it with the Dart SDK.</p>
+<p><strong>Q26.</strong> What does <code>String name</code> mean under sound null safety?</p>
+<p><strong>Answer:</strong> It can never be null</p>
+<p>String? allows null.</p>
+<p><strong>Q27.</strong> What does the <code>!</code> operator do?</p>
+<p><strong>Answer:</strong> Asserts a nullable value isn't null and throws if it is</p>
+<p>Use sparingly.</p>
+<p><strong>Q28.</strong> What does <code>late</code> mean?</p>
+<p><strong>Answer:</strong> The variable is initialized later but non-null; accessing early throws</p>
+<p>Use carefully.</p>
+<h3 id="08-async-basics"><a href="../level-1/08-async-basics/">08 · Async Basics</a><a class="headerlink" href="#08-async-basics" title="Permanent link">&para;</a></h3>
+<p><strong>Q29.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">Future</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">f</span><span class="p">()</span><span class="w"> </span><span class="kd">async</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kd">await</span><span class="w"> </span><span class="n">Future</span><span class="p">.</span><span class="n">delayed</span><span class="p">(</span><span class="n">Duration</span><span class="p">(</span><span class="nl">milliseconds:</span><span class="m">10</span><span class="p">));</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="m">42</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="kt">void</span><span class="w"> </span><span class="n">main</span><span class="p">()</span><span class="w"> </span><span class="kd">async</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="s1">'start'</span><span class="p">);</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="kd">await</span><span class="w"> </span><span class="n">f</span><span class="p">());</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="s1">'end'</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p><strong>Answer:</strong> start
+42
+end</p>
+<p>await pauses the async function. Verified by running it with the Dart SDK.</p>
+<p><strong>Q30.</strong> What type does an async function return?</p>
+<p><strong>Answer:</strong> A Future</p>
+<p>Mark it async and await results.</p>
+<p><strong>Q31.</strong> Is Dart single-threaded?</p>
+<p><strong>Answer:</strong> Each isolate runs on one thread with an event loop</p>
+<p>Isolates have separate memory.</p>
+<p><strong>Q32.</strong> What does <code>Future.wait</code> do?</p>
+<p><strong>Answer:</strong> Waits for several futures to complete</p>
+<p>Returns a list of results.</p>
+<h3 id="09-packages-pub-pubspecyaml"><a href="../level-1/09-packages/">09 · Packages (pub, pubspec.yaml)</a><a class="headerlink" href="#09-packages-pub-pubspecyaml" title="Permanent link">&para;</a></h3>
+<p><strong>Q33.</strong> What file lists a project's dependencies?</p>
+<p><strong>Answer:</strong> pubspec.yaml</p>
+<p>pub get resolves them.</p>
+<p><strong>Q34.</strong> What does <code>dart pub add http</code> do?</p>
+<p><strong>Answer:</strong> Adds the package to pubspec.yaml and fetches it</p>
+<p>From pub.dev.</p>
+<p><strong>Q35.</strong> What is pubspec.lock for?</p>
+<p><strong>Answer:</strong> Pinning the exact resolved versions</p>
+<p>Commit it for apps, not libraries.</p>
+<p><strong>Q36.</strong> What does <code>^1.2.3</code> mean?</p>
+<p><strong>Answer:</strong> Compatible versions &gt;=1.2.3 &lt;2.0.0</p>
+<p>Caret constraint.</p>
+<h3 id="10-project-cli-to-do-app"><a href="../level-1/10-project-todo-cli/">10 · Project — CLI To-Do App</a><a class="headerlink" href="#10-project-cli-to-do-app" title="Permanent link">&para;</a></h3>
+<p><strong>Q37.</strong> How can the CLI persist tasks between runs?</p>
+<p><strong>Answer:</strong> Write them to a JSON file and load on start</p>
+<p>dart:io File.</p>
+<p><strong>Q38.</strong> Which collection holds the task list?</p>
+<p><strong>Answer:</strong> List&lt;Task&gt;</p>
+<p>Ordered and growable.</p>
+<p><strong>Q39.</strong> How do you read command-line arguments?</p>
+<p><strong>Answer:</strong> main(List&lt;String&gt; args)</p>
+<p>Parse the command.</p>
+<p><strong>Q40.</strong> Why validate user input?</p>
+<p><strong>Answer:</strong> To avoid crashes on bad values like non-numeric ids</p>
+<p>int.tryParse.</p>
+<h2 id="level-2-intermediate">Level 2 · Intermediate<a class="headerlink" href="#level-2-intermediate" title="Permanent link">&para;</a></h2>
+<h3 id="01-oop-deep-dive"><a href="../level-2/01-oop-deep-dive/">01 · OOP Deep Dive</a><a class="headerlink" href="#01-oop-deep-dive" title="Permanent link">&para;</a></h3>
+<p><strong>Q41.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="kd">abstract</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">Shape</span><span class="p">{</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">area</span><span class="p">();</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="kd">class</span><span class="w"> </span><span class="nc">Sq</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Shape</span><span class="p">{</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">s</span><span class="p">;</span><span class="w"> </span><span class="n">Sq</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="n">s</span><span class="p">);</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">area</span><span class="p">()</span><span class="o">=&gt;</span><span class="n">s</span><span class="o">*</span><span class="n">s</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="kt">void</span><span class="w"> </span><span class="n">main</span><span class="p">(){</span><span class="w"> </span><span class="n">Shape</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Sq</span><span class="p">(</span><span class="m">3</span><span class="p">);</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">area</span><span class="p">());</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p><strong>Answer:</strong> 9.0</p>
+<p>Abstract classes define a contract. Verified by running it with the Dart SDK.</p>
+<p><strong>Q42.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="kd">mixin</span><span class="w"> </span><span class="nc">Walker</span><span class="p">{</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="n">move</span><span class="p">()</span><span class="o">=&gt;</span><span class="s1">'walk'</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="kd">class</span><span class="w"> </span><span class="nc">Dog</span><span class="w"> </span><span class="kd">with</span><span class="w"> </span><span class="n">Walker</span><span class="p">{}</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="kt">void</span><span class="w"> </span><span class="n">main</span><span class="p">(){</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="n">Dog</span><span class="p">().</span><span class="n">move</span><span class="p">());</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p><strong>Answer:</strong> walk</p>
+<p>Mixins add reusable behavior. Verified by running it with the Dart SDK.</p>
+<p><strong>Q43.</strong> What does <code>implements</code> do?</p>
+<p><strong>Answer:</strong> Requires the class to provide the whole interface of another</p>
+<p>Every class is an implicit interface.</p>
+<p><strong>Q44.</strong> What's a factory constructor?</p>
+<p><strong>Answer:</strong> A constructor that may return an existing or subtype instance</p>
+<p>Useful for caching/singletons.</p>
+<h3 id="02-null-safety-advanced"><a href="../level-2/02-null-safety-advanced/">02 · Null Safety Advanced</a><a class="headerlink" href="#02-null-safety-advanced" title="Permanent link">&para;</a></h3>
+<p><strong>Q45.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="kt">void</span><span class="w"> </span><span class="n">main</span><span class="p">(){</span><span class="w"> </span><span class="kt">int</span><span class="o">?</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="p">;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="p">);</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kt">String</span><span class="o">?</span><span class="w"> </span><span class="n">s</span><span class="p">;</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="n">s</span><span class="o">?</span><span class="p">.</span><span class="n">toUpperCase</span><span class="p">()</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="s1">'empty'</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p><strong>Answer:</strong> 6
+empty</p>
+<p>Flow analysis promotes x to int. Verified by running it with the Dart SDK.</p>
+<p><strong>Q46.</strong> What does type promotion mean?</p>
+<p><strong>Answer:</strong> After a null check, the compiler treats the variable as non-null</p>
+<p>Works for local variables.</p>
+<p><strong>Q47.</strong> Why can't a nullable field be promoted?</p>
+<p><strong>Answer:</strong> It may change between check and use, so copy it to a local first</p>
+<p>Use a local variable.</p>
+<p><strong>Q48.</strong> What does <code>required</code> do for a named parameter?</p>
+<p><strong>Answer:</strong> Forces callers to pass it</p>
+<p>Avoids nulls for important params.</p>
+<h3 id="03-streams"><a href="../level-2/03-streams/">03 · Streams</a><a class="headerlink" href="#03-streams" title="Permanent link">&para;</a></h3>
+<p><strong>Q49.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="n">Stream</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">count</span><span class="p">()</span><span class="w"> </span><span class="kd">async</span><span class="o">*</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="m">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="m">3</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kd">yield</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="kt">void</span><span class="w"> </span><span class="n">main</span><span class="p">()</span><span class="w"> </span><span class="kd">async</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kd">await</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">count</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="n">v</span><span class="o">*</span><span class="m">10</span><span class="p">);</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p><strong>Answer:</strong> 10
+20
+30</p>
+<p>async* yields a Stream. Verified by running it with the Dart SDK.</p>
+<p><strong>Q50.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="kt">void</span><span class="w"> </span><span class="n">main</span><span class="p">()</span><span class="w"> </span><span class="kd">async</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">await</span><span class="w"> </span><span class="n">Stream</span><span class="p">.</span><span class="n">fromIterable</span><span class="p">([</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">3</span><span class="p">,</span><span class="m">4</span><span class="p">]).</span><span class="n">where</span><span class="p">((</span><span class="n">x</span><span class="p">)</span><span class="o">=&gt;</span><span class="n">x</span><span class="p">.</span><span class="n">isEven</span><span class="p">).</span><span class="n">fold</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="m">0</span><span class="p">,(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span><span class="o">=&gt;</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">);</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="n">total</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p><strong>Answer:</strong> 6</p>
+<p>where then fold. Verified by running it with the Dart SDK.</p>
+<p><strong>Q51.</strong> What's the difference between a single-subscription and broadcast stream?</p>
+<p><strong>Answer:</strong> Single allows one listener; broadcast allows many</p>
+<p>asBroadcastStream.</p>
+<p><strong>Q52.</strong> What does <code>yield</code> do in async*?</p>
+<p><strong>Answer:</strong> Emits a value to the stream</p>
+<p>Generators.</p>
+<h3 id="04-testing-with-the-test-package"><a href="../level-2/04-testing/">04 · Testing with the test package</a><a class="headerlink" href="#04-testing-with-the-test-package" title="Permanent link">&para;</a></h3>
+<p><strong>Q53.</strong> Which function defines a test case in package:test?</p>
+<p><strong>Answer:</strong> test('description', () { ... })</p>
+<p>group() organizes tests.</p>
+<p><strong>Q54.</strong> What does <code>expect(actual, matcher)</code> do?</p>
+<p><strong>Answer:</strong> Asserts the value satisfies the matcher</p>
+<p>e.g. equals, throwsA.</p>
+<p><strong>Q55.</strong> How do you run all tests?</p>
+<p><strong>Answer:</strong> dart test</p>
+<p>Files end with _test.dart.</p>
+<p><strong>Q56.</strong> How do you test code that throws?</p>
+<p><strong>Answer:</strong> expect(() =&gt; f(), throwsA(isA&lt;FormatException&gt;()))</p>
+<p>Wrap in a closure.</p>
+<h3 id="05-working-with-json"><a href="../level-2/05-json/">05 · Working with JSON</a><a class="headerlink" href="#05-working-with-json" title="Permanent link">&para;</a></h3>
+<p><strong>Q57.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="k">import</span><span class="w"> </span><span class="s1">'dart:convert'</span><span class="p">;</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="kt">void</span><span class="w"> </span><span class="n">main</span><span class="p">(){</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jsonDecode</span><span class="p">(</span><span class="s1">'{"a":1,"b":[2,3]}'</span><span class="p">);</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="s1">'b'</span><span class="p">][</span><span class="m">1</span><span class="p">]);</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="n">jsonEncode</span><span class="p">({</span><span class="s1">'x'</span><span class="o">:</span><span class="kc">true</span><span class="p">,</span><span class="s1">'y'</span><span class="o">:</span><span class="kc">null</span><span class="p">}));</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p><strong>Answer:</strong> 3
+{"x":true,"y":null}</p>
+<p>jsonDecode yields Maps and Lists. Verified by running it with the Dart SDK.</p>
+<p><strong>Q58.</strong> What do fromJson factories do?</p>
+<p><strong>Answer:</strong> Build a typed object from a decoded Map</p>
+<p>Pair with toJson.</p>
+<p><strong>Q59.</strong> Why type-check decoded JSON?</p>
+<p><strong>Answer:</strong> jsonDecode returns dynamic, and malformed data causes runtime errors</p>
+<p>Validate fields.</p>
+<p><strong>Q60.</strong> What does <code>jsonEncode</code> accept?</p>
+<p><strong>Answer:</strong> Maps, Lists, numbers, strings, bools, null (or objects with toJson)</p>
+<p>Custom classes need toJson.</p>
+<h3 id="06-generics"><a href="../level-2/06-generics/">06 · Generics</a><a class="headerlink" href="#06-generics" title="Permanent link">&para;</a></h3>
+<p><strong>Q61.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="kd">class</span><span class="w"> </span><span class="nc">Box</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">{</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">v</span><span class="p">;</span><span class="w"> </span><span class="n">Box</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="n">v</span><span class="p">);</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="kd">get</span><span class="p">(){</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">v</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="n">T</span><span class="w"> </span><span class="n">first</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">l</span><span class="p">)</span><span class="o">=&gt;</span><span class="n">l</span><span class="p">.</span><span class="n">first</span><span class="p">;</span>
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="kt">void</span><span class="w"> </span><span class="n">main</span><span class="p">(){</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="n">Box</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="m">7</span><span class="p">).</span><span class="kd">get</span><span class="p">());</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="n">first</span><span class="p">([</span><span class="s1">'a'</span><span class="p">,</span><span class="s1">'b'</span><span class="p">]));</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p><strong>Answer:</strong> 7
+a</p>
+<p>Generics keep type safety. Verified by running it with the Dart SDK.</p>
+<p><strong>Q62.</strong> What does <code>&lt;T extends num&gt;</code> do?</p>
+<p><strong>Answer:</strong> Restricts T to num or its subtypes</p>
+<p>Bounded generics.</p>
+<p><strong>Q63.</strong> What's reified generics in Dart?</p>
+<p><strong>Answer:</strong> Generic types are available at runtime</p>
+<p>Unlike Java erasure.</p>
+<p><strong>Q64.</strong> Why use List&lt;int&gt; instead of List&lt;dynamic&gt;?</p>
+<p><strong>Answer:</strong> Compile-time type checking</p>
+<p>Avoid dynamic.</p>
+<h3 id="07-extension-methods"><a href="../level-2/07-extension-methods/">07 · Extension Methods</a><a class="headerlink" href="#07-extension-methods" title="Permanent link">&para;</a></h3>
+<p><strong>Q65.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="kd">extension</span><span class="w"> </span><span class="nc">StringX</span><span class="w"> </span><span class="kd">on</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="kd">get</span><span class="w"> </span><span class="n">shout</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">toUpperCase</span><span class="p">()</span><span class="o">+</span><span class="s1">'!'</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="kt">void</span><span class="w"> </span><span class="n">main</span><span class="p">(){</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="s1">'hi'</span><span class="p">.</span><span class="n">shout</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p><strong>Answer:</strong> HI!</p>
+<p>Extensions add members to existing types. Verified by running it with the Dart SDK.</p>
+<p><strong>Q66.</strong> When are extension methods resolved?</p>
+<p><strong>Answer:</strong> Statically, based on the declared type</p>
+<p>Not virtual.</p>
+<p><strong>Q67.</strong> Can extensions access private members of the type?</p>
+<p><strong>Answer:</strong> No, only the public API</p>
+<p>They don't change the class.</p>
+<p><strong>Q68.</strong> What do extensions help avoid?</p>
+<p><strong>Answer:</strong> Static helper functions and wrapper classes</p>
+<p>Readable API.</p>
+<h3 id="08-error-handling"><a href="../level-2/08-error-handling/">08 · Error Handling</a><a class="headerlink" href="#08-error-handling" title="Permanent link">&para;</a></h3>
+<p><strong>Q69.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="kd">class</span><span class="w"> </span><span class="nc">AppError</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Exception</span><span class="p">{</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="n">m</span><span class="p">;</span><span class="w"> </span><span class="n">AppError</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="n">m</span><span class="p">);</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="n">toString</span><span class="p">()</span><span class="o">=&gt;</span><span class="s1">'AppError: </span><span class="si">$</span><span class="n">m</span><span class="s1">'</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="kt">void</span><span class="w"> </span><span class="n">main</span><span class="p">(){</span><span class="w"> </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="n">AppError</span><span class="p">(</span><span class="s1">'bad'</span><span class="p">);</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kd">on</span><span class="w"> </span><span class="n">AppError</span><span class="w"> </span><span class="k">catch</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="n">e</span><span class="p">);</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="s1">'done'</span><span class="p">);</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p><strong>Answer:</strong> AppError: bad
+done</p>
+<p>finally always runs. Verified by running it with the Dart SDK.</p>
+<p><strong>Q70.</strong> What's the difference between Exception and Error?</p>
+<p><strong>Answer:</strong> Exceptions are recoverable conditions; Errors indicate programmer bugs</p>
+<p>Don't catch Errors generally.</p>
+<p><strong>Q71.</strong> What does <code>rethrow</code> do?</p>
+<p><strong>Answer:</strong> Rethrows the caught exception preserving the stack trace</p>
+<p>Better than throw e.</p>
+<p><strong>Q72.</strong> How do you handle errors from a Future?</p>
+<p><strong>Answer:</strong> try/catch around await, or .catchError</p>
+<p>Unhandled async errors crash.</p>
+<h3 id="09-collections-deep-dive"><a href="../level-2/09-collections-deep-dive/">09 · Collections Deep Dive</a><a class="headerlink" href="#09-collections-deep-dive" title="Permanent link">&para;</a></h3>
+<p><strong>Q73.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="kt">void</span><span class="w"> </span><span class="n">main</span><span class="p">(){</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="n">n</span><span class="o">=</span><span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">3</span><span class="p">,</span><span class="m">4</span><span class="p">];</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="n">n</span><span class="p">.</span><span class="n">where</span><span class="p">((</span><span class="n">x</span><span class="p">)</span><span class="o">=&gt;</span><span class="n">x</span><span class="o">&gt;</span><span class="m">1</span><span class="p">).</span><span class="n">map</span><span class="p">((</span><span class="n">x</span><span class="p">)</span><span class="o">=&gt;</span><span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="p">).</span><span class="n">toList</span><span class="p">());</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="n">n</span><span class="p">.</span><span class="n">fold</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="m">0</span><span class="p">,(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span><span class="o">=&gt;</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">));</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="n">n</span><span class="p">.</span><span class="n">reduce</span><span class="p">((</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span><span class="o">=&gt;</span><span class="n">a</span><span class="o">&gt;</span><span class="n">b</span><span class="o">?</span><span class="nl">a:</span><span class="n">b</span><span class="p">));</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p><strong>Answer:</strong> [4, 9, 16]
+10
+4</p>
+<p>where, map, fold and reduce. Verified by running it with the Dart SDK.</p>
+<p><strong>Q74.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="kt">void</span><span class="w"> </span><span class="n">main</span><span class="p">(){</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="n">l</span><span class="o">=</span><span class="p">[[</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">],[</span><span class="m">3</span><span class="p">],[</span><span class="m">4</span><span class="p">,</span><span class="m">5</span><span class="p">]];</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="n">l</span><span class="p">.</span><span class="n">expand</span><span class="p">((</span><span class="n">x</span><span class="p">)</span><span class="o">=&gt;</span><span class="n">x</span><span class="p">).</span><span class="n">toList</span><span class="p">());</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p><strong>Answer:</strong> [1, 2, 3, 4, 5]</p>
+<p>expand flattens. Verified by running it with the Dart SDK.</p>
+<p><strong>Q75.</strong> Are map/where lazy?</p>
+<p><strong>Answer:</strong> Yes: they return lazy Iterables until toList()</p>
+<p>Beware repeated evaluation.</p>
+<p><strong>Q76.</strong> What does <code>sort((a,b)=&gt;b.compareTo(a))</code> do?</p>
+<p><strong>Answer:</strong> Sorts descending</p>
+<p>Comparator.</p>
+<h3 id="10-project-weather-cli"><a href="../level-2/10-project-weather-cli/">10 · Project — Weather CLI</a><a class="headerlink" href="#10-project-weather-cli" title="Permanent link">&para;</a></h3>
+<p><strong>Q77.</strong> Which package makes HTTP requests?</p>
+<p><strong>Answer:</strong> package:http</p>
+<p>Also dart:io HttpClient.</p>
+<p><strong>Q78.</strong> How should you handle a non-200 response?</p>
+<p><strong>Answer:</strong> Check statusCode and throw/handle a meaningful error</p>
+<p>Don't assume success.</p>
+<p><strong>Q79.</strong> Where should an API key come from?</p>
+<p><strong>Answer:</strong> Environment variables, not source code</p>
+<p>Never commit secrets.</p>
+<p><strong>Q80.</strong> Why fetch several cities concurrently?</p>
+<p><strong>Answer:</strong> Future.wait overlaps network waits</p>
+<p>I/O bound.</p>
+<h2 id="level-3-advanced">Level 3 · Advanced<a class="headerlink" href="#level-3-advanced" title="Permanent link">&para;</a></h2>
+<h3 id="01-flutter-fundamentals"><a href="../level-3/01-flutter-fundamentals/">01 · Flutter Fundamentals</a><a class="headerlink" href="#01-flutter-fundamentals" title="Permanent link">&para;</a></h3>
+<p><strong>Q81.</strong> In Flutter, what is a widget?</p>
+<p><strong>Answer:</strong> An immutable description of part of the UI; Flutter builds elements and render objects from it</p>
+<p>UI is a tree of widgets.</p>
+<p><strong>Q82.</strong> What's the difference between StatelessWidget and StatefulWidget?</p>
+<p><strong>Answer:</strong> Stateful widgets hold mutable State that triggers rebuilds via setState</p>
+<p>Use stateless when possible.</p>
+<p><strong>Q83.</strong> What does setState() do?</p>
+<p><strong>Answer:</strong> Marks the widget dirty so build() runs again with new state</p>
+<p>Only for local state.</p>
+<p><strong>Q84.</strong> Why is build() expected to be cheap and side-effect free?</p>
+<p><strong>Answer:</strong> It can be called many times per second</p>
+<p>Move work out.</p>
+<h3 id="02-building-apis-with-shelf"><a href="../level-3/02-building-apis-shelf/">02 · Building APIs with <code>shelf</code></a><a class="headerlink" href="#02-building-apis-with-shelf" title="Permanent link">&para;</a></h3>
+<p><strong>Q85.</strong> How does shelf model a server?</p>
+<p><strong>Answer:</strong> A function from Request to Response, composed with middleware</p>
+<p>Handler = FutureOr&lt;Response&gt; Function(Request).</p>
+<p><strong>Q86.</strong> What is middleware in shelf?</p>
+<p><strong>Answer:</strong> A function wrapping a handler to add behavior like logging or auth</p>
+<p>Pipeline().addMiddleware().</p>
+<p><strong>Q87.</strong> How do you route requests in shelf?</p>
+<p><strong>Answer:</strong> Use shelf_router or inspect request.url</p>
+<p>Router().get('/x', handler).</p>
+<p><strong>Q88.</strong> Which status code for a missing resource?</p>
+<p><strong>Answer:</strong> 404</p>
+<p>Response.notFound.</p>
+<h3 id="03-databases"><a href="../level-3/03-databases/">03 · Databases</a><a class="headerlink" href="#03-databases" title="Permanent link">&para;</a></h3>
+<p><strong>Q89.</strong> Why use parameterized queries with sqlite3?</p>
+<p><strong>Answer:</strong> To prevent SQL injection</p>
+<p>Use ? placeholders.</p>
+<p><strong>Q90.</strong> What does sqlite3 give a Dart service?</p>
+<p><strong>Answer:</strong> An embedded SQL database without a server process</p>
+<p>File-based.</p>
+<p><strong>Q91.</strong> What does a transaction ensure?</p>
+<p><strong>Answer:</strong> All-or-nothing changes</p>
+<p>BEGIN/COMMIT/ROLLBACK.</p>
+<p><strong>Q92.</strong> Why close database handles?</p>
+<p><strong>Answer:</strong> To release resources and flush data</p>
+<p>dispose().</p>
+<h3 id="04-design-patterns-in-dart"><a href="../level-3/04-design-patterns/">04 · Design Patterns in Dart</a><a class="headerlink" href="#04-design-patterns-in-dart" title="Permanent link">&para;</a></h3>
+<p><strong>Q93.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="kd">class</span><span class="w"> </span><span class="nc">Cfg</span><span class="p">{</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Cfg</span><span class="w"> </span><span class="n">_i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Cfg</span><span class="p">.</span><span class="n">_</span><span class="p">();</span><span class="w"> </span><span class="n">Cfg</span><span class="p">.</span><span class="n">_</span><span class="p">();</span><span class="w"> </span><span class="kd">factory</span><span class="w"> </span><span class="n">Cfg</span><span class="p">()</span><span class="o">=&gt;</span><span class="n">_i</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="kt">void</span><span class="w"> </span><span class="n">main</span><span class="p">(){</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="n">identical</span><span class="p">(</span><span class="n">Cfg</span><span class="p">(),</span><span class="w"> </span><span class="n">Cfg</span><span class="p">()));</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p><strong>Answer:</strong> true</p>
+<p>A factory constructor returning one instance implements Singleton. Verified by running it with the Dart SDK.</p>
+<p><strong>Q94.</strong> What does the Observer pattern provide?</p>
+<p><strong>Answer:</strong> Subjects notify subscribers of changes (Streams in Dart)</p>
+<p>StreamController.</p>
+<p><strong>Q95.</strong> What's the Factory pattern for?</p>
+<p><strong>Answer:</strong> Centralizing object creation behind an interface</p>
+<p>Choose subtype by input.</p>
+<p><strong>Q96.</strong> What's the Repository pattern?</p>
+<p><strong>Answer:</strong> An abstraction over data access</p>
+<p>Swap implementations in tests.</p>
+<h3 id="05-isolates"><a href="../level-3/05-isolates/">05 · Isolates</a><a class="headerlink" href="#05-isolates" title="Permanent link">&para;</a></h3>
+<p><strong>Q97.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="k">import</span><span class="w"> </span><span class="s1">'dart:isolate'</span><span class="p">;</span>
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="kt">int</span><span class="w"> </span><span class="n">heavy</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">){</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="n">s</span><span class="o">=</span><span class="m">0</span><span class="p">;</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="m">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span><span class="w"> </span><span class="n">s</span><span class="o">+=</span><span class="n">i</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">s</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="kt">void</span><span class="w"> </span><span class="n">main</span><span class="p">()</span><span class="w"> </span><span class="kd">async</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="kd">await</span><span class="w"> </span><span class="n">Isolate</span><span class="p">.</span><span class="n">run</span><span class="p">(()</span><span class="o">=&gt;</span><span class="n">heavy</span><span class="p">(</span><span class="m">1000</span><span class="p">)));</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p><strong>Answer:</strong> 500500</p>
+<p>Isolate.run executes in a separate isolate. Verified by running it with the Dart SDK.</p>
+<p><strong>Q98.</strong> Why use isolates?</p>
+<p><strong>Answer:</strong> To run CPU-heavy work in parallel without blocking the event loop</p>
+<p>Each has separate memory.</p>
+<p><strong>Q99.</strong> How do isolates communicate?</p>
+<p><strong>Answer:</strong> By message passing (ports), not shared memory</p>
+<p>Messages are copied.</p>
+<p><strong>Q100.</strong> Is async/await parallel execution?</p>
+<p><strong>Answer:</strong> No: it's concurrency on one thread; use isolates for parallelism</p>
+<p>Event loop.</p>
+<h3 id="06-testing-advanced"><a href="../level-3/06-testing-advanced/">06 · Testing Advanced</a><a class="headerlink" href="#06-testing-advanced" title="Permanent link">&para;</a></h3>
+<p><strong>Q101.</strong> What's a mock/fake used for?</p>
+<p><strong>Answer:</strong> Replacing dependencies like HTTP clients in unit tests</p>
+<p>mockito or hand-written fakes.</p>
+<p><strong>Q102.</strong> What does setUp() do?</p>
+<p><strong>Answer:</strong> Runs before each test in a group</p>
+<p>tearDown is after.</p>
+<p><strong>Q103.</strong> What does test coverage show?</p>
+<p><strong>Answer:</strong> Which lines executed, not assertion quality</p>
+<p>dart test --coverage.</p>
+<p><strong>Q104.</strong> How do you test async code?</p>
+<p><strong>Answer:</strong> Make the test async and await, using expectLater for streams</p>
+<p>Await futures.</p>
+<h3 id="07-state-management-concepts"><a href="../level-3/07-state-management-concepts/">07 · State Management Concepts</a><a class="headerlink" href="#07-state-management-concepts" title="Permanent link">&para;</a></h3>
+<p><strong>Q105.</strong> What's the core idea of state management?</p>
+<p><strong>Answer:</strong> Keep state in one place and let UI react to changes</p>
+<p>Lift state up.</p>
+<p><strong>Q106.</strong> What's wrong with putting everything in setState?</p>
+<p><strong>Answer:</strong> State shared across widgets becomes hard to manage and test</p>
+<p>Use a dedicated approach.</p>
+<p><strong>Q107.</strong> What does ChangeNotifier do?</p>
+<p><strong>Answer:</strong> Notifies listeners when state changes</p>
+<p>Used by Provider.</p>
+<p><strong>Q108.</strong> What does unidirectional data flow mean?</p>
+<p><strong>Answer:</strong> State flows down, events flow up</p>
+<p>Predictable updates.</p>
+<h3 id="08-performance-profiling"><a href="../level-3/08-performance-profiling/">08 · Performance &amp; Profiling</a><a class="headerlink" href="#08-performance-profiling" title="Permanent link">&para;</a></h3>
+<p><strong>Q109.</strong> What does the Dart DevTools profiler show?</p>
+<p><strong>Answer:</strong> CPU, memory and frame timing to find bottlenecks</p>
+<p>Profile in profile mode.</p>
+<p><strong>Q110.</strong> Why profile in release/profile mode, not debug?</p>
+<p><strong>Answer:</strong> Debug mode has extra checks and no AOT optimizations</p>
+<p>Timing differs.</p>
+<p><strong>Q111.</strong> What's a common Flutter jank cause?</p>
+<p><strong>Answer:</strong> Expensive work in build() or the UI thread</p>
+<p>Use const and isolates.</p>
+<p><strong>Q112.</strong> What does <code>const</code> widget constructors enable?</p>
+<p><strong>Answer:</strong> Reuse of identical instances to skip rebuilds</p>
+<p>Cheaper builds.</p>
+<h3 id="09-code-generation"><a href="../level-3/09-code-generation/">09 · Code Generation</a><a class="headerlink" href="#09-code-generation" title="Permanent link">&para;</a></h3>
+<p><strong>Q113.</strong> What does build_runner do?</p>
+<p><strong>Answer:</strong> Runs code generators like json_serializable</p>
+<p>dart run build_runner build.</p>
+<p><strong>Q114.</strong> Why generate JSON serialization code?</p>
+<p><strong>Answer:</strong> Avoids error-prone hand-written boilerplate</p>
+<p>Annotations drive it.</p>
+<p><strong>Q115.</strong> Are generated files committed?</p>
+<p><strong>Answer:</strong> Depends on policy; keep them consistent and re-generate when sources change</p>
+<p>Some projects ignore them.</p>
+<p><strong>Q116.</strong> What do annotations like @JsonSerializable do?</p>
+<p><strong>Answer:</strong> Mark classes for the generator</p>
+<p>Metadata.</p>
+<h3 id="10-project-rest-api-database-service"><a href="../level-3/10-project-rest-api-db/">10 · Project — REST API + Database Service</a><a class="headerlink" href="#10-project-rest-api-database-service" title="Permanent link">&para;</a></h3>
+<p><strong>Q117.</strong> What layers does the API project separate?</p>
+<p><strong>Answer:</strong> Routes/handlers, service logic and data access</p>
+<p>Separation of concerns.</p>
+<p><strong>Q118.</strong> Which verb creates a resource?</p>
+<p><strong>Answer:</strong> POST</p>
+<p>Return 201 with Location.</p>
+<p><strong>Q119.</strong> How should validation errors respond?</p>
+<p><strong>Answer:</strong> 400 with a clear message</p>
+<p>Client errors.</p>
+<p><strong>Q120.</strong> How do you test the API?</p>
+<p><strong>Answer:</strong> Call handlers with Request objects or use an integration test against a running server</p>
+<p>Automate.</p>
+<h2 id="level-4-master">Level 4 · Master<a class="headerlink" href="#level-4-master" title="Permanent link">&para;</a></h2>
+<h3 id="01-advanced-async-patterns"><a href="../level-4/01-advanced-async-patterns/">01 · Advanced Async Patterns</a><a class="headerlink" href="#01-advanced-async-patterns" title="Permanent link">&para;</a></h3>
+<p><strong>Q121.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="kt">void</span><span class="w"> </span><span class="n">main</span><span class="p">()</span><span class="w"> </span><span class="kd">async</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">await</span><span class="w"> </span><span class="n">Future</span><span class="p">.</span><span class="n">wait</span><span class="p">([</span><span class="n">Future</span><span class="p">.</span><span class="n">value</span><span class="p">(</span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="n">Future</span><span class="p">.</span><span class="n">delayed</span><span class="p">(</span><span class="n">Duration</span><span class="p">(</span><span class="nl">milliseconds:</span><span class="m">5</span><span class="p">),()</span><span class="o">=&gt;</span><span class="m">2</span><span class="p">)]);</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="n">r</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p><strong>Answer:</strong> [1, 2]</p>
+<p>Future.wait preserves order. Verified by running it with the Dart SDK.</p>
+<p><strong>Q122.</strong> What's a StreamTransformer for?</p>
+<p><strong>Answer:</strong> Transforming a stream's events (map, debounce, etc.)</p>
+<p>Composable pipelines.</p>
+<p><strong>Q123.</strong> Why handle backpressure in streams?</p>
+<p><strong>Answer:</strong> Producers may outpace consumers and exhaust memory</p>
+<p>Pause subscriptions.</p>
+<p><strong>Q124.</strong> What does a Completer do?</p>
+<p><strong>Answer:</strong> Lets you complete a Future manually</p>
+<p>Bridge callback APIs.</p>
+<h3 id="02-production-dart-services"><a href="../level-4/02-production-dart-services/">02 · Production Dart Services</a><a class="headerlink" href="#02-production-dart-services" title="Permanent link">&para;</a></h3>
+<p><strong>Q125.</strong> What should a production service expose?</p>
+<p><strong>Answer:</strong> Health checks, structured logs and metrics</p>
+<p>Operability.</p>
+<p><strong>Q126.</strong> How should configuration be supplied?</p>
+<p><strong>Answer:</strong> Environment variables or config files, not hard-coded</p>
+<p>12-factor.</p>
+<p><strong>Q127.</strong> Why handle shutdown signals gracefully?</p>
+<p><strong>Answer:</strong> To finish in-flight requests and close resources</p>
+<p>SIGTERM.</p>
+<p><strong>Q128.</strong> What does AOT compilation provide?</p>
+<p><strong>Answer:</strong> Fast startup and a standalone executable</p>
+<p>dart compile exe.</p>
+<h3 id="03-flutter-state-management-at-scale"><a href="../level-4/03-flutter-state-management-scale/">03 · Flutter State Management at Scale</a><a class="headerlink" href="#03-flutter-state-management-at-scale" title="Permanent link">&para;</a></h3>
+<p><strong>Q129.</strong> What's a benefit of Bloc/Riverpod-style architecture at scale?</p>
+<p><strong>Answer:</strong> Testable, predictable state separate from UI</p>
+<p>Choose consistently.</p>
+<p><strong>Q130.</strong> What should repositories handle?</p>
+<p><strong>Answer:</strong> Data sources behind an abstraction for the state layer</p>
+<p>Layering.</p>
+<p><strong>Q131.</strong> Why avoid putting business logic in widgets?</p>
+<p><strong>Answer:</strong> It's hard to test and reuse</p>
+<p>Keep widgets dumb.</p>
+<p><strong>Q132.</strong> What does dependency injection enable here?</p>
+<p><strong>Answer:</strong> Swapping implementations for tests</p>
+<p>Providers.</p>
+<h3 id="04-security-best-practices"><a href="../level-4/04-security-best-practices/">04 · Security Best Practices</a><a class="headerlink" href="#04-security-best-practices" title="Permanent link">&para;</a></h3>
+<p><strong>Q133.</strong> Where should API secrets live in a Flutter app?</p>
+<p><strong>Answer:</strong> Not embedded in the client; use a backend or secure storage</p>
+<p>Clients can be reverse-engineered.</p>
+<p><strong>Q134.</strong> What does certificate pinning defend against?</p>
+<p><strong>Answer:</strong> Man-in-the-middle with fraudulent certificates</p>
+<p>Use carefully.</p>
+<p><strong>Q135.</strong> Why validate all input on the server?</p>
+<p><strong>Answer:</strong> Clients can be modified or bypassed</p>
+<p>Never trust clients.</p>
+<p><strong>Q136.</strong> How should passwords be stored?</p>
+<p><strong>Answer:</strong> Salted slow hashes (bcrypt/argon2)</p>
+<p>Never reversible.</p>
+<h3 id="05-testing-at-scale-ci"><a href="../level-4/05-testing-at-scale-ci/">05 · Testing at Scale &amp; CI</a><a class="headerlink" href="#05-testing-at-scale-ci" title="Permanent link">&para;</a></h3>
+<p><strong>Q137.</strong> What should CI run for a Dart project?</p>
+<p><strong>Answer:</strong> dart analyze, dart format check and dart test</p>
+<p>Gate merges.</p>
+<p><strong>Q138.</strong> Why cache the pub cache in CI?</p>
+<p><strong>Answer:</strong> Faster dependency installs</p>
+<p>Restore by pubspec.lock hash.</p>
+<p><strong>Q139.</strong> What's a flaky test?</p>
+<p><strong>Answer:</strong> One that passes and fails without code changes</p>
+<p>Fix or quarantine.</p>
+<p><strong>Q140.</strong> What does a test pyramid recommend?</p>
+<p><strong>Answer:</strong> Mostly unit tests, fewer integration, fewest end-to-end</p>
+<p>Speed and confidence.</p>
+<h3 id="06-deployment-with-docker"><a href="../level-4/06-deployment-docker/">06 · Deployment with Docker</a><a class="headerlink" href="#06-deployment-with-docker" title="Permanent link">&para;</a></h3>
+<p><strong>Q141.</strong> Why multi-stage Docker builds for Dart?</p>
+<p><strong>Answer:</strong> Compile to a native binary in a build stage and ship it in a tiny runtime image</p>
+<p>Small images.</p>
+<p><strong>Q142.</strong> What does <code>dart compile exe</code> produce?</p>
+<p><strong>Answer:</strong> A self-contained native executable</p>
+<p>AOT.</p>
+<p><strong>Q143.</strong> Why run as non-root in a container?</p>
+<p><strong>Answer:</strong> Limits damage if compromised</p>
+<p>Least privilege.</p>
+<p><strong>Q144.</strong> How should containers receive config?</p>
+<p><strong>Answer:</strong> Environment variables</p>
+<p>Inject at runtime.</p>
+<h3 id="07-performance-at-scale"><a href="../level-4/07-performance-at-scale/">07 · Performance at Scale</a><a class="headerlink" href="#07-performance-at-scale" title="Permanent link">&para;</a></h3>
+<p><strong>Q145.</strong> What should you do before optimizing?</p>
+<p><strong>Answer:</strong> Measure with a profiler to find the real bottleneck</p>
+<p>Evidence first.</p>
+<p><strong>Q146.</strong> What helps throughput of a Dart server?</p>
+<p><strong>Answer:</strong> Running multiple isolates/instances behind a load balancer</p>
+<p>Isolates don't share memory.</p>
+<p><strong>Q147.</strong> Why avoid blocking the event loop?</p>
+<p><strong>Answer:</strong> Everything else on that isolate stalls</p>
+<p>Offload CPU work.</p>
+<p><strong>Q148.</strong> What reduces allocations in hot paths?</p>
+<p><strong>Answer:</strong> Reusing objects and using const/typed data</p>
+<p>Typed lists.</p>
+<h3 id="08-package-publishing-pubdev"><a href="../level-4/08-package-publishing/">08 · Package Publishing (pub.dev)</a><a class="headerlink" href="#08-package-publishing-pubdev" title="Permanent link">&para;</a></h3>
+<p><strong>Q149.</strong> What command checks a package before publishing?</p>
+<p><strong>Answer:</strong> dart pub publish --dry-run</p>
+<p>Validates layout and metadata.</p>
+<p><strong>Q150.</strong> What versioning does pub use?</p>
+<p><strong>Answer:</strong> Semantic versioning</p>
+<p>Breaking changes bump major.</p>
+<p><strong>Q151.</strong> What should a published package include?</p>
+<p><strong>Answer:</strong> README, CHANGELOG, LICENSE, tests and docs</p>
+<p>Quality signals on pub.dev.</p>
+<p><strong>Q152.</strong> Can a published version be changed?</p>
+<p><strong>Answer:</strong> No: versions are immutable; publish a new one (or retract)</p>
+<p>Immutability.</p>
+<h3 id="09-code-quality-dart-analyze-lints"><a href="../level-4/09-code-quality/">09 · Code Quality (<code>dart analyze</code> / lints)</a><a class="headerlink" href="#09-code-quality-dart-analyze-lints" title="Permanent link">&para;</a></h3>
+<p><strong>Q153.</strong> What does <code>dart analyze</code> do?</p>
+<p><strong>Answer:</strong> Statically checks code for errors and lint violations</p>
+<p>Configure analysis_options.yaml.</p>
+<p><strong>Q154.</strong> What does <code>dart format</code> do?</p>
+<p><strong>Answer:</strong> Applies the standard code style</p>
+<p>Consistent diffs.</p>
+<p><strong>Q155.</strong> Why enable strict lints?</p>
+<p><strong>Answer:</strong> Catch issues early and keep consistency</p>
+<p>package:lints or flutter_lints.</p>
+<p><strong>Q156.</strong> What is dead code detection good for?</p>
+<p><strong>Answer:</strong> Removing unused code to reduce maintenance</p>
+<p>Analyzer hints.</p>
+<h3 id="10-capstone-authenticated-notes-api"><a href="../level-4/10-capstone-project/">10 · Capstone — Authenticated Notes API</a><a class="headerlink" href="#10-capstone-authenticated-notes-api" title="Permanent link">&para;</a></h3>
+<p><strong>Q157.</strong> What does the capstone integrate?</p>
+<p><strong>Answer:</strong> API, persistence, testing, CI, containers and quality tooling</p>
+<p>End-to-end.</p>
+<p><strong>Q158.</strong> How do you validate the finished project?</p>
+<p><strong>Answer:</strong> Tests, analysis, CI and a containerized run</p>
+<p>Layered checks.</p>
+<p><strong>Q159.</strong> What makes it maintainable?</p>
+<p><strong>Answer:</strong> Layering, tests, documentation and consistent style</p>
+<p>Sustainable.</p>
+<p><strong>Q160.</strong> What should the README cover?</p>
+<p><strong>Answer:</strong> How to run, test and deploy</p>
+<p>Onboarding.</p>
+<h2 id="mixed-questions-across-all-levels">Mixed questions across all levels<a class="headerlink" href="#mixed-questions-across-all-levels" title="Permanent link">&para;</a></h2>
+<p><strong>Q161.</strong> In Dart, what does <code>String name</code> mean under sound null safety?</p>
+<p><strong>Answer:</strong> name can never be null; use String? to allow null</p>
+<p>Non-nullable by default.</p>
+<p><strong>Q162.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="kt">void</span><span class="w"> </span><span class="n">main</span><span class="p">(){</span><span class="w"> </span><span class="kt">String</span><span class="o">?</span><span class="w"> </span><span class="n">s</span><span class="p">;</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="n">s</span><span class="o">?</span><span class="p">.</span><span class="n">length</span><span class="p">);</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="s1">'none'</span><span class="p">);</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">??=</span><span class="w"> </span><span class="s1">'x'</span><span class="p">;</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="n">s</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p><strong>Answer:</strong> null
+none
+x</p>
+<p>?. short-circuits, ?? gives a default, ??= assigns if null. Verified by running it with the Dart SDK.</p>
+<p><strong>Q163.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="kt">void</span><span class="w"> </span><span class="n">main</span><span class="p">(){</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">a</span><span class="o">=</span><span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">];</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="m">3</span><span class="p">);</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="n">a</span><span class="p">);</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">b</span><span class="o">=</span><span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">];</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="n">b</span><span class="p">.</span><span class="n">length</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p><strong>Answer:</strong> [1, 2, 3]
+2</p>
+<p>final stops reassignment, not mutation; const makes an immutable compile-time value. Verified by running it with the Dart SDK.</p>
+<p><strong>Q164.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="kt">void</span><span class="w"> </span><span class="n">main</span><span class="p">(){</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="n">n</span><span class="o">=</span><span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">3</span><span class="p">,</span><span class="m">4</span><span class="p">];</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="n">n</span><span class="p">.</span><span class="n">where</span><span class="p">((</span><span class="n">x</span><span class="p">)</span><span class="o">=&gt;</span><span class="n">x</span><span class="p">.</span><span class="n">isOdd</span><span class="p">).</span><span class="n">map</span><span class="p">((</span><span class="n">x</span><span class="p">)</span><span class="o">=&gt;</span><span class="n">x</span><span class="o">*</span><span class="m">10</span><span class="p">).</span><span class="n">toList</span><span class="p">());</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p><strong>Answer:</strong> [10, 30]</p>
+<p>where filters, map transforms. Verified by running it with the Dart SDK.</p>
+<p><strong>Q165.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="kd">class</span><span class="w"> </span><span class="nc">A</span><span class="p">{</span><span class="w"> </span><span class="n">A</span><span class="p">(){</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="s1">'A'</span><span class="p">);</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a><span class="kd">class</span><span class="w"> </span><span class="nc">B</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">A</span><span class="p">{</span><span class="w"> </span><span class="n">B</span><span class="p">(){</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="s1">'B'</span><span class="p">);</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a><span class="kt">void</span><span class="w"> </span><span class="n">main</span><span class="p">(){</span><span class="w"> </span><span class="n">B</span><span class="p">();</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p><strong>Answer:</strong> A
+B</p>
+<p>The superclass constructor runs first. Verified by running it with the Dart SDK.</p>
+<p><strong>Q166.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="kd">mixin</span><span class="w"> </span><span class="nc">Walker</span><span class="p">{</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="n">move</span><span class="p">()</span><span class="o">=&gt;</span><span class="s1">'walk'</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a><span class="kd">class</span><span class="w"> </span><span class="nc">Dog</span><span class="w"> </span><span class="kd">with</span><span class="w"> </span><span class="n">Walker</span><span class="p">{}</span>
+<a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a><span class="kt">void</span><span class="w"> </span><span class="n">main</span><span class="p">(){</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="n">Dog</span><span class="p">().</span><span class="n">move</span><span class="p">());</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p><strong>Answer:</strong> walk</p>
+<p>Mixins add reusable behavior. Verified by running it with the Dart SDK.</p>
+<p><strong>Q167.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="kt">void</span><span class="w"> </span><span class="n">main</span><span class="p">()</span><span class="w"> </span><span class="kd">async</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="s1">'a'</span><span class="p">);</span><span class="w"> </span><span class="kd">await</span><span class="w"> </span><span class="n">Future</span><span class="p">.</span><span class="n">delayed</span><span class="p">(</span><span class="n">Duration</span><span class="p">(</span><span class="nl">milliseconds:</span><span class="m">5</span><span class="p">));</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="s1">'b'</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p><strong>Answer:</strong> a
+b</p>
+<p>await pauses this function only. Verified by running it with the Dart SDK.</p>
+<p><strong>Q168.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a><span class="n">Stream</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">s</span><span class="p">()</span><span class="w"> </span><span class="kd">async</span><span class="o">*</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="m">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="m">3</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="kd">yield</span><span class="w"> </span><span class="n">i</span><span class="o">*</span><span class="n">i</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a><span class="kt">void</span><span class="w"> </span><span class="n">main</span><span class="p">()</span><span class="w"> </span><span class="kd">async</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kd">await</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">s</span><span class="p">())</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="n">v</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p><strong>Answer:</strong> 1
+4
+9</p>
+<p>async* generators emit with yield. Verified by running it with the Dart SDK.</p>
+<p><strong>Q169.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="k">import</span><span class="w"> </span><span class="s1">'dart:isolate'</span><span class="p">;</span>
+<a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a><span class="kt">void</span><span class="w"> </span><span class="n">main</span><span class="p">()</span><span class="w"> </span><span class="kd">async</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="kd">await</span><span class="w"> </span><span class="n">Isolate</span><span class="p">.</span><span class="n">run</span><span class="p">(()</span><span class="o">=&gt;</span><span class="n">List</span><span class="p">.</span><span class="n">generate</span><span class="p">(</span><span class="m">5</span><span class="p">,(</span><span class="n">i</span><span class="p">)</span><span class="o">=&gt;</span><span class="n">i</span><span class="o">*</span><span class="n">i</span><span class="p">).</span><span class="n">reduce</span><span class="p">((</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span><span class="o">=&gt;</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)));</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p><strong>Answer:</strong> 30</p>
+<p>CPU-heavy work can run in a separate isolate. Verified by running it with the Dart SDK.</p>
+<p><strong>Q170.</strong> Why isn't async/await the same as parallelism in Dart?</p>
+<p><strong>Answer:</strong> It interleaves work on one thread via the event loop; isolates give real parallelism with separate memory</p>
+<p>Use isolates for CPU-bound work.</p>
+<p><strong>Q171.</strong> A Flutter list janks because build() sorts 10,000 items. What's the fix?</p>
+<p><strong>Answer:</strong> Move the work out of build() (compute once or in an isolate) and use const widgets where possible</p>
+<p>build() must be cheap.</p>
+<p><strong>Q172.</strong> State is passed through six widgets only to be used at the bottom. What do you use?</p>
+<p><strong>Answer:</strong> A state management approach (e.g. Provider/Riverpod/Bloc) to lift and share state</p>
+<p>Reduces prop drilling.</p>
+<p><strong>Q173.</strong> A shelf handler needs logging and auth for every route. How?</p>
+<p><strong>Answer:</strong> Wrap handlers with middleware in a Pipeline</p>
+<p>Middleware composes behavior.</p>
+<p><strong>Q174.</strong> A query builds SQL by concatenating a request parameter. What's wrong?</p>
+<p><strong>Answer:</strong> SQL injection risk: use parameterized queries with placeholders</p>
+<p>Bind values.</p>
+<p><strong>Q175.</strong> Where must an API secret not be stored in a Flutter app?</p>
+<p><strong>Answer:</strong> In the client bundle, since it can be extracted; keep it on a backend</p>
+<p>Clients are untrusted.</p>
+<p><strong>Q176.</strong> What's the smallest reasonable Docker setup for a Dart server?</p>
+<p><strong>Answer:</strong> Compile with <code>dart compile exe</code> in a build stage and copy the binary into a minimal runtime image</p>
+<p>Small and fast to start.</p>
+<p><strong>Q177.</strong> A package change breaks callers' code. What version bump?</p>
+<p><strong>Answer:</strong> Major, per semantic versioning</p>
+<p>Breaking changes require a major.</p>
+<p><strong>Q178.</strong> CI for a Dart repo should at minimum run...</p>
+<p><strong>Answer:</strong> dart analyze, dart format --set-exit-if-changed and dart test</p>
+<p>Gate merges automatically.</p>
+<h2 id="practical-coding-questions">Practical coding questions<a class="headerlink" href="#practical-coding-questions" title="Permanent link">&para;</a></h2>
+<h3 id="totals-and-counts-with-collections">Totals and counts with collections<a class="headerlink" href="#totals-and-counts-with-collections" title="Permanent link">&para;</a></h3>
+<p>Implement total(items) with fold (sum of qty x price) and countByInitial(items) returning the total quantity per upper-cased first letter of the item name. Print the total to two decimals and the map.</p>
+<p>Starter code:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>class Item {
+<a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a>  final String name;
+<a id="__codelineno-36-3" name="__codelineno-36-3" href="#__codelineno-36-3"></a>  final int qty;
+<a id="__codelineno-36-4" name="__codelineno-36-4" href="#__codelineno-36-4"></a>  final double price;
+<a id="__codelineno-36-5" name="__codelineno-36-5" href="#__codelineno-36-5"></a>  Item(this.name, this.qty, this.price);
+<a id="__codelineno-36-6" name="__codelineno-36-6" href="#__codelineno-36-6"></a>}
+<a id="__codelineno-36-7" name="__codelineno-36-7" href="#__codelineno-36-7"></a>
+<a id="__codelineno-36-8" name="__codelineno-36-8" href="#__codelineno-36-8"></a>double total(List&lt;Item&gt; items) {
+<a id="__codelineno-36-9" name="__codelineno-36-9" href="#__codelineno-36-9"></a>  // sum qty * price with fold
+<a id="__codelineno-36-10" name="__codelineno-36-10" href="#__codelineno-36-10"></a>  return 0;
+<a id="__codelineno-36-11" name="__codelineno-36-11" href="#__codelineno-36-11"></a>}
+<a id="__codelineno-36-12" name="__codelineno-36-12" href="#__codelineno-36-12"></a>
+<a id="__codelineno-36-13" name="__codelineno-36-13" href="#__codelineno-36-13"></a>Map&lt;String, int&gt; countByInitial(List&lt;Item&gt; items) {
+<a id="__codelineno-36-14" name="__codelineno-36-14" href="#__codelineno-36-14"></a>  // total quantity per upper-cased first letter of the name
+<a id="__codelineno-36-15" name="__codelineno-36-15" href="#__codelineno-36-15"></a>  return {};
+<a id="__codelineno-36-16" name="__codelineno-36-16" href="#__codelineno-36-16"></a>}
+<a id="__codelineno-36-17" name="__codelineno-36-17" href="#__codelineno-36-17"></a>
+<a id="__codelineno-36-18" name="__codelineno-36-18" href="#__codelineno-36-18"></a>void main() {
+<a id="__codelineno-36-19" name="__codelineno-36-19" href="#__codelineno-36-19"></a>  final items = [
+<a id="__codelineno-36-20" name="__codelineno-36-20" href="#__codelineno-36-20"></a>    Item('apple', 3, 0.5),
+<a id="__codelineno-36-21" name="__codelineno-36-21" href="#__codelineno-36-21"></a>    Item('avocado', 2, 1.25),
+<a id="__codelineno-36-22" name="__codelineno-36-22" href="#__codelineno-36-22"></a>    Item('bread', 1, 2.0),
+<a id="__codelineno-36-23" name="__codelineno-36-23" href="#__codelineno-36-23"></a>  ];
+<a id="__codelineno-36-24" name="__codelineno-36-24" href="#__codelineno-36-24"></a>  print(total(items).toStringAsFixed(2));
+<a id="__codelineno-36-25" name="__codelineno-36-25" href="#__codelineno-36-25"></a>  print(countByInitial(items));
+<a id="__codelineno-36-26" name="__codelineno-36-26" href="#__codelineno-36-26"></a>}
+</code></pre></div>
+<p>Expected output:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>6.00
+<a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a>{A: 5, B: 1}
+</code></pre></div>
+<p>??? success "Show a solution"</p>
+<div class="highlight"><pre><span></span><code>```
+class Item {
+  final String name;
+  final int qty;
+  final double price;
+  Item(this.name, this.qty, this.price);
+}
+
+double total(List&lt;Item&gt; items) =&gt;
+    items.fold(0.0, (sum, i) =&gt; sum + i.qty * i.price);
+
+Map&lt;String, int&gt; countByInitial(List&lt;Item&gt; items) {
+  final counts = &lt;String, int&gt;{};
+  for (final i in items) {
+    final key = i.name[0].toUpperCase();
+    counts[key] = (counts[key] ?? 0) + i.qty;
+  }
+  return counts;
+}
+
+void main() {
+  final items = [
+    Item('apple', 3, 0.5),
+    Item('avocado', 2, 1.25),
+    Item('bread', 1, 2.0),
+  ];
+  print(total(items).toStringAsFixed(2));
+  print(countByInitial(items));
+}
+```
+
+fold accumulates a running sum, and a map with `?? 0` accumulates per-key totals. Dart prints maps as {A: 5, B: 1}. Verified by running the solution with the Dart SDK.
+</code></pre></div>
+<h3 id="typed-exceptions-and-streams">Typed exceptions and streams<a class="headerlink" href="#typed-exceptions-and-streams" title="Permanent link">&para;</a></h3>
+<p>Complete Account.withdraw (ArgumentError for non-positive amounts, a custom InsufficientFunds exception when over balance), and an async* generator ticks(n) that yields 1..n. The provided main handles each failure type and uses finally.</p>
+<p>Starter code:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a>import 'dart:async';
+<a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a>
+<a id="__codelineno-39-3" name="__codelineno-39-3" href="#__codelineno-39-3"></a>class Account {
+<a id="__codelineno-39-4" name="__codelineno-39-4" href="#__codelineno-39-4"></a>  int _balance;
+<a id="__codelineno-39-5" name="__codelineno-39-5" href="#__codelineno-39-5"></a>  Account(this._balance);
+<a id="__codelineno-39-6" name="__codelineno-39-6" href="#__codelineno-39-6"></a>  int get balance =&gt; _balance;
+<a id="__codelineno-39-7" name="__codelineno-39-7" href="#__codelineno-39-7"></a>  void withdraw(int amount) {
+<a id="__codelineno-39-8" name="__codelineno-39-8" href="#__codelineno-39-8"></a>    // throw ArgumentError for amount &lt;= 0, InsufficientFunds(shortBy) when amount &gt; balance,
+<a id="__codelineno-39-9" name="__codelineno-39-9" href="#__codelineno-39-9"></a>    // otherwise subtract it from the balance
+<a id="__codelineno-39-10" name="__codelineno-39-10" href="#__codelineno-39-10"></a>  }
+<a id="__codelineno-39-11" name="__codelineno-39-11" href="#__codelineno-39-11"></a>}
+<a id="__codelineno-39-12" name="__codelineno-39-12" href="#__codelineno-39-12"></a>
+<a id="__codelineno-39-13" name="__codelineno-39-13" href="#__codelineno-39-13"></a>class InsufficientFunds implements Exception {
+<a id="__codelineno-39-14" name="__codelineno-39-14" href="#__codelineno-39-14"></a>  final int shortBy;
+<a id="__codelineno-39-15" name="__codelineno-39-15" href="#__codelineno-39-15"></a>  InsufficientFunds(this.shortBy);
+<a id="__codelineno-39-16" name="__codelineno-39-16" href="#__codelineno-39-16"></a>  @override
+<a id="__codelineno-39-17" name="__codelineno-39-17" href="#__codelineno-39-17"></a>  String toString() =&gt; 'InsufficientFunds(short by $shortBy)';
+<a id="__codelineno-39-18" name="__codelineno-39-18" href="#__codelineno-39-18"></a>}
+<a id="__codelineno-39-19" name="__codelineno-39-19" href="#__codelineno-39-19"></a>
+<a id="__codelineno-39-20" name="__codelineno-39-20" href="#__codelineno-39-20"></a>Stream&lt;int&gt; ticks(int n) async* {
+<a id="__codelineno-39-21" name="__codelineno-39-21" href="#__codelineno-39-21"></a>  // yield 1..n
+<a id="__codelineno-39-22" name="__codelineno-39-22" href="#__codelineno-39-22"></a>}
+<a id="__codelineno-39-23" name="__codelineno-39-23" href="#__codelineno-39-23"></a>
+<a id="__codelineno-39-24" name="__codelineno-39-24" href="#__codelineno-39-24"></a>Future&lt;void&gt; main() async {
+<a id="__codelineno-39-25" name="__codelineno-39-25" href="#__codelineno-39-25"></a>  final acct = Account(100);
+<a id="__codelineno-39-26" name="__codelineno-39-26" href="#__codelineno-39-26"></a>  for (final amt in [30, 100, -5]) {
+<a id="__codelineno-39-27" name="__codelineno-39-27" href="#__codelineno-39-27"></a>    try {
+<a id="__codelineno-39-28" name="__codelineno-39-28" href="#__codelineno-39-28"></a>      acct.withdraw(amt);
+<a id="__codelineno-39-29" name="__codelineno-39-29" href="#__codelineno-39-29"></a>      print('withdrew $amt, balance ${acct.balance}');
+<a id="__codelineno-39-30" name="__codelineno-39-30" href="#__codelineno-39-30"></a>    } on InsufficientFunds catch (e) {
+<a id="__codelineno-39-31" name="__codelineno-39-31" href="#__codelineno-39-31"></a>      print('error: $e');
+<a id="__codelineno-39-32" name="__codelineno-39-32" href="#__codelineno-39-32"></a>    } on ArgumentError catch (e) {
+<a id="__codelineno-39-33" name="__codelineno-39-33" href="#__codelineno-39-33"></a>      print('invalid: ${e.message}');
+<a id="__codelineno-39-34" name="__codelineno-39-34" href="#__codelineno-39-34"></a>    } finally {
+<a id="__codelineno-39-35" name="__codelineno-39-35" href="#__codelineno-39-35"></a>      print('checked $amt');
+<a id="__codelineno-39-36" name="__codelineno-39-36" href="#__codelineno-39-36"></a>    }
+<a id="__codelineno-39-37" name="__codelineno-39-37" href="#__codelineno-39-37"></a>  }
+<a id="__codelineno-39-38" name="__codelineno-39-38" href="#__codelineno-39-38"></a>  final total = await ticks(4).fold&lt;int&gt;(0, (a, b) =&gt; a + b);
+<a id="__codelineno-39-39" name="__codelineno-39-39" href="#__codelineno-39-39"></a>  print('sum of ticks: $total');
+<a id="__codelineno-39-40" name="__codelineno-39-40" href="#__codelineno-39-40"></a>}
+</code></pre></div>
+<p>Expected output:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a>withdrew 30, balance 70
+<a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a>checked 30
+<a id="__codelineno-40-3" name="__codelineno-40-3" href="#__codelineno-40-3"></a>error: InsufficientFunds(short by 30)
+<a id="__codelineno-40-4" name="__codelineno-40-4" href="#__codelineno-40-4"></a>checked 100
+<a id="__codelineno-40-5" name="__codelineno-40-5" href="#__codelineno-40-5"></a>invalid: amount must be positive
+<a id="__codelineno-40-6" name="__codelineno-40-6" href="#__codelineno-40-6"></a>checked -5
+<a id="__codelineno-40-7" name="__codelineno-40-7" href="#__codelineno-40-7"></a>sum of ticks: 10
+</code></pre></div>
+<p>??? success "Show a solution"</p>
+<div class="highlight"><pre><span></span><code>```
+import 'dart:async';
+
+class Account {
+  int _balance;
+  Account(this._balance);
+  int get balance =&gt; _balance;
+  void withdraw(int amount) {
+    if (amount &lt;= 0) throw ArgumentError('amount must be positive');
+    if (amount &gt; _balance) throw InsufficientFunds(amount - _balance);
+    _balance -= amount;
+  }
+}
+
+class InsufficientFunds implements Exception {
+  final int shortBy;
+  InsufficientFunds(this.shortBy);
+  @override
+  String toString() =&gt; 'InsufficientFunds(short by $shortBy)';
+}
+
+Stream&lt;int&gt; ticks(int n) async* {
+  for (var i = 1; i &lt;= n; i++) {
+    yield i;
+  }
+}
+
+Future&lt;void&gt; main() async {
+  final acct = Account(100);
+  for (final amt in [30, 100, -5]) {
+    try {
+      acct.withdraw(amt);
+      print('withdrew $amt, balance ${acct.balance}');
+    } on InsufficientFunds catch (e) {
+      print('error: $e');
+    } on ArgumentError catch (e) {
+      print('invalid: ${e.message}');
+    } finally {
+      print('checked $amt');
+    }
+  }
+  final total = await ticks(4).fold&lt;int&gt;(0, (a, b) =&gt; a + b);
+  print('sum of ticks: $total');
+}
+```
+
+Catch the most specific exception types first, use finally for always-run code, and async* with yield to produce a Stream. Verified by running the solution with the Dart SDK.
+</code></pre></div>
+<hr />
+<p>More free practice: the <a href="../">Dart Mastery Path</a> curriculum, the <a href="https://learnmasterypath.com/interview-pack/">Interview Prep Pack</a> and the <a href="https://learnmasterypath.com/resume/">free resume ATS check</a>.</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+  
+  <nav class="mp-related" aria-label="Related free courses">
+    <h2>Related free courses</h2>
+    <ul>
+      <li><a href="https://learnmasterypath.com/python-mastery-path/">Python</a></li><li><a href="https://learnmasterypath.com/java-mastery-path/">Java</a></li><li><a href="https://learnmasterypath.com/javascript-mastery-path/">JavaScript</a></li><li><a href="https://learnmasterypath.com/typescript-mastery-path/">TypeScript</a></li><li><a href="https://learnmasterypath.com/csharp-mastery-path/">C#</a></li>
+      <li><a href="https://learnmasterypath.com/">All 100+ courses &rarr;</a></li>
+    </ul>
+  </nav>
+  
+
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href=".." class="md-footer__link md-footer__link--prev" aria-label="Previous: Home">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Home
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../cheat-sheet/" class="md-footer__link md-footer__link--next" aria-label="Next: Cheat Sheet">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Cheat Sheet
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+  <div class="mp-foot">
+    <div class="mp-foot-inner">
+      <a class="mp-foot-brand" href="https://learnmasterypath.com/"><svg class="mp-mark" viewBox="0 0 160 160" role="img" aria-label="Mastery Path logo">
+  <circle cx="80" cy="80" r="74" fill="#FAF7EF" stroke="#2FA98D" stroke-width="5"/>
+  <rect class="mp-bar mp-bar-1" x="36" y="90" width="17" height="24" rx="5" fill="#2FA98D"/>
+  <rect class="mp-bar mp-bar-2" x="59" y="74" width="17" height="40" rx="5" fill="#7FC9B7"/>
+  <rect class="mp-bar mp-bar-3" x="82" y="56" width="17" height="58" rx="5" fill="#E0B457"/>
+  <rect class="mp-bar mp-bar-4" x="105" y="38" width="17" height="76" rx="5" fill="#C97B4A"/>
+  <circle class="mp-dot" cx="44.5" cy="82" r="7" fill="#22261f"/>
+</svg><span>Mastery Path</span></a>
+      <nav class="mp-sitelinks" aria-label="Site and legal links">
+        <a href="https://learnmasterypath.com/">All courses</a>
+        <a href="https://learnmasterypath.com/about.html">About</a>
+        <a href="https://learnmasterypath.com/contact.html">Contact</a>
+        <a href="https://learnmasterypath.com/dart-mastery-path/privacy/">Privacy Policy</a>
+        <a href="https://learnmasterypath.com/terms.html">Terms</a>
+        <a href="https://learnmasterypath.com/dart-mastery-path/license/">License</a>
+        <a href="https://learnmasterypath.com/verify/">Verify a certificate</a>
+      </nav>
+    </div>
+    <p class="mp-license-note">
+      © 2026 Vinod Kumar Sigilipelli · Except where otherwise noted, lesson content is licensed under
+      <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> and code examples under the
+      <a href="https://opensource.org/license/mit">MIT License</a>.
+    </p>
+  </div>
+
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.path", "navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "navigation.footer", "navigation.indexes", "toc.follow", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+        <script src="../javascripts/progress-tracker.js"></script>
+      
+        <script src="../javascripts/final-quiz.js"></script>
+      
+    
+  </body>
+</html>
